@@ -1,0 +1,1 @@
+import{t as e}from"./index-DB2tm-4_.js";var t=e;export{t as component};
