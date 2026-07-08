@@ -14,31 +14,18 @@
   },
   "terminal": {
     "tabs": {
-      "about": "about_me.sh",
-      "music": "synth_wave.wav",
-      "gaming": "gamer_stats.cfg"
+      "about": "sobre_mim.txt",
+      "music": "hobby.mp3"
     },
     "about": {
-      "executing": "[sistema] Executando: ./about_me.sh...",
+      "executing": "ranier@dalton:~$ cat sobre_mim.txt",
       "status": "[sistema] Conexão: S/4HANA Cloud (BTP) & IA Agêntica · ATIVA"
     },
     "music": {
-      "executing": "ranier@dalton:~$ play_audio synth_wave.wav",
-      "playing": "Reproduzindo: Síntese Criativa & Batidas Eletrônicas (128 kbps)",
-      "hobby": "Hobby: Produção de Música Eletrônica & Sound Design",
-      "gear": "Equipamentos/DAW: Ableton Live · FL Studio · Serum · Vital",
-      "focus": "Foco: Beats, texturas sonoras e síntese analógica"
-    },
-    "gaming": {
-      "executing": "ranier@dalton:~$ cat gamer_stats.cfg",
-      "loading": "Carregando perfil de jogador...",
-      "cs2-title": "// CS2 HUD TÁTICO",
-      "cs2-map": "MAPA FAVORITO: de_inferno",
-      "cs2-role": "FUNÇÃO: Suporte Técnico & Entry Coder",
-      "stardew-title": "// STARDEW VALLEY STATUS",
-      "stardew-role": "PROFISSÃO: Fazendeiro & Mago do Código",
-      "stardew-level": "NÍVEL: 10 (Farming & Coding)",
-      "stardew-vibes": "VIBE: Happy & Creative ☕"
+      "executing": "ranier@dalton:~$ play_audio hobby.mp3",
+      "playing": "Reproduzindo: hobby.mp3 (320 kbps)",
+      "desc": "Sou o Ranier, tenho 17 anos e sou apaixonado por música. Estou iniciando uma jornada emocionante na produção musical, com foco em trap, rap e música eletrônica. Apenas com um computador e fones de ouvido, estou transformando minhas inspirações em realidade, explorando os segredos da produção e criando os beats que ecoam na minha mente. Minha parte favorita é, com certeza, a criação de Beats e Mixagem, utilizando exclusivamente o FL Studio.",
+      "focus": "Foco: Produção de Beats, Mixagem e Sound Design no FL Studio"
     }
   },
   "sections": {

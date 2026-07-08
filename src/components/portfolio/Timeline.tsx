@@ -56,16 +56,16 @@ function TimelineTrack({
   return (
     <div className="relative">
       <div className="mb-6 flex items-center justify-between">
-        <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-indigo-glow">
+        <div className="inline-flex items-center gap-2 rounded-lg border border-indigo/20 bg-surface/60 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-indigo-glow font-mono">
           {icon}
           {label}
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 font-mono">
           <button
             onClick={() => canPrev && setIndex((i) => i - 1)}
             disabled={!canPrev}
             aria-label={`${label} anterior`}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border transition-colors hover:border-indigo hover:text-indigo-glow disabled:cursor-not-allowed disabled:opacity-30"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-surface transition-colors hover:border-indigo hover:text-indigo-glow disabled:cursor-not-allowed disabled:opacity-30"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
@@ -73,7 +73,7 @@ function TimelineTrack({
             onClick={() => canNext && setIndex((i) => i + 1)}
             disabled={!canNext}
             aria-label={`${label} próximo`}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border transition-colors hover:border-indigo hover:text-indigo-glow disabled:cursor-not-allowed disabled:opacity-30"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-surface transition-colors hover:border-indigo hover:text-indigo-glow disabled:cursor-not-allowed disabled:opacity-30"
           >
             <ChevronRight className="h-4 w-4" />
           </button>
@@ -85,7 +85,7 @@ function TimelineTrack({
         <div className="absolute left-3 top-2 bottom-2 w-px bg-gradient-to-b from-indigo/60 via-border to-transparent" />
 
         {/* dots */}
-        <div className="mb-6 flex flex-col gap-3">
+        <div className="mb-6 flex flex-col gap-3 font-mono">
           {items.map((item, i) => {
             const active = i === index;
             return (
@@ -95,13 +95,17 @@ function TimelineTrack({
                 className="group relative flex items-start gap-4 text-left"
               >
                 <span
-                  className={`relative z-10 mt-1.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-all ${
+                  className={`relative z-10 mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-lg border transition-all ${
                     active
                       ? "border-indigo bg-indigo shadow-glow"
                       : "border-border bg-surface group-hover:border-indigo/60"
                   }`}
                 >
-                  {active && <span className="h-2 w-2 rounded-full bg-primary-foreground" />}
+                  {active ? (
+                    <span className="text-[10px] font-bold text-primary-foreground">&gt;</span>
+                  ) : (
+                    <span className="text-[10px] font-semibold text-muted-foreground/40">-</span>
+                  )}
                 </span>
                 <span className="min-w-0 flex-1 pb-1">
                   <span
@@ -111,41 +115,68 @@ function TimelineTrack({
                   >
                     {t(`${track}.${item.id}.title`)}
                   </span>
-                  <span className="block text-xs text-muted-foreground">{item.period}</span>
+                  <span className="block text-[11px] text-muted-foreground/80">{item.period}</span>
                 </span>
               </button>
             );
           })}
         </div>
 
-        {/* card */}
+        {/* Console-style Card */}
         <article
           key={current.id}
-          className="rounded-2xl border border-border bg-surface-elevated p-6 shadow-card animate-in fade-in slide-in-from-bottom-2 duration-500 sm:p-7"
+          className="rounded-2xl border border-indigo/20 bg-surface-elevated/70 shadow-glow backdrop-blur-md animate-in fade-in slide-in-from-bottom-2 duration-500 flex flex-col overflow-hidden font-mono"
         >
-          <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-indigo-glow">
-            {current.period}
+          {/* Terminal Window Header */}
+          <div className="bg-surface-elevated px-4 py-2 flex items-center justify-between border-b border-border/30 text-xs">
+            <div className="flex gap-1.5">
+              <div className="h-2.5 w-2.5 rounded-full bg-red-500/70"></div>
+              <div className="h-2.5 w-2.5 rounded-full bg-yellow-500/70"></div>
+              <div className="h-2.5 w-2.5 rounded-full bg-green-500/70"></div>
+            </div>
+            <div className="text-muted-foreground/60 font-semibold truncate max-w-[200px] sm:max-w-xs">
+              ~/trajetoria/{track}/{current.id}
+            </div>
+            <div className="w-8"></div>
           </div>
-          <h3 className="mt-2 font-display text-xl font-bold sm:text-2xl">{t(`${track}.${current.id}.title`)}</h3>
-          <p className="mt-1 text-sm font-medium text-muted-foreground">
-            {track === "education" ? t(`${track}.${current.id}.org`) : current.org}
-            {current.location && (
-              <span className="ml-2 inline-flex items-center gap-1">
-                <MapPin className="h-3 w-3" />
-                {current.location}
-              </span>
-            )}
-          </p>
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{t(`${track}.${current.id}.description`)}</p>
-          <div className="mt-5 flex flex-wrap gap-1.5">
-            {current.skills.map((s) => (
-              <span
-                key={s}
-                className="tag-pill cursor-default rounded-md border border-border bg-surface px-2 py-0.5 text-xs font-medium text-foreground/80 hover:-translate-y-0.5 hover:border-indigo/60 hover:text-indigo-glow"
-              >
-                {s}
-              </span>
-            ))}
+
+          <div className="p-6 sm:p-7 space-y-4">
+            <div className="text-indigo-glow font-bold text-xs sm:text-sm">
+              ranier@dalton:~$ <span className="text-foreground">cat details.txt</span>
+            </div>
+
+            <div>
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-cyan-400">
+                {current.period}
+              </div>
+              <h3 className="mt-1 font-display text-lg font-bold text-foreground sm:text-xl">
+                {t(`${track}.${current.id}.title`)}
+              </h3>
+              <p className="text-xs font-medium text-muted-foreground/80">
+                {track === "education" ? t(`${track}.${current.id}.org`) : current.org}
+                {current.location && (
+                  <span className="ml-2 inline-flex items-center gap-1 text-[11px]">
+                    <MapPin className="h-3 w-3" />
+                    {current.location}
+                  </span>
+                )}
+              </p>
+            </div>
+
+            <p className="text-xs sm:text-sm leading-relaxed text-foreground/80">
+              {t(`${track}.${current.id}.description`)}
+            </p>
+
+            <div className="flex flex-wrap gap-1.5 pt-2">
+              {current.skills.map((s) => (
+                <span
+                  key={s}
+                  className="rounded border border-indigo/20 bg-indigo/5 px-2.5 py-0.5 text-xs font-semibold text-indigo-glow hover:bg-indigo/10 transition-colors"
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
           </div>
         </article>
       </div>
@@ -163,15 +194,17 @@ export function SectionHeader({
   subtitle?: string;
 }) {
   return (
-    <div>
+    <div className="font-mono">
       <div className="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-glow">
-        {kicker}
+        # {kicker}
       </div>
-      <h2 className="mt-3 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl">
-        {title}
+      <h2 className="mt-3 max-w-3xl text-3xl font-bold tracking-tight sm:text-4xl">
+        $: {title}
       </h2>
       {subtitle && (
-        <p className="mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">{subtitle}</p>
+        <p className="mt-4 max-w-2xl text-xs sm:text-sm text-muted-foreground/80 leading-relaxed">
+          {subtitle}
+        </p>
       )}
     </div>
   );

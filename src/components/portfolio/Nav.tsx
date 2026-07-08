@@ -37,13 +37,62 @@ export function Nav() {
         <Link
           to="/"
           onClick={() => setIsOpen(false)}
-          className="group font-display text-lg font-bold tracking-tight"
+          className="group font-display text-lg font-bold tracking-tight shrink-0"
         >
           <span className="text-gradient transition-all duration-300 group-hover:[filter:brightness(1.15)]">
             RC
           </span>
           <span className="text-foreground">.dev</span>
         </Link>
+
+        {/* SAP GUI Command Field (T-Code Navigator) */}
+        <div className="hidden md:flex items-center gap-1.5 bg-surface-elevated/60 border border-border/40 rounded-lg px-2.5 py-1 font-mono text-xs max-w-[240px] ml-4 hover:border-indigo/50 transition-all duration-200">
+          <span className="text-indigo-glow font-bold">/n</span>
+          <input
+            type="text"
+            placeholder="T-Code (ex: projetos)"
+            className="bg-transparent border-none outline-none text-foreground w-[125px] placeholder:text-muted-foreground"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                const val = e.currentTarget.value.trim().toLowerCase();
+                const sectionMap: Record<string, string> = {
+                  sobre: "#sobre",
+                  trajetoria: "#trajetoria",
+                  projetos: "#projetos",
+                  cert: "#certificacoes",
+                  certificacoes: "#certificacoes",
+                };
+                const target = sectionMap[val] || sectionMap[val.replace("/n", "")];
+                if (target) {
+                  window.location.hash = target;
+                  e.currentTarget.value = "";
+                }
+              }
+            }}
+          />
+          <button 
+            onClick={(e) => {
+              const input = e.currentTarget.previousElementSibling as HTMLInputElement;
+              const val = input.value.trim().toLowerCase();
+              const sectionMap: Record<string, string> = {
+                sobre: "#sobre",
+                trajetoria: "#trajetoria",
+                projetos: "#projetos",
+                cert: "#certificacoes",
+                certificacoes: "#certificacoes",
+              };
+              const target = sectionMap[val] || sectionMap[val.replace("/n", "")];
+              if (target) {
+                window.location.hash = target;
+                input.value = "";
+              }
+            }}
+            className="h-4 w-4 bg-emerald-500 rounded flex items-center justify-center text-[9px] text-white font-bold hover:bg-emerald-400 transition-colors cursor-pointer" 
+            title="Execute T-Code"
+          >
+            ✓
+          </button>
+        </div>
 
         <nav className="hidden items-center gap-1 md:flex">
           {nav.map((item) => {

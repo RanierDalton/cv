@@ -26,17 +26,18 @@ export function Projects() {
           subtitle={t("sections.projects-description")}
         />
 
-        <div className="mt-10 flex flex-wrap gap-2">
+        {/* SAP Fiori Launchpad Group Tabs Bar */}
+        <div className="mt-10 flex flex-wrap gap-2 border-b border-border/20 pb-4 font-mono text-xs">
           {categories.map((c) => {
             const active = filter === c.id;
             return (
               <button
                 key={c.id}
                 onClick={() => setFilter(c.id)}
-                className={`filter-pill rounded-full border px-4 py-1.5 text-sm font-medium transition-all ${
+                className={`px-4 py-2 font-semibold transition-all rounded-lg border cursor-pointer ${
                   active
-                    ? "border-indigo bg-gradient-primary text-primary-foreground shadow-glow"
-                    : "border-border text-muted-foreground hover:-translate-y-0.5 hover:border-indigo/60 hover:text-foreground"
+                    ? "bg-indigo/15 text-indigo-glow border-indigo/40 shadow-sm"
+                    : "text-muted-foreground border-transparent hover:bg-white/5"
                 }`}
               >
                 {c.id === "Todos" ? t("sections.projects-all") : c.label}
@@ -45,7 +46,7 @@ export function Projects() {
           })}
         </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filtered.map((p) => (
             <ProjectCard key={p.id} project={p} />
           ))}
@@ -59,49 +60,76 @@ function ProjectCard({ project }: { project: Project }) {
   const { t } = useTranslation();
 
   const content = (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface-elevated p-6 shadow-card transition-all hover:-translate-y-1 hover:border-indigo/60 hover:shadow-glow">
-      <div
-        className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gradient-primary opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-30"
-        aria-hidden
-      />
-      <div className="flex items-center justify-between">
-        <span className="rounded-md border border-border bg-surface px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-indigo-glow">
-          {project.category}
-        </span>
-        <span className="text-xs text-muted-foreground">{project.period}</span>
-      </div>
-
-      <h3 className="mt-4 font-display text-lg font-bold leading-tight">
-        {t(`projects.${project.id}.title`, { defaultValue: project.title })}
-      </h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-        {t(`projects.${project.id}.description`)}
-      </p>
-
-      <div className="mt-4 flex items-start gap-2 rounded-lg border border-border/60 bg-surface/60 p-3">
-        <Target className="mt-0.5 h-3.5 w-3.5 shrink-0 text-indigo-glow" />
-        <p className="text-xs leading-relaxed text-foreground/80">
-          {t(`projects.${project.id}.objectives`)}
-        </p>
-      </div>
-
-      <div className="mt-4 flex flex-wrap gap-1.5">
-        {project.stack.map((s) => (
-          <span
-            key={s}
-            className="tag-pill cursor-default rounded-md bg-accent/60 px-2 py-0.5 text-[11px] font-medium text-accent-foreground hover:-translate-y-0.5 hover:bg-indigo/20 hover:text-indigo-glow"
-          >
-            {s}
-          </span>
-        ))}
-      </div>
-
-      {project.link && (
-        <div className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-indigo-glow">
-          {t("sections.projects-repo")}
-          <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-indigo/20 bg-surface-elevated/70 shadow-glow backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-indigo/50 hover:shadow-glow font-mono text-xs">
+      
+      {/* Terminal Window Header (Fiori Style) */}
+      <div className="bg-surface-elevated/70 px-4 py-2 flex items-center justify-between border-b border-border/30 text-[10px]">
+        <div className="flex gap-1">
+          <div className="h-2 w-2 rounded-full bg-red-500/70"></div>
+          <div className="h-2 w-2 rounded-full bg-yellow-500/70"></div>
+          <div className="h-2 w-2 rounded-full bg-green-500/70"></div>
         </div>
-      )}
+        <div className="text-muted-foreground/60 font-semibold truncate max-w-[150px]">
+          ~/projects/{project.id}
+        </div>
+        <div className="w-4"></div>
+      </div>
+
+      <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+        <div>
+          <div className="flex items-center justify-between">
+            <span className="rounded border border-indigo/20 bg-indigo/5 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-indigo-glow">
+              {project.category}
+            </span>
+            <span className="text-[10px] text-muted-foreground/80">{project.period}</span>
+          </div>
+
+          <h3 className="mt-3 font-display text-base font-bold leading-snug text-foreground group-hover:text-indigo-glow transition-colors">
+            {t(`projects.${project.id}.title`, { defaultValue: project.title })}
+          </h3>
+          <p className="mt-2 text-xs leading-relaxed text-foreground/70">
+            {t(`projects.${project.id}.description`)}
+          </p>
+        </div>
+
+        {/* Target Objective */}
+        <div className="flex items-start gap-2 rounded-lg border border-border/40 bg-surface/30 p-2.5">
+          <Target className="mt-0.5 h-3.5 w-3.5 shrink-0 text-indigo-glow animate-pulse" />
+          <p className="text-[11px] leading-relaxed text-foreground/80">
+            {t(`projects.${project.id}.objectives`)}
+          </p>
+        </div>
+
+        {/* Stacks */}
+        <div className="flex flex-wrap gap-1">
+          {project.stack.map((s) => (
+            <span
+              key={s}
+              className="rounded border border-border/40 bg-surface-elevated px-2 py-0.5 text-[10px] text-foreground/80"
+            >
+              {s}
+            </span>
+          ))}
+        </div>
+
+        {/* Action Link & SAP Status bar */}
+        <div className="border-t border-border/20 pt-3 flex items-center justify-between text-[10px] text-muted-foreground/80">
+          <div>
+            <span>T-Code: /n{project.id}</span>
+          </div>
+          {project.link ? (
+            <div className="inline-flex items-center gap-0.5 text-indigo-glow font-bold">
+              {t("sections.projects-repo")}
+              <ArrowUpRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </div>
+          ) : (
+            <div className="flex items-center gap-1 text-emerald-500 font-bold">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_#10b981]"></span>
+              <span>BUILD: OK</span>
+            </div>
+          )}
+        </div>
+      </div>
     </article>
   );
 

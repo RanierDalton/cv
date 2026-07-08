@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { profile } from "@/lib/portfolio-data";
-import { Github, Linkedin, Mail, ArrowUpRight, Sparkles, FileDown, Terminal, Music, Gamepad2, Settings } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowUpRight, Sparkles, FileDown, Terminal, Music, Settings } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import sapLogo from "@/assets/sap_logo.jpeg";
 
@@ -17,15 +17,21 @@ type TechItem = {
   logo: React.ReactNode;
 };
 
-// Distributed SAP logos evenly in rows
+// Oracle custom SVG Stadium logo filled with Oracle Red (#F80000)
+const oracleSvgIcon = (
+  <svg viewBox="0 0 24 24" fill="currentColor" className="text-[#F80000] h-5 w-10 object-contain shrink-0">
+    <path d="M12 4C5.37 4 0 7.58 0 12s5.37 8 12 8 12-3.58 12-8-5.37-8-12-8zm0 12c-4.42 0-8-1.79-8-4s3.58-4 8-4 8 1.79 8 4-3.58 4-8 4z"/>
+  </svg>
+);
+
 const row1: TechItem[] = [
   { name: "SAP BTP", logo: createImgLogo(sapLogo, "SAP BTP") },
   { name: "Python", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", "Python") },
   { name: "Docker", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", "Docker") },
   { name: "PostgreSQL", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", "PostgreSQL") },
   { name: "TypeScript", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", "TypeScript") },
-  { name: "AWS", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg", "AWS") },
-  { name: "Django", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg", "Django") },
+  { name: "AWS", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg", "AWS", "dark:invert") },
+  { name: "Django", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg", "Django", "dark:invert") },
   { name: "Git", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", "Git") },
   { name: "C++", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg", "C++") },
   {
@@ -65,9 +71,9 @@ const row2: TechItem[] = [
     ),
   },
   { name: "JavaScript", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", "JavaScript") },
-  { name: "OCI", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg", "OCI") },
+  { name: "OCI", logo: createSvgLogo(oracleSvgIcon) },
   { name: "SAP RAP", logo: createImgLogo(sapLogo, "SAP RAP") },
-  { name: "Flask", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg", "Flask") },
+  { name: "Flask", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg", "Flask", "dark:invert") },
   { name: "GitHub", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", "GitHub", "dark:invert") },
   { name: "C", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg", "C") },
   { name: "shell/bash", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg", "shell/bash", "dark:invert") },
@@ -77,28 +83,69 @@ const row2: TechItem[] = [
 
 export function Hero() {
   const { t, i18n } = useTranslation();
-  const [activeTab, setActiveTab] = useState<"about" | "music" | "gaming">("about");
+  const [activeTab, setActiveTab] = useState<"about" | "music">("about");
   const [typedText, setTypedText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [nameText, setNameText] = useState("");
 
-  const fullText = t("profile.bio");
+  const fullText = activeTab === "about" ? t("profile.bio") : t("terminal.music.desc");
 
   // Effect to simulate typing animation in Terminal
   useEffect(() => {
-    setTypedText("");
     setIsTyping(true);
     let index = 0;
-    const interval = setInterval(() => {
-      if (index < fullText.length) {
-        setTypedText((prev) => prev + fullText.charAt(index));
-        index++;
+    setTypedText("");
+
+    const timer = setInterval(() => {
+      index++;
+      if (index <= fullText.length) {
+        setTypedText(fullText.substring(0, index));
       } else {
         setIsTyping(false);
-        clearInterval(interval);
+        clearInterval(timer);
       }
-    }, 4); // Fast typing effect
-    return () => clearInterval(interval);
-  }, [activeTab, i18n.language]);
+    }, 6); // Fast and robust typing effect
+
+    return () => clearInterval(timer);
+  }, [activeTab, fullText]);
+
+  // Effect to simulate title typing loop ($: Ranier Dalton Couto)
+  useEffect(() => {
+    let isMounted = true;
+    const fullTitle = "$: Ranier Dalton Couto";
+    let index = 0;
+    let isDeleting = false;
+
+    const tick = () => {
+      if (!isMounted) return;
+      const current = fullTitle.substring(0, index);
+      setNameText(current);
+
+      if (!isDeleting && index === fullTitle.length) {
+        setTimeout(() => {
+          isDeleting = true;
+          tick();
+        }, 4000); // Hold name for 4s
+        return;
+      }
+
+      if (isDeleting && index === 3) { // Back to "$: "
+        isDeleting = false;
+        setTimeout(() => {
+          tick();
+        }, 1500); // Pause 1.5s
+        return;
+      }
+
+      index = isDeleting ? index - 1 : index + 1;
+      setTimeout(tick, isDeleting ? 40 : 80);
+    };
+
+    tick();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const currentLangCode = i18n.language?.startsWith("en") ? "EN" : "PT-BR";
 
@@ -121,46 +168,45 @@ export function Hero() {
       {/* Fade-out background transition to the next section */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background via-background/40 to-transparent z-10" />
 
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 z-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          
-          {/* Left Column: Personal Presentation */}
-          <div className="lg:col-span-5 flex flex-col justify-center">
-            <div className="inline-flex self-start items-center gap-2 rounded-full border border-border glass px-4 py-1.5 text-xs font-semibold text-muted-foreground">
-              <Sparkles className="h-3.5 w-3.5 text-indigo-glow" />
-              {t("hero.status")}
-            </div>
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 z-20 flex flex-col gap-10">
+        
+        {/* Top: Personal Presentation Header */}
+        <div className="flex flex-col items-start text-left max-w-3xl">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border glass px-4 py-1.5 text-xs font-semibold text-muted-foreground">
+            <Sparkles className="h-3.5 w-3.5 text-indigo-glow" />
+            {t("hero.status")}
+          </div>
 
-            <h1 className="mt-6 text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl">
-              {profile.name.split(" ").slice(0, -1).join(" ")}{" "}
-              <span className="text-gradient">{profile.name.split(" ").slice(-1)[0]}</span>
-            </h1>
+          {/* Loop-Typing Monospace Header */}
+          <h1 className="mt-6 text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl min-h-[70px] font-mono text-indigo-glow">
+            {nameText}
+            <span className="inline-block h-6 sm:h-8 w-2 bg-gradient-primary ml-1 animate-cursor-blink">▋</span>
+          </h1>
 
-            <p className="mt-3 font-display text-lg font-medium text-indigo-glow sm:text-xl">
-              {t("profile.role")}
-            </p>
+          <p className="mt-2 font-display text-base font-semibold text-foreground/80 sm:text-lg">
+            {t("profile.role")}
+          </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <a
-                href={`mailto:${profile.contacts.email}`}
-                className="group inline-flex items-center gap-2 rounded-full bg-gradient-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5"
-              >
-                <Mail className="h-4 w-4" />
-                {profile.contacts.email}
-                <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <a
+              href={`mailto:${profile.contacts.email}`}
+              className="group inline-flex items-center gap-2 rounded-full bg-gradient-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5"
+            >
+              <Mail className="h-4 w-4" />
+              {profile.contacts.email}
+              <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
 
-              <a
-                href="./cv.pdf"
-                download="Ranier_Dalton_CV.pdf"
-                className="group inline-flex items-center gap-2 rounded-full border border-border bg-surface-elevated px-5 py-2.5 text-sm font-semibold text-foreground transition-all duration-200 hover:-translate-y-0.5 hover:border-indigo hover:text-indigo-glow hover:shadow-glow"
-              >
-                <FileDown className="h-4 w-4" />
-                {t("hero.download-cv")}
-              </a>
-            </div>
+            <a
+              href="./cv.pdf"
+              download="Ranier_Dalton_CV.pdf"
+              className="group inline-flex items-center gap-2 rounded-full border border-border bg-surface-elevated px-5 py-2.5 text-sm font-semibold text-foreground transition-all duration-200 hover:-translate-y-0.5 hover:border-indigo hover:text-indigo-glow hover:shadow-glow"
+            >
+              <FileDown className="h-4 w-4" />
+              {t("hero.download-cv")}
+            </a>
 
-            <div className="mt-6 flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 sm:ml-2">
               <ContactPill href={profile.contacts.linkedin} icon={<Linkedin className="h-4 w-4" />}>
                 LinkedIn
               </ContactPill>
@@ -175,230 +221,146 @@ export function Hero() {
               </ContactPill>
             </div>
           </div>
+        </div>
 
-          {/* Right Column: Monospace Interactive Terminal Simulator */}
-          <div className="lg:col-span-7 w-full">
-            <div className="w-full rounded-2xl border border-indigo/25 bg-surface/85 shadow-glow backdrop-blur-md overflow-hidden font-mono text-sm text-foreground/90 flex flex-col min-h-[380px]">
-              
-              {/* Terminal Window Header */}
-              <div className="bg-surface-elevated/70 px-4 py-3 flex items-center justify-between border-b border-border/30">
-                <div className="flex gap-2">
-                  <div className="h-3.5 w-3.5 rounded-full bg-red-500/80 border border-red-600/40"></div>
-                  <div className="h-3.5 w-3.5 rounded-full bg-yellow-500/80 border border-yellow-600/40"></div>
-                  <div className="h-3.5 w-3.5 rounded-full bg-green-500/80 border border-green-600/40"></div>
-                </div>
-                <div className="text-xs text-muted-foreground font-semibold tracking-wider">
-                  ranier@BTP-AI:~
-                </div>
-                <div className="w-12"></div> {/* Spacer for balancing title */}
+        {/* Bottom: Monospace Interactive Terminal Simulator (Widescreen Full Width) */}
+        <div className="w-full">
+          <div className="w-full rounded-2xl border border-indigo/25 bg-surface/85 shadow-glow backdrop-blur-md overflow-hidden font-mono text-sm text-foreground/90 flex flex-col min-h-[360px]">
+            
+            {/* Terminal Window Header */}
+            <div className="bg-surface-elevated/70 px-4 py-3 flex items-center justify-between border-b border-border/30">
+              <div className="flex gap-2">
+                <div className="h-3.5 w-3.5 rounded-full bg-red-500/80 border border-red-600/40"></div>
+                <div className="h-3.5 w-3.5 rounded-full bg-yellow-500/80 border border-yellow-600/40"></div>
+                <div className="h-3.5 w-3.5 rounded-full bg-green-500/80 border border-green-600/40"></div>
               </div>
-
-              {/* Terminal Tab Bar */}
-              <div className="flex bg-surface-elevated/40 border-b border-border/20">
-                <button
-                  onClick={() => setActiveTab("about")}
-                  className={`flex-1 py-2 px-3 flex items-center justify-center gap-2 border-r border-border/20 text-xs font-semibold transition-all ${
-                    activeTab === "about"
-                      ? "bg-surface/90 text-indigo-glow border-b-2 border-indigo-glow"
-                      : "text-muted-foreground hover:bg-white/5"
-                  }`}
-                >
-                  <Terminal className="h-3.5 w-3.5" />
-                  {t("terminal.tabs.about")}
-                </button>
-                <button
-                  onClick={() => setActiveTab("music")}
-                  className={`flex-1 py-2 px-3 flex items-center justify-center gap-2 border-r border-border/20 text-xs font-semibold transition-all ${
-                    activeTab === "music"
-                      ? "bg-surface/90 text-indigo-glow border-b-2 border-indigo-glow"
-                      : "text-muted-foreground hover:bg-white/5"
-                  }`}
-                >
-                  <Music className="h-3.5 w-3.5" />
-                  {t("terminal.tabs.music")}
-                </button>
-                <button
-                  onClick={() => setActiveTab("gaming")}
-                  className={`flex-1 py-2 px-3 flex items-center justify-center gap-2 text-xs font-semibold transition-all ${
-                    activeTab === "gaming"
-                      ? "bg-surface/90 text-indigo-glow border-b-2 border-indigo-glow"
-                      : "text-muted-foreground hover:bg-white/5"
-                  }`}
-                >
-                  <Gamepad2 className="h-3.5 w-3.5" />
-                  {t("terminal.tabs.gaming")}
-                </button>
+              <div className="text-xs text-muted-foreground font-semibold tracking-wider">
+                ranier@BTP-AI:~
               </div>
+              <div className="w-12"></div>
+            </div>
 
-              {/* Terminal Inner Console Area */}
-              <div className="p-5 flex-1 flex flex-col justify-between leading-relaxed text-xs sm:text-sm">
-                <div>
-                  {/* TAB 1: ABOUT / BIO */}
-                  {activeTab === "about" && (
-                    <div className="space-y-3">
-                      <div className="text-indigo-glow font-bold">
-                        ranier@dalton:~$ <span className="text-foreground">./about_me.sh</span>
-                      </div>
-                      <div className="text-cyan-400 opacity-90">
-                        {t("terminal.about.executing")}
-                      </div>
-                      <div className="text-muted-foreground font-semibold">
-                        {t("terminal.about.status")}
-                      </div>
-                      <div className="border-t border-border/20 pt-2"></div>
-                      <p className="text-foreground/90 whitespace-pre-wrap leading-relaxed">
-                        {typedText}
-                        {isTyping && <span className="inline-block h-3.5 w-2 bg-indigo-glow ml-1 animate-cursor-blink">▋</span>}
+            {/* Terminal Tab Bar */}
+            <div className="flex bg-surface-elevated/40 border-b border-border/20">
+              <button
+                onClick={() => setActiveTab("about")}
+                className={`flex-1 py-2.5 px-4 flex items-center justify-center gap-2 border-r border-border/20 text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === "about"
+                    ? "bg-surface/90 text-indigo-glow border-b-2 border-indigo-glow"
+                    : "text-muted-foreground hover:bg-white/5"
+                }`}
+              >
+                <Terminal className="h-3.5 w-3.5" />
+                {t("terminal.tabs.about")}
+              </button>
+              <button
+                onClick={() => setActiveTab("music")}
+                className={`flex-1 py-2.5 px-4 flex items-center justify-center gap-2 text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === "music"
+                    ? "bg-surface/90 text-indigo-glow border-b-2 border-indigo-glow"
+                    : "text-muted-foreground hover:bg-white/5"
+                }`}
+              >
+                <Music className="h-3.5 w-3.5" />
+                {t("terminal.tabs.music")}
+              </button>
+            </div>
+
+            {/* Terminal Inner Console Area */}
+            <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between leading-relaxed text-xs sm:text-sm">
+              <div>
+                {/* TAB 1: ABOUT / BIO */}
+                {activeTab === "about" && (
+                  <div className="space-y-3">
+                    <div className="text-indigo-glow font-bold">
+                      {t("terminal.about.executing")}
+                    </div>
+                    <div className="text-muted-foreground font-semibold text-[11px]">
+                      {t("terminal.about.status")}
+                    </div>
+                    <div className="border-t border-border/20 pt-2"></div>
+                    <p className="text-foreground/90 whitespace-pre-wrap leading-relaxed">
+                      {typedText}
+                      {isTyping && <span className="inline-block h-3.5 w-2 bg-indigo-glow ml-1 animate-cursor-blink">▋</span>}
+                    </p>
+                  </div>
+                )}
+
+                {/* TAB 2: MUSIC HOBBIES (hobby.mp3) */}
+                {activeTab === "music" && (
+                  <div className="space-y-3">
+                    <div className="text-indigo-glow font-bold">
+                      {t("terminal.music.executing")}
+                    </div>
+                    <div className="text-cyan-400 opacity-90">
+                      {t("terminal.music.playing")}
+                    </div>
+
+                    {/* Interactive CSS Audio Visualizer */}
+                    <div className="flex h-16 items-end justify-center gap-1.5 my-3 p-3 rounded-xl border border-white/5 bg-white/5 overflow-hidden">
+                      {Array.from({ length: 36 }).map((_, i) => {
+                        const delay = (i % 6) * 0.12 + (i % 3) * 0.08;
+                        const height = [45, 80, 95, 60, 85, 100, 70, 50, 90, 75, 40, 55][i % 12];
+                        return (
+                          <div
+                            key={i}
+                            className="w-1.5 bg-gradient-to-t from-indigo-500 via-indigo-glow to-cyan-400 rounded-full animate-soundwave origin-bottom"
+                            style={{
+                              height: `${height}%`,
+                              animationDelay: `${delay}s`,
+                            }}
+                            aria-hidden="true"
+                          />
+                        );
+                      })}
+                    </div>
+
+                    <div className="border-t border-border/20 pt-2 text-xs space-y-2">
+                      <p className="text-foreground/80 leading-relaxed italic">
+                        "{typedText}"
+                        {isTyping && <span className="inline-block h-3 w-1.5 bg-indigo-glow ml-0.5 animate-cursor-blink">▋</span>}
                       </p>
-                    </div>
-                  )}
-
-                  {/* TAB 2: MUSIC HOBBIES */}
-                  {activeTab === "music" && (
-                    <div className="space-y-3">
-                      <div className="text-indigo-glow font-bold">
-                        {t("terminal.music.executing")}
-                      </div>
-                      <div className="text-cyan-400 opacity-90">
-                        {t("terminal.music.playing")}
-                      </div>
-
-                      {/* Interactive CSS Audio Visualizer */}
-                      <div className="flex h-16 items-end justify-center gap-1.5 my-3 p-3 rounded-xl border border-white/5 bg-white/5 overflow-hidden">
-                        {Array.from({ length: 24 }).map((_, i) => {
-                          const delay = (i % 6) * 0.15 + (i % 3) * 0.08;
-                          const height = [45, 80, 95, 60, 85, 100, 70, 50, 90, 75, 40, 55][i % 12];
-                          return (
-                            <div
-                              key={i}
-                              className="w-1.5 bg-gradient-to-t from-indigo-500 via-indigo-glow to-cyan-400 rounded-full animate-soundwave origin-bottom"
-                              style={{
-                                height: `${height}%`,
-                                animationDelay: `${delay}s`,
-                              }}
-                            />
-                          );
-                        })}
-                      </div>
-
-                      <div className="border-t border-border/20 pt-2 text-xs space-y-1">
-                        <div className="text-foreground/90">
-                          <span className="text-indigo-glow font-semibold">🎧 </span>
-                          {t("terminal.music.hobby")}
-                        </div>
-                        <div className="text-foreground/90">
-                          <span className="text-indigo-glow font-semibold">🎛️ </span>
-                          {t("terminal.music.gear")}
-                        </div>
-                        <div className="text-foreground/90">
-                          <span className="text-indigo-glow font-semibold">🎵 </span>
-                          {t("terminal.music.focus")}
-                        </div>
+                      <div className="text-foreground/90 pt-1 text-[11px]">
+                        <span className="text-indigo-glow font-semibold">🎛️ </span>
+                        {t("terminal.music.focus")}
                       </div>
                     </div>
-                  )}
-
-                  {/* TAB 3: GAMING HOBBIES */}
-                  {activeTab === "gaming" && (
-                    <div className="space-y-3">
-                      <div className="text-indigo-glow font-bold">
-                        {t("terminal.gaming.executing")}
-                      </div>
-                      <div className="text-muted-foreground opacity-90 text-xs">
-                        {t("terminal.gaming.loading")}
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                        {/* CS2 Tactical Card */}
-                        <div className="border border-orange-500/30 bg-orange-950/10 p-3 rounded-lg flex flex-col justify-between">
-                          <div className="text-orange-400 font-bold text-xs border-b border-orange-500/20 pb-1.5 mb-2">
-                            {t("terminal.gaming.cs2-title")}
-                          </div>
-                          <div className="space-y-1.5 text-xs font-semibold">
-                            <div className="flex items-center justify-between">
-                              <span className="text-orange-400/80">HEALTH:</span>
-                              <span className="text-orange-300">100 HP</span>
-                            </div>
-                            <div className="w-full h-2 bg-orange-950/50 rounded overflow-hidden">
-                              <div className="h-full w-full bg-orange-500"></div>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <span className="text-orange-400/80">ARMOR:</span>
-                              <span className="text-orange-300">100 AP</span>
-                            </div>
-                            <div className="w-full h-2 bg-orange-950/50 rounded overflow-hidden">
-                              <div className="h-full w-full bg-orange-400"></div>
-                            </div>
-                            <div className="text-orange-300/90 pt-1 text-[11px] leading-tight">
-                              {t("terminal.gaming.cs2-map")}
-                            </div>
-                            <div className="text-orange-300/90 text-[11px] leading-tight">
-                              {t("terminal.gaming.cs2-role")}
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Stardew Valley Cozy Card */}
-                        <div className="border border-yellow-600/30 bg-yellow-950/5 p-3 rounded-lg flex flex-col justify-between">
-                          <div className="text-yellow-500 font-bold text-xs border-b border-yellow-600/20 pb-1.5 mb-2">
-                            {t("terminal.gaming.stardew-title")}
-                          </div>
-                          <div className="space-y-1.5 text-xs font-semibold">
-                            <div className="flex items-center justify-between">
-                              <span className="text-yellow-600/85">ENERGY:</span>
-                              <span className="text-yellow-500">80/100</span>
-                            </div>
-                            <div className="w-full h-2 bg-yellow-950/50 rounded overflow-hidden">
-                              <div className="h-full w-[80%] bg-emerald-500"></div>
-                            </div>
-                            <div className="text-emerald-400/90 text-[11px] leading-tight pt-1">
-                              🌾 {t("terminal.gaming.stardew-role")}
-                            </div>
-                            <div className="text-emerald-400/90 text-[11px] leading-tight">
-                              ⭐ {t("terminal.gaming.stardew-level")}
-                            </div>
-                            <div className="text-emerald-400/90 text-[11px] leading-tight">
-                              🍂 {t("terminal.gaming.stardew-vibes")}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Simulated SAP GUI / Fiori Status Bar */}
-                <div className="mt-6 pt-2 border-t border-border/25 flex items-center justify-between text-[10px] text-muted-foreground/80 bg-surface-elevated/20 -mx-5 -mb-5 px-5 py-2 font-semibold">
-                  <div className="flex items-center gap-1.5">
-                    <Settings className="h-3 w-3 text-indigo-glow animate-spin-slow" />
-                    <span>System: S4H (Client 100)</span>
                   </div>
-                  <div>
-                    <span>Lang: {currentLangCode}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <span className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]"></span>
-                    <span>ONLINE</span>
-                  </div>
-                </div>
-
+                )}
               </div>
+
+              {/* Simulated SAP GUI / Fiori Status Bar */}
+              <div className="mt-6 pt-2 border-t border-border/25 flex items-center justify-between text-[10px] text-muted-foreground/80 bg-surface-elevated/20 -mx-5 -mb-5 px-5 py-2 sm:px-6 font-semibold">
+                <div className="flex items-center gap-1.5">
+                  <Settings className="h-3 w-3 text-indigo-glow animate-spin-slow" />
+                  <span>System: S4H (Client 100)</span>
+                </div>
+                <div>
+                  <span>Lang: {currentLangCode}</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <span className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]"></span>
+                  <span>ONLINE</span>
+                </div>
+              </div>
+
             </div>
           </div>
-
         </div>
+
       </div>
 
       {/* Integrated Avenue Tech Carousel */}
       <div className="relative z-20 mt-16 pb-4">
-        <h2 className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-indigo-glow mb-6 px-4">
+        <h2 className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-indigo-glow mb-6 px-4 font-mono">
           {t("sections.tech-title")}
         </h2>
 
         {/* Row 1 (slides left) */}
         <div className="relative flex w-full items-center overflow-x-hidden border-t border-border/20 bg-surface/20 py-4 backdrop-blur-sm">
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
+          {/* Larger Edge Fade Overlays */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-40 bg-gradient-to-r from-background to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-40 bg-gradient-to-l from-background to-transparent z-10" />
 
           {/* Block 1 */}
           <div className="flex animate-marquee-left whitespace-nowrap gap-16 items-center shrink-0 pr-16">
@@ -431,8 +393,9 @@ export function Hero() {
 
         {/* Row 2 (slides right) */}
         <div className="relative flex w-full items-center overflow-x-hidden border-t border-b border-border/20 bg-surface/20 py-4 backdrop-blur-sm">
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
+          {/* Larger Edge Fade Overlays */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-40 bg-gradient-to-r from-background to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-40 bg-gradient-to-l from-background to-transparent z-10" />
 
           {/* Block 1 */}
           <div className="flex animate-marquee-right whitespace-nowrap gap-16 items-center shrink-0 pr-16">
