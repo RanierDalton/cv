@@ -1,27 +1,30 @@
 import { profile } from "@/lib/portfolio-data";
 import { Github, Linkedin, Mail, Link2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer id="contato" className="border-t border-border/60 bg-surface/30 py-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="grid gap-10 md:grid-cols-2 md:items-center">
           <div>
             <div className="font-display text-2xl font-bold tracking-tight">
-              <span className="text-gradient">Vamos</span>
-              <span className="text-foreground"> conversar?</span>
+              <span className="text-gradient">{t("footer.title").split(" ")[0]}</span>
+              <span className="text-foreground"> {t("footer.title").split(" ").slice(1).join(" ")}</span>
             </div>
             <p className="mt-2 text-sm text-muted-foreground max-w-md">
-              Sinta-se à vontade para entrar em contato para novas oportunidades, projetos ou apenas para trocar ideias sobre desenvolvimento SAP, Cloud e Inteligência Artificial.
+              {t("footer.description")}
             </p>
             <p className="mt-8 text-xs text-muted-foreground/60">
-              © {new Date().getFullYear()} · Ranier Dalton Couto. Construído com foco em inovação.
+              © {new Date().getFullYear()} · Ranier Dalton Couto.
             </p>
           </div>
 
           <div className="flex flex-col items-start gap-4 md:items-end">
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-glow">
-              Contato & Redes
+              {t("footer.social")}
             </span>
             <div className="flex flex-wrap gap-3">
               <a

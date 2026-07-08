@@ -1,7 +1,10 @@
 import { profile } from "@/lib/portfolio-data";
 import { Github, Linkedin, Mail, ArrowUpRight, Sparkles } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export function Hero() {
+  const { t } = useTranslation();
+
   return (
     <section id="sobre" className="relative overflow-hidden pt-32 pb-24 sm:pt-40 sm:pb-32">
       <div className="absolute inset-0 bg-gradient-hero opacity-90" aria-hidden />
@@ -17,7 +20,7 @@ export function Hero() {
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <div className="inline-flex items-center gap-2 rounded-full border border-border glass px-4 py-1.5 text-xs font-medium text-muted-foreground">
           <Sparkles className="h-3.5 w-3.5 text-indigo-glow" />
-          Disponível para novos projetos SAP & IA
+          {t("hero.status")}
         </div>
 
         <h1 className="mt-8 max-w-4xl text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
@@ -26,11 +29,11 @@ export function Hero() {
         </h1>
 
         <p className="mt-4 font-display text-lg font-medium text-indigo-glow sm:text-xl">
-          {profile.role}
+          {t("profile.role")}
         </p>
 
         <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          {profile.bio}
+          {t("profile.bio")}
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
@@ -47,13 +50,13 @@ export function Hero() {
             LinkedIn
           </ContactPill>
           <ContactPill href={profile.contacts.githubPersonal} icon={<Github className="h-4 w-4" />}>
-            GitHub · Pessoal
+            {t("hero.personal-github")}
           </ContactPill>
           <ContactPill
             href={profile.contacts.githubAcademic}
             icon={<Github className="h-4 w-4" />}
           >
-            GitHub · Acadêmico
+            {t("hero.academic-github")}
           </ContactPill>
         </div>
 

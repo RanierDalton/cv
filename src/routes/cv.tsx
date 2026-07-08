@@ -5,6 +5,7 @@ import { Timeline } from "@/components/portfolio/Timeline";
 import { Projects } from "@/components/portfolio/Projects";
 import { Certifications } from "@/components/portfolio/Certifications";
 import { Footer } from "@/components/portfolio/Footer";
+import { BackToTop } from "@/components/portfolio/BackToTop";
 import { profile } from "@/lib/portfolio-data";
 
 export const Route = createFileRoute("/cv")({
@@ -68,6 +69,7 @@ export function Index() {
         <Certifications />
       </main>
       <Footer />
+      <BackToTop />
     </div>
   );
 }

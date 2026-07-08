@@ -2,6 +2,7 @@ import { useState } from "react";
 import { projects, type Project } from "@/lib/portfolio-data";
 import { ArrowUpRight, Target } from "lucide-react";
 import { SectionHeader } from "./Timeline";
+import { useTranslation } from "react-i18next";
 
 const categories: Array<{ id: Project["category"] | "Todos"; label: string }> = [
   { id: "Todos", label: "Todos" },
@@ -12,6 +13,7 @@ const categories: Array<{ id: Project["category"] | "Todos"; label: string }> = 
 ];
 
 export function Projects() {
+  const { t } = useTranslation();
   const [filter, setFilter] = useState<Project["category"] | "Todos">("Todos");
   const filtered = filter === "Todos" ? projects : projects.filter((p) => p.category === filter);
 
@@ -19,9 +21,9 @@ export function Projects() {
     <section id="projetos" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeader
-          kicker="03 · Portfólio"
-          title="Projetos em destaque"
-          subtitle="Uma seleção de entregas reais e experimentos. Cada card traz objetivo, stack e período de desenvolvimento."
+          kicker={t("sections.projects-subtitle")}
+          title={t("sections.projects-title")}
+          subtitle={t("sections.projects-description")}
         />
 
         <div className="mt-10 flex flex-wrap gap-2">
@@ -37,7 +39,7 @@ export function Projects() {
                     : "border-border text-muted-foreground hover:-translate-y-0.5 hover:border-indigo/60 hover:text-foreground"
                 }`}
               >
-                {c.label}
+                {c.id === "Todos" ? t("sections.projects-all") : c.label}
               </button>
             );
           })}
@@ -54,6 +56,8 @@ export function Projects() {
 }
 
 function ProjectCard({ project }: { project: Project }) {
+  const { t } = useTranslation();
+
   const content = (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface-elevated p-6 shadow-card transition-all hover:-translate-y-1 hover:border-indigo/60 hover:shadow-glow">
       <div
@@ -67,12 +71,18 @@ function ProjectCard({ project }: { project: Project }) {
         <span className="text-xs text-muted-foreground">{project.period}</span>
       </div>
 
-      <h3 className="mt-4 font-display text-lg font-bold leading-tight">{project.title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
+      <h3 className="mt-4 font-display text-lg font-bold leading-tight">
+        {t(`projects.${project.id}.title`, { defaultValue: project.title })}
+      </h3>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        {t(`projects.${project.id}.description`)}
+      </p>
 
       <div className="mt-4 flex items-start gap-2 rounded-lg border border-border/60 bg-surface/60 p-3">
         <Target className="mt-0.5 h-3.5 w-3.5 shrink-0 text-indigo-glow" />
-        <p className="text-xs leading-relaxed text-foreground/80">{project.objectives}</p>
+        <p className="text-xs leading-relaxed text-foreground/80">
+          {t(`projects.${project.id}.objectives`)}
+        </p>
       </div>
 
       <div className="mt-4 flex flex-wrap gap-1.5">
@@ -88,7 +98,7 @@ function ProjectCard({ project }: { project: Project }) {
 
       {project.link && (
         <div className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-indigo-glow">
-          Ver repositório
+          {t("sections.projects-repo")}
           <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </div>
       )}

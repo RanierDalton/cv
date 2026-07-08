@@ -17,6 +17,16 @@ export function useTheme() {
     const initial = getInitialTheme();
     setTheme(initial);
     setMounted(true);
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: light)");
+    const handleChange = (e: MediaQueryListEvent) => {
+      if (!window.localStorage.getItem("theme")) {
+        setTheme(e.matches ? "light" : "dark");
+      }
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
   useEffect(() => {

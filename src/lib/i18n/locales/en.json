@@ -1,0 +1,100 @@
+{
+  "nav": {
+    "about": "About",
+    "timeline": "Timeline",
+    "projects": "Projects",
+    "certifications": "Certifications",
+    "contact": "Contact"
+  },
+  "hero": {
+    "status": "Available for new SAP & AI projects",
+    "academic-github": "GitHub · Academic",
+    "personal-github": "GitHub · Personal"
+  },
+  "sections": {
+    "timeline-subtitle": "02 · Timeline",
+    "timeline-title": "Academic and professional journey",
+    "timeline-description": "Two parallel timelines. Use the arrows to navigate through each moment.",
+    "timeline-exp": "Experience",
+    "timeline-edu": "Education",
+    "projects-subtitle": "03 · Portfolio",
+    "projects-title": "Featured Projects",
+    "projects-description": "A selection of real deliveries and experiments. Each card shows the objective, stack, and development period.",
+    "projects-all": "All",
+    "projects-repo": "View repository",
+    "projects-details": "View details",
+    "certifications-subtitle": "04 · Credentials",
+    "certifications-title": "Certifications & Specializations",
+    "certifications-description": "My technical certifications and proficiencies issued by partner institutions. Click to validate the credential.",
+    "certifications-validate": "Validate credential",
+    "certifications-expires": "Expires on",
+    "certifications-no-expiry": "No expiry"
+  },
+  "footer": {
+    "title": "Let's talk?",
+    "description": "Feel free to reach out for new opportunities, projects, or just to exchange ideas about SAP development, Cloud, and Artificial Intelligence.",
+    "social": "Contact & Networks"
+  },
+  "profile": {
+    "role": "BTP & AI Consultant · SAP ABAP Developer",
+    "bio": "Currently working as a Trainee in SAP ABAP and BTP development at Exed Consulting, focusing on SAP Fiori, OData services, and R&D initiatives in React, Node.js, and Artificial Intelligence — including Agentic AI. I am a Computer Science student and digital game programming technician, interested in solutions that connect technology, business, and innovation."
+  },
+  "experience": {
+    "exed-consultant": {
+      "title": "BTP & AI Consultant",
+      "description": "Development of extensions and integrations for SAP S/4HANA environments (side-by-side and in-app extension architectures) using SAP BTP. Testing and integration of SAP LBN (Logistics Business Network) with carrier systems. Strong focus on logistics and sales modules (SD, EWM, and TM). Building AI applications and agents (LLMs) with Python, LangGraph, and FastAPI. Direct client engagement using the SAP Activate methodology."
+    },
+    "exed-abap": {
+      "title": "ABAP & BTP Consultant",
+      "description": "Meeting real client demands by developing customized systemic solutions with a deep focus on HCM and SD modules. Business logic and data modeling in ABAP and CDS Views. Complex implementations using Enhancements, BADIs, BAPIs, Adobe Forms, and BOPF. Interfaces in SAP Fiori (Freestyle and Fiori Elements) and OData services via SAP Gateway."
+    },
+    "freelance-rpa": {
+      "title": "Freelance Developer · RPA",
+      "description": "Development of robotic process automations (RPA) in Python aimed at optimizing fiscal flows. Creation of scripts for automated service invoice entry in municipal portals, reducing operational effort by approximately 89% and typing error rates to 1%."
+    }
+  },
+  "education": {
+    "sptech": {
+      "title": "Bachelor's in Computer Science",
+      "org": "São Paulo Tech School — SPTech",
+      "description": "Training in backend development with Java and Spring Boot, microservices architecture, messaging with RabbitMQ, data pipelines (OLTP, OLAP, Data Lake, DW), Cloud, and DevOps with AWS and Terraform."
+    },
+    "etec": {
+      "title": "Technician in Digital Game Programming",
+      "org": "ETEC Professor Basilides de Godoy",
+      "description": "Game development with Unity and C#, object-oriented programming, MySQL, mobile development with Android Studio (Java), and visual and sound design for games."
+    }
+  },
+  "projects": {
+    "infrawatch": {
+      "title": "InfraWatch",
+      "description": "Innovative academic solution developed as a 2nd (second) semester project in college for smart monitoring of Render Farms, ensuring efficiency, predictability, and security in rendering server infrastructure usage.",
+      "objectives": "Provide real-time visibility into render server resource consumption, anticipating bottlenecks and failures."
+    },
+    "solarway": {
+      "title": "SolarWay",
+      "description": "Academic extension project developed during the 3rd (third) and 4th (fourth) semesters in college, facilitating access to solar panel installation projects and generating a positive social impact.",
+      "objectives": "Create a solution that contributes to improving the quality of life around SolarWay, an autonomous solar energy company."
+    },
+    "cs2-stats-bot": {
+      "title": "CS2 Stats Bot",
+      "description": "Discord bot in Python to track and analyze Counter-Strike player and match statistics, with MySQL persistence and AI-assisted OCR.",
+      "objectives": "Automate the collection of CS2 statistics and provide quick analysis for gaming communities on Discord."
+    },
+    "monocromo": {
+      "title": "Monocromo",
+      "description": "Action-adventure game set in a futuristic dystopian world, developed as the graduation project (TCC) for the digital game programming technical course.",
+      "objectives": "Deliver an engaging narrative experience with puzzles, exploration, and combat, consolidating the technical course learning."
+    },
+    "sap-lbn-integration": {
+      "title": "SAP LBN × Carrier Integration",
+      "description": "Event-driven solution for integration between SAP Logistics Business Network (LBN) and external carrier systems, connecting integration plans through SAP Integration Suite (CPI) and SAP S/4HANA to unify tracking in real time.",
+      "objectives": "Reduce tracking latency and eliminate manual reconciliation between SAP and logistics partners."
+    },
+    "nfe-rpa": {
+      "title": "RPA · Electronic Invoices",
+      "description": "Robot for automated emission and verification of NF-e (electronic service invoices), integrating fiscal portal, ERP, and document repository, reducing operational effort by approximately 89%.",
+      "objectives": "Reduce emission error rate to ~1% and free up time for the tax team."
+    }
+  }
+}

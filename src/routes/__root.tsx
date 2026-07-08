@@ -8,9 +8,11 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
 import appCss from "../style.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import "@/lib/i18n";
 
 function NotFoundComponent() {
   return (
@@ -95,7 +97,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "./favicon.svg", type: "image/svg+xml" },
     ],
     scripts: [{ children: themeInitScript }],
   }),
@@ -106,8 +108,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const { i18n } = useTranslation();
+  const lang = i18n.language?.startsWith("en") ? "en" : "pt-BR";
+
   return (
-    <html lang="pt-BR" className="dark">
+    <html lang={lang} className="dark">
       <head>
         <HeadContent />
       </head>
@@ -119,13 +124,18 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+import { I18nextProvider } from "react-i18next";
+import i18n from "@/lib/i18n";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
-    </QueryClientProvider>
+    <I18nextProvider i18n={i18n}>
+      <QueryClientProvider client={queryClient}>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </QueryClientProvider>
+    </I18nextProvider>
   );
 }

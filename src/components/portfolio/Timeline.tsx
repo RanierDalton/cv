@@ -1,29 +1,32 @@
 import { useState } from "react";
 import { experience, education, type TimelineItem } from "@/lib/portfolio-data";
 import { Briefcase, GraduationCap, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 type Track = "experience" | "education";
 
 export function Timeline() {
+  const { t } = useTranslation();
+
   return (
     <section id="trajetoria" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeader
-          kicker="02 · Trajetória"
-          title="Vida acadêmica e profissional"
-          subtitle="Duas linhas do tempo em paralelo. Use as setas para navegar por cada momento."
+          kicker={t("sections.timeline-subtitle")}
+          title={t("sections.timeline-title")}
+          subtitle={t("sections.timeline-description")}
         />
 
         <div className="mt-14 grid gap-8 lg:grid-cols-2 lg:gap-12">
           <TimelineTrack
             track="experience"
-            label="Experiência"
+            label={t("sections.timeline-exp")}
             icon={<Briefcase className="h-4 w-4" />}
             items={experience}
           />
           <TimelineTrack
             track="education"
-            label="Escolaridade"
+            label={t("sections.timeline-edu")}
             icon={<GraduationCap className="h-4 w-4" />}
             items={education}
           />
@@ -44,6 +47,7 @@ function TimelineTrack({
   icon: React.ReactNode;
   items: TimelineItem[];
 }) {
+  const { t } = useTranslation();
   const [index, setIndex] = useState(0);
   const current = items[index];
   const canPrev = index > 0;
@@ -105,7 +109,7 @@ function TimelineTrack({
                       active ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
                     }`}
                   >
-                    {item.title}
+                    {t(`${track}.${item.id}.title`)}
                   </span>
                   <span className="block text-xs text-muted-foreground">{item.period}</span>
                 </span>
@@ -122,9 +126,9 @@ function TimelineTrack({
           <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-indigo-glow">
             {current.period}
           </div>
-          <h3 className="mt-2 font-display text-xl font-bold sm:text-2xl">{current.title}</h3>
+          <h3 className="mt-2 font-display text-xl font-bold sm:text-2xl">{t(`${track}.${current.id}.title`)}</h3>
           <p className="mt-1 text-sm font-medium text-muted-foreground">
-            {current.org}
+            {track === "education" ? t(`${track}.${current.id}.org`) : current.org}
             {current.location && (
               <span className="ml-2 inline-flex items-center gap-1">
                 <MapPin className="h-3 w-3" />
@@ -132,7 +136,7 @@ function TimelineTrack({
               </span>
             )}
           </p>
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{current.description}</p>
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{t(`${track}.${current.id}.description`)}</p>
           <div className="mt-5 flex flex-wrap gap-1.5">
             {current.skills.map((s) => (
               <span
