@@ -1,0 +1,1 @@
+import{t as e}from"./index-BPd0-L2z.js";var t=e;export{t as component};
