@@ -142,7 +142,7 @@ function TimelineTrack({
 
           <div className="p-6 sm:p-7 space-y-4">
             <div className="text-indigo-glow font-bold text-xs sm:text-sm">
-              ranier@dalton:~$ <span className="text-foreground">cat details.txt</span>
+              ranier@s4h:~$ <span className="text-foreground">cat details.txt</span>
             </div>
 
             <div>

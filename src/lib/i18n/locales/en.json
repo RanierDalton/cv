@@ -18,13 +18,13 @@
       "music": "hobby.mp3"
     },
     "about": {
-      "executing": "ranier@dalton:~$ cat about_me.txt",
+      "executing": "ranier@s4h:~$ cat about_me.txt",
       "status": "[system] Connection: S/4HANA Cloud (BTP) & Agentic AI · ACTIVE"
     },
     "music": {
-      "executing": "ranier@dalton:~$ play_audio hobby.mp3",
+      "executing": "ranier@s4h:~$ play_audio hobby.mp3",
       "playing": "Playing: hobby.mp3 (320 kbps)",
-      "desc": "I am Ranier, I'm a 17-year-old passionate about music, and I'm embarking on an exciting journey of music production. The genres that have fascinated me the most are trap, rap, and electronic music. With a computer and a set of headphones, I'm starting to turn my musical inspirations into reality, exploring the secrets of production and creating the beats that resonate in my mind. I work exclusively with FL Studio, and my favorite parts are definitely Beat making and Mixing.",
+      "desc": "I am Ranier, I'm passionate about music and embarking on an exciting journey of music production. The genres that have fascinated me the most are trap, rap, and electronic music. With a computer and a set of headphones, I'm starting to turn my musical inspirations into reality, exploring the secrets of production and creating the beats that resonate in my mind. I work exclusively with FL Studio, and my favorite parts are definitely Beat making and Mixing.",
       "focus": "Focus: Beat Making, Mixing and Sound Design on FL Studio"
     }
   },

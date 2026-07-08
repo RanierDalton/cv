@@ -104,15 +104,15 @@ export function Hero() {
         setIsTyping(false);
         clearInterval(timer);
       }
-    }, 6); // Fast and robust typing effect
+    }, 15); // Natural typing speed (slower)
 
     return () => clearInterval(timer);
   }, [activeTab, fullText]);
 
-  // Effect to simulate title typing loop ($: Ranier Dalton Couto)
+  // Effect to simulate title typing loop ($: Ranier Dalton do Couto)
   useEffect(() => {
     let isMounted = true;
-    const fullTitle = "$: Ranier Dalton Couto";
+    const fullTitle = "$: Ranier Dalton do Couto";
     let index = 0;
     let isDeleting = false;
 
@@ -138,7 +138,7 @@ export function Hero() {
       }
 
       index = isDeleting ? index - 1 : index + 1;
-      setTimeout(tick, isDeleting ? 40 : 80);
+      setTimeout(tick, isDeleting ? 60 : 120); // Slower typing (120ms write, 60ms delete)
     };
 
     tick();
@@ -180,7 +180,7 @@ export function Hero() {
           {/* Loop-Typing Monospace Header */}
           <h1 className="mt-6 text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl min-h-[70px] font-mono text-indigo-glow">
             {nameText}
-            <span className="inline-block h-6 sm:h-8 w-2 bg-gradient-primary ml-1 animate-cursor-blink">▋</span>
+            <span className="inline-block h-6 sm:h-8 w-[2px] bg-gradient-primary ml-1.5 animate-cursor-blink" />
           </h1>
 
           <p className="mt-2 font-display text-base font-semibold text-foreground/80 sm:text-lg">
@@ -235,7 +235,7 @@ export function Hero() {
                 <div className="h-3.5 w-3.5 rounded-full bg-green-500/80 border border-green-600/40"></div>
               </div>
               <div className="text-xs text-muted-foreground font-semibold tracking-wider">
-                ranier@BTP-AI:~
+                ranier@s4h:~
               </div>
               <div className="w-12"></div>
             </div>
