@@ -25,7 +25,14 @@ export function Nav() {
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/40 bg-surface/70 backdrop-blur-xl">
+    <header 
+      className="fixed inset-x-0 top-0 z-50 border-b border-border/40 backdrop-blur-xl transition-colors duration-200"
+      style={{
+        backgroundColor: isOpen 
+          ? "var(--background)" 
+          : "color-mix(in oklab, var(--surface) 85%, transparent)"
+      }}
+    >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           to="/"
@@ -86,7 +93,7 @@ export function Nav() {
       </div>
 
       {isOpen && (
-        <div className="fixed inset-x-0 top-16 bottom-0 z-40 bg-background/95 backdrop-blur-lg flex flex-col p-6 md:hidden animate-in slide-in-from-top duration-300 border-t border-border/40">
+        <div className="fixed inset-x-0 top-16 bottom-0 z-40 bg-background flex flex-col p-6 md:hidden animate-in slide-in-from-top duration-300 border-t border-border/40">
           <nav className="flex flex-col gap-4 mt-4">
             {nav.map((item) => {
               const isActive = active === item.href.replace("#", "");

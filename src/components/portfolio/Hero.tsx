@@ -4,8 +4,8 @@ import { Github, Linkedin, Mail, ArrowUpRight, Sparkles, FileDown } from "lucide
 import { useTranslation } from "react-i18next";
 import sapLogo from "@/assets/sap_logo.jpeg";
 
-const createImgLogo = (src: string, alt: string) => (
-  <img src={src} alt={alt} className="h-full w-full object-contain" loading="lazy" />
+const createImgLogo = (src: string, alt: string, extraClass = "") => (
+  <img src={src} alt={alt} className={`h-full w-full object-contain ${extraClass}`} loading="lazy" />
 );
 
 const createSvgLogo = (children: React.ReactNode) => (
@@ -43,7 +43,7 @@ const row1: TechItem[] = [
     ),
   },
   { name: "SAP CAP", logo: createImgLogo(sapLogo, "SAP CAP") },
-  { name: "Express", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", "Express") },
+  { name: "Express", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", "Express", "dark:invert") },
   { name: "Redis", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg", "Redis") },
   { name: "Linux", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg", "Linux") },
 ];
@@ -65,29 +65,17 @@ const row2: TechItem[] = [
   },
   { name: "JavaScript", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", "JavaScript") },
   { name: "OCI", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg", "OCI") },
-  { name: "Flask", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg", "Flask") },
-  { name: "GitHub", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", "GitHub") },
-  { name: "C", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg", "C") },
-  {
-    name: "Claude",
-    logo: createSvgLogo(
-      <svg viewBox="0 0 24 24" fill="currentColor" className="text-orange-500/90 h-full w-full p-0.5">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.8 14.5h-3.6l-.8 2.3H7.1l3.6-10.1h2.6l3.6 10.1h-2.3l-.8-2.3zm-1.8-5l-1.3 3.8h2.6L12 11.5z"/>
-      </svg>
-    ),
-  },
   { name: "SAP RAP", logo: createImgLogo(sapLogo, "SAP RAP") },
+  { name: "Flask", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg", "Flask") },
+  { name: "GitHub", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", "GitHub", "dark:invert") },
+  { name: "C", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg", "C") },
+  { name: "shell/bash", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg", "shell/bash", "dark:invert") },
   { name: "SAP HANA", logo: createImgLogo(sapLogo, "SAP HANA") },
-  { name: "shell/bash", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg", "shell/bash") },
   { name: "Arduino", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg", "Arduino") },
 ];
 
 export function Hero() {
   const { t } = useTranslation();
-
-  // Duplicate items 4 times to ensure they scroll infinitely on any resolution without blanks
-  const marquee1 = [...row1, ...row1, ...row1, ...row1];
-  const marquee2 = [...row2, ...row2, ...row2, ...row2];
 
   return (
     <section id="sobre" className="relative overflow-hidden pt-32 pb-6 sm:pt-40 sm:pb-8">
@@ -169,9 +157,24 @@ export function Hero() {
           <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
 
-          <div className="flex animate-marquee-left whitespace-nowrap gap-16 items-center shrink-0">
-            {marquee1.map((t, idx) => (
-              <div key={`${t.name}-${idx}`} className="flex items-center gap-3.5">
+          {/* Block 1 */}
+          <div className="flex animate-marquee-left whitespace-nowrap gap-16 items-center shrink-0 pr-16">
+            {row1.map((t, idx) => (
+              <div key={`${t.name}-1-${idx}`} className="flex items-center gap-3.5">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/5 border border-white/10 p-2 shadow-sm hover:border-indigo/50 hover:shadow-glow hover:scale-110 transition-all duration-300">
+                  {t.logo}
+                </div>
+                <span className="font-display text-sm font-semibold tracking-wide text-foreground/80">
+                  {t.name}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Block 2 (Clone for perfect seamless looping) */}
+          <div className="flex animate-marquee-left whitespace-nowrap gap-16 items-center shrink-0 pr-16" aria-hidden="true">
+            {row1.map((t, idx) => (
+              <div key={`${t.name}-2-${idx}`} className="flex items-center gap-3.5">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/5 border border-white/10 p-2 shadow-sm hover:border-indigo/50 hover:shadow-glow hover:scale-110 transition-all duration-300">
                   {t.logo}
                 </div>
@@ -188,9 +191,24 @@ export function Hero() {
           <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
 
-          <div className="flex animate-marquee-right whitespace-nowrap gap-16 items-center shrink-0">
-            {marquee2.map((t, idx) => (
-              <div key={`${t.name}-${idx}`} className="flex items-center gap-3.5">
+          {/* Block 1 */}
+          <div className="flex animate-marquee-right whitespace-nowrap gap-16 items-center shrink-0 pr-16">
+            {row2.map((t, idx) => (
+              <div key={`${t.name}-1-${idx}`} className="flex items-center gap-3.5">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/5 border border-white/10 p-2 shadow-sm hover:border-indigo/50 hover:shadow-glow hover:scale-110 transition-all duration-300">
+                  {t.logo}
+                </div>
+                <span className="font-display text-sm font-semibold tracking-wide text-foreground/80">
+                  {t.name}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Block 2 (Clone for perfect seamless looping) */}
+          <div className="flex animate-marquee-right whitespace-nowrap gap-16 items-center shrink-0 pr-16" aria-hidden="true">
+            {row2.map((t, idx) => (
+              <div key={`${t.name}-2-${idx}`} className="flex items-center gap-3.5">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/5 border border-white/10 p-2 shadow-sm hover:border-indigo/50 hover:shadow-glow hover:scale-110 transition-all duration-300">
                   {t.logo}
                 </div>
