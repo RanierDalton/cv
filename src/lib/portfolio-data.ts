@@ -92,7 +92,7 @@ export const projects: Project[] = [
     id: "infrawatch",
     title: "InfraWatch",
     description:
-      "Solução acadêmica inovadora para monitoramento inteligente de Render Farms, garantindo eficiência, previsibilidade e segurança no uso de infraestrutura de servidores de renderização.",
+      "Solução acadêmica inovadora desenvolvida como projeto do 2º (segundo) semestre da faculdade para monitoramento inteligente de Render Farms, garantindo eficiência, previsibilidade e segurança no uso de infraestrutura de servidores de renderização.",
     objectives:
       "Oferecer visibilidade em tempo real do consumo de recursos dos servidores de renderização, antecipando gargalos e falhas.",
     stack: ["Python", "IoT", "Monitoramento", "Backend"],
@@ -104,7 +104,7 @@ export const projects: Project[] = [
     id: "solarway",
     title: "SolarWay",
     description:
-      "Projeto de extensão acadêmico que desenvolve uma iniciativa tecnológica para facilitar o acesso a projetos de instalação de placas solares, gerando impacto positivo na sociedade.",
+      "Projeto de extensão acadêmico desenvolvido ao longo do 3º (terceiro) e 4º (quarto) semestres da faculdade, facilitando o acesso a projetos de instalação de placas solares e gerando impacto social positivo.",
     objectives:
       "Criar uma solução que contribua para a melhoria da qualidade de vida ao redor da SolarWay, empresa autônoma de energia solar.",
     stack: ["JavaScript", "Node.js", "React", "Extensão"],
@@ -121,7 +121,7 @@ export const projects: Project[] = [
       "Automatizar a coleta de estatísticas de CS2 e fornecer análises rápidas para comunidades de jogadores no Discord.",
     stack: ["Python", "Discord API", "MySQL", "OCR", "IA"],
     period: "Férias 2025 — 2026",
-    link: "https://github.com/RanierDalton/cs2-stats",
+    link: "https://github.com/RanierDalton/cs2-stats-bot",
     category: "IA",
   },
   {
@@ -140,42 +140,22 @@ export const projects: Project[] = [
     id: "sap-lbn-integration",
     title: "Integração SAP LBN × Transportadoras",
     description:
-      "Ponte entre SAP Logistics Business Network e plataformas de transportadoras externas, unificando eventos de tracking em tempo real.",
+      "Solução orientada a eventos para integração entre o SAP Logistics Business Network (LBN) e sistemas de transportadoras externas, conectando planos de integração através do SAP Integration Suite (CPI) e do SAP S/4HANA para unificar o rastreamento em tempo real.",
     objectives:
       "Reduzir latência de rastreio e eliminar reconciliação manual entre SAP e parceiros logísticos.",
-    stack: ["SAP BTP", "CAP", "Node.js", "OData", "SAP LBN"],
+    stack: ["SAP BTP", "CAP", "CPI", "S/4HANA", "OData", "Event-Driven", "SAP LBN"],
     period: "2026",
-    category: "SAP",
-  },
-  {
-    id: "fiori-hcm",
-    title: "Extensões Fiori · Módulo HCM",
-    description:
-      "Aplicações Fiori Freestyle e Fiori Elements sobre CDS Views para fluxos customizados de RH em cliente enterprise.",
-    objectives: "Modernizar a experiência de aprovação e consulta em processos de HCM.",
-    stack: ["ABAP", "CDS", "SAPUI5", "OData", "Fiori Elements"],
-    period: "2025 — 2026",
     category: "SAP",
   },
   {
     id: "nfe-rpa",
     title: "RPA · Notas Fiscais Eletrônicas",
     description:
-      "Robô de emissão e conferência automática de NF-e integrando portal fiscal, ERP e repositório documental.",
+      "Robô de emissão e conferência automática de NF-e integrando portal fiscal, ERP e repositório documental, reduzindo o esforço operacional em aproximadamente 89%.",
     objectives: "Reduzir taxa de erros de emissão para ~1% e liberar tempo do time fiscal.",
     stack: ["Python", "RPA", "NF-e", "Selenium"],
     period: "2024",
     category: "Backend",
-  },
-  {
-    id: "unity-games",
-    title: "Portfolio de Jogos · Unity",
-    description:
-      "Projetos autorais desenvolvidos no técnico da ETEC, explorando POO, física, IA de inimigos e áudio dinâmico.",
-    objectives: "Aprofundar fundamentos de POO, arquitetura de jogos e design de interação.",
-    stack: ["Unity", "C#", "MySQL"],
-    period: "2021 — 2023",
-    category: "Games",
   },
 ];
 
@@ -260,5 +240,13 @@ export const certifications: Certification[] = [
     issued: "Set 2025",
     skills: ["Inglês C1"],
     link: "https://cert.efset.org/pt/tFDDat",
+  },
+  {
+    id: "ibm-ai-fundamentals",
+    name: "Artificial Intelligence Fundamentals",
+    issuer: "IBM",
+    issued: "Mai 2026",
+    skills: ["Artificial Intelligence", "Generative AI", "IBM Watson"],
+    link: "https://www.credly.com/badges/91446c3b-1738-4837-8dcf-0487d2ea0889",
   },
 ];
