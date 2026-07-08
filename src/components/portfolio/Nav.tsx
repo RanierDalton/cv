@@ -7,7 +7,6 @@ const nav = [
   { href: "#trajetoria", label: "Trajetória" },
   { href: "#projetos", label: "Projetos" },
   { href: "#certificacoes", label: "Certificações" },
-  { href: "#contato", label: "Contato" },
 ];
 
 export function Nav() {

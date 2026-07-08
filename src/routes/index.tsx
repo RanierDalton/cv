@@ -1,13 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Nav } from "@/components/portfolio/Nav";
-import { Hero } from "@/components/portfolio/Hero";
-import { Timeline } from "@/components/portfolio/Timeline";
-import { Projects } from "@/components/portfolio/Projects";
-import { Certifications } from "@/components/portfolio/Certifications";
-import { Footer } from "@/components/portfolio/Footer";
+import { Index } from "./cv";
 import { profile } from "@/lib/portfolio-data";
 
-export const Route = createFileRoute("/$")({
+export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Ranier Dalton Couto — Consultor SAP BTP & IA · Portfólio" },
@@ -56,18 +51,3 @@ export const Route = createFileRoute("/$")({
   }),
   component: Index,
 });
-
-function Index() {
-  return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Nav />
-      <main>
-        <Hero />
-        <Timeline />
-        <Projects />
-        <Certifications />
-      </main>
-      <Footer />
-    </div>
-  );
-}

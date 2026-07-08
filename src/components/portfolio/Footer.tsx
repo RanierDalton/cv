@@ -1,54 +1,74 @@
 import { profile } from "@/lib/portfolio-data";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, Link2 } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/60 py-12">
-      <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-4 sm:px-6 md:flex-row md:items-center">
-        <div>
-          <div className="font-display text-lg font-bold">
-            <span className="text-gradient">Ranier</span>
-            <span className="text-foreground"> Dalton Couto</span>
+    <footer id="contato" className="border-t border-border/60 bg-surface/30 py-16">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="grid gap-10 md:grid-cols-2 md:items-center">
+          <div>
+            <div className="font-display text-2xl font-bold tracking-tight">
+              <span className="text-gradient">Vamos</span>
+              <span className="text-foreground"> conversar?</span>
+            </div>
+            <p className="mt-2 text-sm text-muted-foreground max-w-md">
+              Sinta-se à vontade para entrar em contato para novas oportunidades, projetos ou apenas para trocar ideias sobre desenvolvimento SAP, Cloud e Inteligência Artificial.
+            </p>
+            <p className="mt-8 text-xs text-muted-foreground/60">
+              © {new Date().getFullYear()} · Ranier Dalton Couto. Construído com foco em inovação.
+            </p>
           </div>
-          <p className="mt-1 text-xs text-muted-foreground">
-            © {new Date().getFullYear()} · Construído com foco em SAP, IA e engenharia de software.
-          </p>
-        </div>
-        <div className="flex items-center gap-3">
-          <a
-            href={`mailto:${profile.contacts.email}`}
-            aria-label="Email"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border transition-colors hover:border-indigo hover:text-indigo-glow"
-          >
-            <Mail className="h-4 w-4" />
-          </a>
-          <a
-            href={profile.contacts.linkedin}
-            aria-label="LinkedIn"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border transition-colors hover:border-indigo hover:text-indigo-glow"
-          >
-            <Linkedin className="h-4 w-4" />
-          </a>
-          <a
-            href={profile.contacts.githubPersonal}
-            aria-label="GitHub Pessoal"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border transition-colors hover:border-indigo hover:text-indigo-glow"
-          >
-            <Github className="h-4 w-4" />
-          </a>
-          <a
-            href={profile.contacts.githubAcademic}
-            aria-label="GitHub Acadêmico"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border transition-colors hover:border-indigo hover:text-indigo-glow"
-          >
-            <Github className="h-4 w-4" />
-          </a>
+
+          <div className="flex flex-col items-start gap-4 md:items-end">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-glow">
+              Contato & Redes
+            </span>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href={`mailto:${profile.contacts.email}`}
+                aria-label="Email"
+                className="group relative inline-flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface/50 text-muted-foreground transition-all duration-300 hover:-translate-y-1 hover:border-red-500/60 hover:text-red-400 hover:shadow-[0_0_20px_rgba(239,68,68,0.4)]"
+              >
+                <Mail className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+              </a>
+              <a
+                href={profile.contacts.linkedin}
+                aria-label="LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface/50 text-muted-foreground transition-all duration-300 hover:-translate-y-1 hover:border-blue-500/60 hover:text-blue-400 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]"
+              >
+                <Linkedin className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+              </a>
+              <a
+                href="https://linktr.ee/ranierdalton"
+                aria-label="Linktree"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface/50 text-muted-foreground transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/60 hover:text-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.4)]"
+              >
+                <Link2 className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+              </a>
+              <a
+                href={profile.contacts.githubPersonal}
+                aria-label="GitHub Pessoal"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface/50 text-muted-foreground transition-all duration-300 hover:-translate-y-1 hover:border-indigo-500/60 hover:text-indigo-400 hover:shadow-[0_0_20px_rgba(99,102,241,0.4)]"
+              >
+                <Github className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+              </a>
+              <a
+                href={profile.contacts.githubAcademic}
+                aria-label="GitHub Acadêmico"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface/50 text-muted-foreground transition-all duration-300 hover:-translate-y-1 hover:border-indigo-500/60 hover:text-indigo-400 hover:shadow-[0_0_20px_rgba(99,102,241,0.4)]"
+              >
+                <Github className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

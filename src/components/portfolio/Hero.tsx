@@ -33,7 +33,7 @@ export function Hero() {
           {profile.bio}
         </p>
 
-        <div className="mt-10 flex flex-wrap items-center gap-3" id="contato">
+        <div className="mt-10 flex flex-wrap items-center gap-3">
           <a
             href={`mailto:${profile.contacts.email}`}
             className="group inline-flex items-center gap-2 rounded-full bg-gradient-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5"
