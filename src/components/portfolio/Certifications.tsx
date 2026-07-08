@@ -3,6 +3,11 @@ import { ArrowUpRight, Calendar, Award } from "lucide-react";
 import { SectionHeader } from "./Timeline";
 import { useTranslation } from "react-i18next";
 
+import sapLogo from "@/assets/sap_logo.jpeg";
+import oracleLogo from "@/assets/oracle_logo.jpeg";
+import ibmLogo from "@/assets/ibm_logo.jpeg";
+import efsetLogo from "@/assets/efset_logo.jpeg";
+
 export function Certifications() {
   const { t } = useTranslation();
 
@@ -72,10 +77,10 @@ function IssuerLogo({ issuer }: { issuer: string }) {
   const normalized = issuer.toUpperCase();
 
   const logoUrls: Record<string, string> = {
-    SAP: "./sap_logo.jpeg",
-    ORACLE: "./oracle_logo.jpeg",
-    IBM: "./ibm_logo.jpeg",
-    EF: "./efset_logo.jpeg",
+    SAP: sapLogo,
+    ORACLE: oracleLogo,
+    IBM: ibmLogo,
+    EF: efsetLogo,
   };
 
   const matchedKey = Object.keys(logoUrls).find((key) => normalized.includes(key));
