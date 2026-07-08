@@ -1,1 +1,0 @@
-import{t as e}from"./index-DBC20yRg.js";var t=e;export{t as component};
