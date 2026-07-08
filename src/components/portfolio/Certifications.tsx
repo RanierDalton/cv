@@ -1,5 +1,5 @@
 import { certifications } from "@/lib/portfolio-data";
-import { ArrowUpRight, Calendar } from "lucide-react";
+import { ArrowUpRight, Calendar, Award } from "lucide-react";
 import { SectionHeader } from "./Timeline";
 import { useTranslation } from "react-i18next";
 
@@ -72,9 +72,10 @@ function IssuerLogo({ issuer }: { issuer: string }) {
   const normalized = issuer.toUpperCase();
 
   const logoUrls: Record<string, string> = {
-    SAP: "https://media.licdn.com/dms/image/v2/D560BAQGmwwo0aq4jVA/company-logo_200_200/company-logo_200_200/0/1723034255614/sap_logo?e=1785369600&v=beta&t=hjG7Cj3EnI9AKNcV05oEgVrCkLCRv5hZezdmmESI-Lg",
-    ORACLE: "https://media.licdn.com/dms/image/v2/D4E0BAQHYCgYovUuPtQ/company-logo_200_200/company-logo_200_200/0/1665755678957/oracle_logo?e=1785369600&v=beta&t=xuIHcxv8Vzbr-r83nRk2MZ1DH32Rvhez8mHdcmcZ9bk",
-    IBM: "https://media.licdn.com/dms/image/v2/D560BAQGiz5ecgpCtkA/company-logo_200_200/company-logo_200_200/0/1688684715866/ibm_logo?e=1785369600&v=beta&t=0-OuQ1Ugf_x7GOIAhFZ4Qxi4gjBRNRa1gaXzA3Yw6xk",
+    SAP: "./sap_logo.jpeg",
+    ORACLE: "./oracle_logo.jpeg",
+    IBM: "./ibm_logo.jpeg",
+    EF: "./efset_logo.jpeg",
   };
 
   const matchedKey = Object.keys(logoUrls).find((key) => normalized.includes(key));
@@ -88,7 +89,6 @@ function IssuerLogo({ issuer }: { issuer: string }) {
           className="h-full w-full object-contain rounded-lg"
           loading="lazy"
           onError={(e) => {
-            // Fallback inside error handler if img fails
             e.currentTarget.style.display = "none";
           }}
         />
@@ -96,13 +96,9 @@ function IssuerLogo({ issuer }: { issuer: string }) {
     );
   }
 
-  // Fallback for EF SET / Others
   return (
-    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-teal-900 to-cyan-950 text-white">
-      <div className="flex flex-col items-center">
-        <span className="text-sm font-black tracking-tight text-teal-300">EF</span>
-        <span className="text-[8px] font-medium tracking-wider text-teal-400/80 -mt-1">SET</span>
-      </div>
+    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-950 to-slate-900 text-white">
+      <Award className="h-6 w-6 text-indigo-glow" />
     </div>
   );
 }

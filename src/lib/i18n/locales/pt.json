@@ -9,7 +9,8 @@
   "hero": {
     "status": "Disponível para novos projetos SAP & IA",
     "academic-github": "GitHub · Acadêmico",
-    "personal-github": "GitHub · Pessoal"
+    "personal-github": "GitHub · Pessoal",
+    "download-cv": "Baixar CV"
   },
   "sections": {
     "timeline-subtitle": "02 · Trajetória",
