@@ -16,6 +16,23 @@ export function Projects() {
   const { t } = useTranslation();
   const [filter, setFilter] = useState<Project["category"] | "Todos">("Todos");
   const [searchTerm, setSearchTerm] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(3);
+
+  // Check if viewport is mobile (md screen threshold 768px)
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Reset pagination limit when search or category filter changes
+  useEffect(() => {
+    setVisibleCount(3);
+  }, [filter, searchTerm]);
 
   // Event listener for global T-Code content search from Nav header
   useEffect(() => {
@@ -52,6 +69,8 @@ export function Projects() {
       p.stack.some((s) => s.toLowerCase().includes(searchTerm));
     return matchesCategory && matchesSearch;
   });
+
+  const displayed = isMobile ? filtered.slice(0, visibleCount) : filtered;
 
   return (
     <section id="projetos" className="relative py-24 sm:py-32">
@@ -102,10 +121,22 @@ export function Projects() {
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((p) => (
+          {displayed.map((p) => (
             <ProjectCard key={p.id} project={p} />
           ))}
         </div>
+
+        {/* Mobile load more button */}
+        {isMobile && filtered.length > visibleCount && (
+          <div className="mt-10 flex justify-center font-mono text-xs">
+            <button
+              onClick={() => setVisibleCount((prev) => prev + 3)}
+              className="glass relative inline-flex h-11 px-6 items-center justify-center rounded-full border border-indigo/30 text-indigo-glow font-bold hover:border-indigo hover:text-indigo-glow hover:shadow-glow cursor-pointer transition-all duration-200"
+            >
+              {t("sections.projects-load-more")}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
@@ -136,7 +167,9 @@ function ProjectCard({ project }: { project: Project }) {
             <span className="rounded border border-indigo/20 bg-indigo/5 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-indigo-glow">
               {project.category}
             </span>
-            <span className="text-[10px] text-muted-foreground/80">{project.period}</span>
+            <span className="text-[10px] text-muted-foreground/80">
+              {t(`projects.${project.id}.period`, { defaultValue: project.period })}
+            </span>
           </div>
 
           <h3 className="mt-3 font-display text-base font-bold leading-snug text-foreground group-hover:text-indigo-glow transition-colors">
@@ -170,7 +203,6 @@ function ProjectCard({ project }: { project: Project }) {
         {/* Action Link & compile status bar */}
         <div className="border-t border-border/20 pt-3 flex items-center justify-between text-[10px] text-muted-foreground/80">
           <div>
-            <span>SYSTEM: S4H</span>
           </div>
           {project.link ? (
             <div className="inline-flex items-center gap-0.5 text-indigo-glow font-bold">

@@ -115,7 +115,9 @@ function TimelineTrack({
                   >
                     {t(`${track}.${item.id}.title`)}
                   </span>
-                  <span className="block text-[11px] text-muted-foreground/80">{item.period}</span>
+                  <span className="block text-[11px] text-muted-foreground/80">
+                    {t(`${track}.${item.id}.period`, { defaultValue: item.period })}
+                  </span>
                 </span>
               </button>
             );
@@ -147,17 +149,17 @@ function TimelineTrack({
 
             <div>
               <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-cyan-400">
-                {current.period}
+                {t(`${track}.${current.id}.period`, { defaultValue: current.period })}
               </div>
               <h3 className="mt-1 font-display text-lg font-bold text-foreground sm:text-xl">
                 {t(`${track}.${current.id}.title`)}
               </h3>
               <p className="text-xs font-medium text-muted-foreground/80">
-                {track === "education" ? t(`${track}.${current.id}.org`) : current.org}
+                {t(`${track}.${current.id}.org`, { defaultValue: current.org })}
                 {current.location && (
                   <span className="ml-2 inline-flex items-center gap-1 text-[11px]">
                     <MapPin className="h-3 w-3" />
-                    {current.location}
+                    {t(`${track}.${current.id}.location`, { defaultValue: current.location })}
                   </span>
                 )}
               </p>
