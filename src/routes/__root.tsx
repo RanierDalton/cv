@@ -108,11 +108,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
-  const { i18n } = useTranslation();
-  const lang = i18n.language?.startsWith("en") ? "en" : "pt-BR";
-
   return (
-    <html lang={lang} className="dark">
+    <html lang="pt-BR" className="dark" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
@@ -129,6 +126,33 @@ import i18n from "@/lib/i18n";
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => {
+    // Determine language preference on mount
+    const saved = localStorage.getItem("i18nextLng");
+    if (saved === "en" || saved === "pt") {
+      i18n.changeLanguage(saved);
+      document.documentElement.lang = saved === "en" ? "en" : "pt-BR";
+    } else {
+      const browserLang = navigator.language || "";
+      if (browserLang.startsWith("en")) {
+        i18n.changeLanguage("en");
+        document.documentElement.lang = "en";
+      } else {
+        document.documentElement.lang = "pt-BR";
+      }
+    }
+
+    // Set listener to keep html lang attribute in sync with manual toggles
+    const handleLangChange = (lng: string) => {
+      document.documentElement.lang = lng.startsWith("en") ? "en" : "pt-BR";
+      localStorage.setItem("i18nextLng", lng);
+    };
+    i18n.on("languageChanged", handleLangChange);
+    return () => {
+      i18n.off("languageChanged", handleLangChange);
+    };
+  }, []);
 
   return (
     <I18nextProvider i18n={i18n}>
