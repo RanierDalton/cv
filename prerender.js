@@ -14,6 +14,7 @@ async function main() {
   const outputDir = path.resolve('dist/client');
   fs.writeFileSync(path.join(outputDir, 'index.html'), html);
   fs.writeFileSync(path.join(outputDir, '404.html'), html);
+  fs.writeFileSync(path.join(outputDir, '.nojekyll'), '');
   
   // Process CSS files to fix absolute font URLs
   const assetsDir = path.join(outputDir, 'assets');
