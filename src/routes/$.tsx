@@ -7,7 +7,7 @@ import { Certifications } from "@/components/portfolio/Certifications";
 import { Footer } from "@/components/portfolio/Footer";
 import { profile } from "@/lib/portfolio-data";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/$")({
   head: () => ({
     meta: [
       { title: "Ranier Dalton Couto — Consultor SAP BTP & IA · Portfólio" },
