@@ -7,8 +7,8 @@ async function main() {
   const res = await server.fetch(req, {}, {});
   let html = await res.text();
   
-  // Replace absolute /assets/ and /favicon.ico with relative ./assets/ and ./favicon.ico
-  html = html.replace(/(href|src)="\/assets\//g, '$1="./assets/');
+  // Replace absolute /assets/, /./assets/, and relative assets with normalized ./assets/
+  html = html.replace(/(href|src)="(?:\/|\/\.\/)?assets\//g, '$1="./assets/');
   html = html.replace(/(href|src)="\/favicon\.ico"/g, '$1="./favicon.ico"');
   
   const outputDir = path.resolve('dist/client');

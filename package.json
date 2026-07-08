@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "predeploy": "npm run build && node prerender.js",
+    "predeploy": "npm run build:dev && node prerender.js",
     "deploy": "gh-pages -d dist/client"
   },
   "dependencies": {

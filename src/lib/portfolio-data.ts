@@ -191,13 +191,31 @@ export type Certification = {
 
 export const certifications: Certification[] = [
   {
+    id: "sap-solution-architect",
+    name: "SAP Certified - Solution Architect - SAP BTP",
+    issuer: "SAP",
+    issued: "Mai 2026",
+    expires: "Mai 2027",
+    skills: ["Solution Architecture", "SAP BTP", "Cloud Architecture"],
+    link: "https://www.credly.com/badges/ad3f0c26-2dde-4f0c-9060-24cb24da6bc3",
+  },
+  {
+    id: "sap-activate-pm",
+    name: "SAP Certified - Project Manager - SAP Activate",
+    issuer: "SAP",
+    issued: "Mai 2026",
+    expires: "Mai 2027",
+    skills: ["Project Management", "SAP Activate", "Agile Methodologies"],
+    link: "https://www.credly.com/badges/791873c8-408a-4185-844f-ad25d4e8a1ae",
+  },
+  {
     id: "oracle-ai-foundations",
     name: "Oracle Cloud AI Foundations",
     issuer: "Oracle",
     issued: "Mai 2026",
     expires: "Mai 2028",
     skills: ["Inteligência Artificial", "Oracle Cloud", "OCI"],
-    link: "https://catalog-education.oracle.com/",
+    link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=9657B6991556DFA3C64AED0D28D48FC58A861F62D5A923A41BF017898FB53E02",
   },
   {
     id: "sap-cap",
@@ -206,7 +224,7 @@ export const certifications: Certification[] = [
     issued: "Mai 2026",
     expires: "Mai 2027",
     skills: ["SAP CAP", "SAP BTP", "S/4HANA"],
-    link: "https://www.credly.com/users/ranierdalton",
+    link: "https://www.credly.com/badges/59b04c03-9ab8-47ec-b981-1b7d7388ed36",
   },
   {
     id: "sap-build",
@@ -215,7 +233,7 @@ export const certifications: Certification[] = [
     issued: "Mai 2026",
     expires: "Mai 2027",
     skills: ["SAP Build", "SAP S/4HANA", "Low-Code"],
-    link: "https://www.credly.com/users/ranierdalton",
+    link: "https://www.credly.com/badges/27ae4df1-f68c-4a96-88ab-e9e8914032ea",
   },
   {
     id: "sap-abap-cloud",
@@ -224,7 +242,7 @@ export const certifications: Certification[] = [
     issued: "Mai 2026",
     expires: "Mai 2027",
     skills: ["SAP ABAP", "ABAP Cloud", "S/4HANA"],
-    link: "https://www.credly.com/users/ranierdalton",
+    link: "https://www.credly.com/badges/de6ae0fe-9100-47e5-8075-41f4ddbdb9b0",
   },
   {
     id: "oracle-cloud-foundations",
@@ -233,7 +251,7 @@ export const certifications: Certification[] = [
     issued: "Abr 2026",
     expires: "Abr 2028",
     skills: ["Cloud Computing", "Data Lakes", "OCI"],
-    link: "https://catalog-education.oracle.com/",
+    link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=8EC12614D76FD8A9E9CC5D4F61DC3ABDF13E5E31A0F0A52856293AAEB92E0350",
   },
   {
     id: "efset-c1",
@@ -241,6 +259,6 @@ export const certifications: Certification[] = [
     issuer: "EF SET",
     issued: "Set 2025",
     skills: ["Inglês C1"],
-    link: "https://www.efset.org/",
+    link: "https://cert.efset.org/pt/tFDDat",
   },
 ];
