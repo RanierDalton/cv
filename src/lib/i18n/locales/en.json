@@ -12,6 +12,35 @@
     "personal-github": "GitHub · Personal",
     "download-cv": "Download CV"
   },
+  "terminal": {
+    "tabs": {
+      "about": "about_me.sh",
+      "music": "synth_wave.wav",
+      "gaming": "gamer_stats.cfg"
+    },
+    "about": {
+      "executing": "[system] Executing: ./about_me.sh...",
+      "status": "[system] Connection: S/4HANA Cloud (BTP) & Agentic AI · ACTIVE"
+    },
+    "music": {
+      "executing": "ranier@dalton:~$ play_audio synth_wave.wav",
+      "playing": "Playing: Creative Synthesis & Electronic Beats (128 kbps)",
+      "hobby": "Hobby: Electronic Music Production & Sound Design",
+      "gear": "Gear/DAW: Ableton Live · FL Studio · Serum · Vital",
+      "focus": "Focus: Beats, soundscapes and analog synthesis"
+    },
+    "gaming": {
+      "executing": "ranier@dalton:~$ cat gamer_stats.cfg",
+      "loading": "Loading gamer profile configuration...",
+      "cs2-title": "// CS2 TACTICAL HUD",
+      "cs2-map": "FAVORITE MAP: de_inferno",
+      "cs2-role": "ROLE: Tech Support & Entry Coder",
+      "stardew-title": "// STARDEW VALLEY COZY STATUS",
+      "stardew-role": "PROFESSION: Farmer & Code Wizard",
+      "stardew-level": "LEVEL: 10 (Farming & Coding)",
+      "stardew-vibes": "VIBE: Happy & Creative ☕"
+    }
+  },
   "sections": {
     "timeline-subtitle": "02 · Timeline",
     "timeline-title": "Academic and professional journey",
