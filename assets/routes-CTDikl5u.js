@@ -1,1 +1,0 @@
-import{t as e}from"./index-DVB8d86G.js";var t=e;export{t as component};
