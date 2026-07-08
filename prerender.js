@@ -23,7 +23,7 @@ async function main() {
       if (file.endsWith('.css')) {
         const filePath = path.join(assetsDir, file);
         let css = fs.readFileSync(filePath, 'utf8');
-        css = css.replace(/url\(\/assets\//g, 'url(./');
+        css = css.replace(/url\((['"]?)\/assets\//g, 'url($1./');
         fs.writeFileSync(filePath, css, 'utf8');
         console.log(`Updated paths in CSS: ${file}`);
       }
