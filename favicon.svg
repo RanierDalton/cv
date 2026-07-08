@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e0e26" />
+      <stop offset="100%" stop-color="#050510" />
+    </linearGradient>
+    
+    <linearGradient id="text-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="50%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+  </defs>
+
+  <rect x="5" y="5" width="90" height="90" rx="24" fill="url(#bg-grad)" stroke="#1e1e3f" stroke-width="2" />
+  
+  <rect x="7" y="7" width="86" height="86" rx="22" fill="none" stroke="url(#text-grad)" stroke-width="2" opacity="0.4" />
+
+  <text x="50%" y="62%" 
+        font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" 
+        font-weight="800" 
+        font-size="42" 
+        fill="url(#text-grad)" 
+        text-anchor="middle" 
+        letter-spacing="-1">RC</text>
+</svg>
