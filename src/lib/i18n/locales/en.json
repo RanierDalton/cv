@@ -97,6 +97,26 @@
       "title": "RPA · Electronic Invoices",
       "description": "Robot for automated emission and verification of NF-e (electronic service invoices), integrating fiscal portal, ERP, and document repository, reducing operational effort by approximately 89%.",
       "objectives": "Reduce emission error rate to ~1% and free up time for the tax team."
+    },
+    "sinal-verde": {
+      "title": "Sinal Verde",
+      "description": "Academic Web project using IoT sensors on utility poles in São Paulo for smart traffic monitoring, developed during the first semester of college.",
+      "objectives": "Use distance sensors to monitor vehicle flow in real-time and provide an intuitive dashboard for traffic agencies, allowing them to optimize traffic, reduce congestion, and improve urban mobility."
+    },
+    "feat-up": {
+      "title": "FeatUp",
+      "description": "Platform developed during the first semester of college to connect music producers, facilitating collaborations (feats), social interactions, and genre preferences.",
+      "objectives": "Design a complete and robust data model capable of capturing preferences, feats, and social media integrations among artists."
+    },
+    "reddead2-wiki": {
+      "title": "RedDead 2 Wiki",
+      "description": "Mobile app developed as a Fan Wiki for the acclaimed action-adventure game Red Dead Redemption 2 by Rockstar Games.",
+      "objectives": "Create a portable reference guide with lore, missions, and items information using Java and Android Studio."
+    },
+    "broken-control": {
+      "title": "Broken Control",
+      "description": "Graduation project for the 1st technical module. A complete gaming portal with industry news and 6 classic platform games playable in the browser (Tic-Tac-Toe, Snake, Magic Game, Space Invaders, Breakout, and Geometric Jump).",
+      "objectives": "Develop a hub for classic platform-style games integrated with a recent news panel about the gaming industry."
     }
   }
 }

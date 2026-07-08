@@ -97,6 +97,26 @@
       "title": "RPA · Notas Fiscais Eletrônicas",
       "description": "Robô de emissão e conferência automática de NF-e integrando portal fiscal, ERP e repositório documental, reduzindo o esforço operacional em aproximadamente 89%.",
       "objectives": "Reduzir taxa de erros de emissão para ~1% e liberar tempo do time fiscal."
+    },
+    "sinal-verde": {
+      "title": "Sinal Verde",
+      "description": "Projeto acadêmico Web de monitoramento inteligente de trânsito utilizando sensores IoT em postes da cidade de São Paulo, desenvolvido no primeiro semestre da faculdade.",
+      "objectives": "Utilizar sensores de distância para monitorar o fluxo de veículos em tempo real e fornecer uma dashboard intuitiva para otimização de tráfego, redução de congestionamentos e melhoria da mobilidade urbana."
+    },
+    "feat-up": {
+      "title": "FeatUp",
+      "description": "Plataforma desenvolvida no primeiro semestre da faculdade para conectar produtores musicais, facilitando colaborações (feats), interações sociais e gerenciamento de preferências de gênero musical.",
+      "objectives": "Projetar uma modelagem de dados completa e robusta capaz de capturar preferências, feats e integrações de redes sociais entre artistas."
+    },
+    "reddead2-wiki": {
+      "title": "RedDead 2 Wiki",
+      "description": "Aplicativo mobile desenvolvido em formato de Fan Wiki sobre o aclamado jogo eletrônico de ação e aventura Red Dead Redemption 2 da Rockstar Games.",
+      "objectives": "Criar um guia portátil de consulta com informações de lore, missões e itens do jogo utilizando Java e Android Studio."
+    },
+    "broken-control": {
+      "title": "Broken Control",
+      "description": "Trabalho de Conclusão de Módulo (TCM) do 1º ano técnico. Um portal completo de jogos com notícias da indústria e 6 clássicos de plataforma jogáveis no navegador (Jogo da Velha, Cobrinha, Jogo da Mágica, Space Invaders, Breakout e Geometric Jump).",
+      "objectives": "Desenvolver um hub de jogos clássicos estilo plataforma integrados a um painel de notícias recente sobre a indústria de games."
     }
   }
 }

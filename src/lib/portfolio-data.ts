@@ -89,16 +89,15 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    id: "infrawatch",
-    title: "InfraWatch",
+    id: "sap-lbn-integration",
+    title: "Integração SAP LBN × Transportadoras",
     description:
-      "Solução acadêmica inovadora desenvolvida como projeto do 2º (segundo) semestre da faculdade para monitoramento inteligente de Render Farms, garantindo eficiência, previsibilidade e segurança no uso de infraestrutura de servidores de renderização.",
+      "Solução orientada a eventos para integração entre o SAP Logistics Business Network (LBN) e sistemas de transportadoras externas, conectando planos de integração através do SAP Integration Suite (CPI) e do SAP S/4HANA para unificar o rastreamento em tempo real.",
     objectives:
-      "Oferecer visibilidade em tempo real do consumo de recursos dos servidores de renderização, antecipando gargalos e falhas.",
-    stack: ["Python", "IoT", "Monitoramento", "Backend"],
-    period: "Dez 2024 — Mai 2025",
-    link: "https://github.com/InfraWatch-inc",
-    category: "Backend",
+      "Reduzir latência de rastreio e eliminar reconciliação manual entre SAP e parceiros logísticos.",
+    stack: ["SAP BTP", "CAP", "CPI", "S/4HANA", "OData", "Event-Driven", "SAP LBN"],
+    period: "2026",
+    category: "SAP",
   },
   {
     id: "solarway",
@@ -125,6 +124,52 @@ export const projects: Project[] = [
     category: "IA",
   },
   {
+    id: "infrawatch",
+    title: "InfraWatch",
+    description:
+      "Solução acadêmica inovadora desenvolvida como projeto do 2º (segundo) semestre da faculdade para monitoramento inteligente de Render Farms, garantindo eficiência, previsibilidade e segurança no uso de infraestrutura de servidores de renderização.",
+    objectives:
+      "Oferecer visibilidade em tempo real do consumo de recursos dos servidores de renderização, antecipando gargalos e falhas.",
+    stack: ["Python", "IoT", "Monitoramento", "Backend"],
+    period: "Dez 2024 — Mai 2025",
+    link: "https://github.com/InfraWatch-inc",
+    category: "Backend",
+  },
+  {
+    id: "nfe-rpa",
+    title: "RPA · Notas Fiscais Eletrônicas",
+    description:
+      "Robô de emissão e conferência automática de NF-e integrando portal fiscal, ERP e repositório documental, reduzindo o esforço operacional em aproximadamente 89%.",
+    objectives: "Reduzir taxa de erros de emissão para ~1% e liberar tempo do time fiscal.",
+    stack: ["Python", "RPA", "NF-e", "Selenium"],
+    period: "2024",
+    category: "Backend",
+  },
+  {
+    id: "sinal-verde",
+    title: "Sinal Verde",
+    description:
+      "Projeto acadêmico Web que utiliza sensores de distância para monitorar o fluxo de veículos em real-time e alimentar um painel analítico na cidade de São Paulo, no primeiro semestre da faculdade em 2024.",
+    objectives:
+      "Otimizar o tráfego, reduzir congestionamentos e melhorar a mobilidade urbana através de sensores IoT integrados a uma dashboard.",
+    stack: ["JavaScript", "IoT", "Sensores", "Dashboard"],
+    period: "1º Semestre 2024",
+    link: "https://github.com/Carvalho003/sinal_verde",
+    category: "Backend",
+  },
+  {
+    id: "feat-up",
+    title: "FeatUp",
+    description:
+      "Plataforma para facilitar conexões, feats e interações de redes sociais entre produtores musicais, mapeando preferências e gêneros musicais no primeiro semestre da faculdade em 2024.",
+    objectives:
+      "Modelagem completa de dados para colaborações, playlists, feeds e preferências entre artistas.",
+    stack: ["Database Modeling", "SQL", "Social Media", "Music Collaboration"],
+    period: "1º Semestre 2024",
+    link: "https://github.com/RanierDalton/feat-up",
+    category: "Backend",
+  },
+  {
     id: "monocromo",
     title: "Monocromo",
     description:
@@ -137,25 +182,28 @@ export const projects: Project[] = [
     category: "Games",
   },
   {
-    id: "sap-lbn-integration",
-    title: "Integração SAP LBN × Transportadoras",
+    id: "reddead2-wiki",
+    title: "RedDead 2 Wiki",
     description:
-      "Solução orientada a eventos para integração entre o SAP Logistics Business Network (LBN) e sistemas de transportadoras externas, conectando planos de integração através do SAP Integration Suite (CPI) e do SAP S/4HANA para unificar o rastreamento em tempo real.",
+      "Aplicativo mobile de estilo Fan Wiki sobre Red Dead Redemption 2, com Lore do jogo, guias de missões e consulta geral de itens, em 2022.",
     objectives:
-      "Reduzir latência de rastreio e eliminar reconciliação manual entre SAP e parceiros logísticos.",
-    stack: ["SAP BTP", "CAP", "CPI", "S/4HANA", "OData", "Event-Driven", "SAP LBN"],
-    period: "2026",
-    category: "SAP",
+      "Desenvolver um guia portátil robusto de Lore e itens usando Java e Android Studio.",
+    stack: ["Java", "Android", "Mobile App", "Android Studio"],
+    period: "2022",
+    link: "https://github.com/RanierDC/RedDead2-Wiki",
+    category: "Games",
   },
   {
-    id: "nfe-rpa",
-    title: "RPA · Notas Fiscais Eletrônicas",
+    id: "broken-control",
+    title: "Broken Control",
     description:
-      "Robô de emissão e conferência automática de NF-e integrando portal fiscal, ERP e repositório documental, reduzindo o esforço operacional em aproximadamente 89%.",
-    objectives: "Reduzir taxa de erros de emissão para ~1% e liberar tempo do time fiscal.",
-    stack: ["Python", "RPA", "NF-e", "Selenium"],
-    period: "2024",
-    category: "Backend",
+      "Trabalho de Conclusão de Módulo (TCM) do 1º ano técnico. Um portal com notícias e 6 jogos clássicos de plataforma (Jogo da Velha, Cobrinha, Jogo da Mágica, Space Invaders, Breakout e Geometric Jump) jogáveis no navegador.",
+    objectives:
+      "Consolidar conceitos de frontend e lógica básica construindo 6 minijogos clássicos interativos em HTML e JavaScript.",
+    stack: ["HTML", "CSS", "JavaScript", "Games Hub"],
+    period: "2021",
+    link: "https://github.com/RanierDC/BrokenControl",
+    category: "Games",
   },
 ];
 

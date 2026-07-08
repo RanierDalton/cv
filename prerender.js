@@ -7,9 +7,11 @@ async function main() {
   const res = await server.fetch(req, {}, {});
   let html = await res.text();
   
-  // Replace absolute /assets/, /./assets/, and relative assets with normalized ./assets/
+  // Replace absolute asset paths in both tags and script manifests with normalized relative paths
+  html = html.replace(/"\/assets\//g, '"./assets/');
   html = html.replace(/(href|src)="(?:\/|\/\.\/)?assets\//g, '$1="./assets/');
-  html = html.replace(/(href|src)="\/favicon\.ico"/g, '$1="./favicon.ico"');
+  html = html.replace(/(href|src|content)="\/favicon\.svg"/g, '$1="./favicon.svg"');
+  html = html.replace(/"\/favicon\.svg"/g, '"./favicon.svg"');
   
   const outputDir = path.resolve('dist/client');
   fs.writeFileSync(path.join(outputDir, 'index.html'), html);
