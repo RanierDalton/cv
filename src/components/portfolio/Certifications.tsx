@@ -71,37 +71,27 @@ export function Certifications() {
 function IssuerLogo({ issuer }: { issuer: string }) {
   const normalized = issuer.toUpperCase();
 
-  if (normalized.includes("SAP")) {
-    return (
-      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-900 to-indigo-950 text-white">
-        <svg viewBox="0 0 40 20" className="h-4 fill-current text-blue-300">
-          <path d="M7 14.5c0 1.8 1.4 2.5 3 2.5 1.5 0 2.5-0.7 2.5-1.8 0-1.1-1-1.4-2.8-1.7-2.2-0.4-3.7-1-3.7-3 0-2 1.8-3 3.8-3 2 0 3.5 1 3.5 3h-2c0-1-0.7-1.5-1.5-1.5-1 0-1.8 0.4-1.8 1.3 0 0.9 0.7 1.1 2.3 1.4 2.2 0.4 4.2 0.8 4.2 3.3 0 2.5-1.8 3.5-4.5 3.5-2.7 0-4.5-1.2-4.5-3.5h2zm11.5-8.5h2.2l4.8 14h-2.4l-1-3h-4.4l-1 3h-2.2l4.8-14zm2.6 9l-1.5-4.8-1.5 4.8h3zm8.9-9h4.5c2.7 0 4 1.3 4 3.2v0.5c0 1.8-1.3 3.2-4 3.2h-2.3V20h-2.2V6zm4.5 5c1.4 0 1.8-0.5 1.8-1.5V9c0-1-0.4-1.5-1.8-1.5h-2.3V11h2.3z" />
-        </svg>
-      </div>
-    );
-  }
+  const logoUrls: Record<string, string> = {
+    SAP: "https://media.licdn.com/dms/image/v2/D560BAQGmwwo0aq4jVA/company-logo_200_200/company-logo_200_200/0/1723034255614/sap_logo?e=1785369600&v=beta&t=hjG7Cj3EnI9AKNcV05oEgVrCkLCRv5hZezdmmESI-Lg",
+    ORACLE: "https://media.licdn.com/dms/image/v2/D4E0BAQHYCgYovUuPtQ/company-logo_200_200/company-logo_200_200/0/1665755678957/oracle_logo?e=1785369600&v=beta&t=xuIHcxv8Vzbr-r83nRk2MZ1DH32Rvhez8mHdcmcZ9bk",
+    IBM: "https://media.licdn.com/dms/image/v2/D560BAQGiz5ecgpCtkA/company-logo_200_200/company-logo_200_200/0/1688684715866/ibm_logo?e=1785369600&v=beta&t=0-OuQ1Ugf_x7GOIAhFZ4Qxi4gjBRNRa1gaXzA3Yw6xk",
+  };
 
-  if (normalized.includes("ORACLE")) {
-    return (
-      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-950 to-orange-950 text-white">
-        <svg viewBox="0 0 50 15" className="h-3.5 fill-current text-red-400">
-          <path d="M7.5 15C3.36 15 0 11.64 0 7.5S3.36 0 7.5 0s7.5 3.36 7.5 7.5-3.36 15-7.5 15zm0-2.5c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm9.5-12.5h3v5.5c0 2 1.5 3.5 3.5 3.5s3.5-1.5 3.5-3.5V0h3v5.5c0 3.5-3 6.5-6.5 6.5s-6.5-3-6.5-6.5V0zm18.5 12h2.5c1.5 0 2.5-1 2.5-2.5V9c0-1.5-1-2.5-2.5-2.5h-2.5V12zm-3-12h5.5c3 0 5.5 2.5 5.5 5.5v0.5c0 3-2.5 5.5-5.5 5.5H35.5V0h-3zm18.5 12V0h3v12h-3z" />
-        </svg>
-      </div>
-    );
-  }
+  const matchedKey = Object.keys(logoUrls).find((key) => normalized.includes(key));
 
-  if (normalized.includes("IBM")) {
+  if (matchedKey) {
     return (
-      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-900 to-blue-950 text-white">
-        <div className="flex flex-col gap-0.5 items-center w-full px-2">
-          {/* Custom geometric representation of IBM's famous stripes */}
-          <div className="h-0.5 w-10 bg-blue-400" />
-          <div className="h-0.5 w-10 bg-blue-400" />
-          <div className="h-0.5 w-10 bg-blue-400" />
-          <div className="h-0.5 w-10 bg-blue-400" />
-          <span className="text-[10px] font-black tracking-widest text-blue-300">IBM</span>
-        </div>
+      <div className="w-full h-full bg-white flex items-center justify-center p-1">
+        <img
+          src={logoUrls[matchedKey]}
+          alt={issuer}
+          className="h-full w-full object-contain rounded-lg"
+          loading="lazy"
+          onError={(e) => {
+            // Fallback inside error handler if img fails
+            e.currentTarget.style.display = "none";
+          }}
+        />
       </div>
     );
   }
