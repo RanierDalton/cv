@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { projects, type Project } from "@/lib/portfolio-data";
-import { ArrowUpRight, Target } from "lucide-react";
+import { ArrowUpRight, Target, X } from "lucide-react";
 import { SectionHeader } from "./Timeline";
 import { useTranslation } from "react-i18next";
 
@@ -15,7 +15,43 @@ const categories: Array<{ id: Project["category"] | "Todos"; label: string }> = 
 export function Projects() {
   const { t } = useTranslation();
   const [filter, setFilter] = useState<Project["category"] | "Todos">("Todos");
-  const filtered = filter === "Todos" ? projects : projects.filter((p) => p.category === filter);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Event listener for global T-Code content search from Nav header
+  useEffect(() => {
+    const handleSearch = (e: Event) => {
+      const query = (e as CustomEvent).detail;
+      if (!query) {
+        setSearchTerm("");
+        setFilter("Todos");
+        return;
+      }
+
+      // Check if it matches a category directly
+      const matchedCategory = categories.find((c) => c.id.toLowerCase() === query);
+      if (matchedCategory) {
+        setFilter(matchedCategory.id);
+        setSearchTerm("");
+      } else {
+        // Otherwise treat it as a free text search term across all categories
+        setFilter("Todos");
+        setSearchTerm(query);
+      }
+    };
+
+    window.addEventListener("search-tcode", handleSearch);
+    return () => window.removeEventListener("search-tcode", handleSearch);
+  }, []);
+
+  const filtered = projects.filter((p) => {
+    const matchesCategory = filter === "Todos" || p.category === filter;
+    const matchesSearch =
+      !searchTerm ||
+      p.title.toLowerCase().includes(searchTerm) ||
+      p.description.toLowerCase().includes(searchTerm) ||
+      p.stack.some((s) => s.toLowerCase().includes(searchTerm));
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <section id="projetos" className="relative py-24 sm:py-32">
@@ -27,23 +63,42 @@ export function Projects() {
         />
 
         {/* SAP Fiori Launchpad Group Tabs Bar */}
-        <div className="mt-10 flex flex-wrap gap-2 border-b border-border/20 pb-4 font-mono text-xs">
-          {categories.map((c) => {
-            const active = filter === c.id;
-            return (
+        <div className="mt-10 flex flex-wrap gap-2 border-b border-border/20 pb-4 font-mono text-xs items-center justify-between">
+          <div className="flex flex-wrap gap-2">
+            {categories.map((c) => {
+              const active = filter === c.id && !searchTerm;
+              return (
+                <button
+                  key={c.id}
+                  onClick={() => {
+                    setFilter(c.id);
+                    setSearchTerm("");
+                  }}
+                  className={`px-4 py-2 font-semibold transition-all rounded-lg border cursor-pointer ${
+                    active
+                      ? "bg-indigo/15 text-indigo-glow border-indigo/40 shadow-sm"
+                      : "text-muted-foreground border-transparent hover:bg-white/5"
+                  }`}
+                >
+                  {c.id === "Todos" ? t("sections.projects-all") : c.label}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Active Search Badge */}
+          {searchTerm && (
+            <div className="flex items-center gap-2 bg-indigo/10 border border-indigo/30 rounded-lg px-3 py-1.5 text-indigo-glow text-[11px] font-bold">
+              <span>Busca ativa: "{searchTerm}"</span>
               <button
-                key={c.id}
-                onClick={() => setFilter(c.id)}
-                className={`px-4 py-2 font-semibold transition-all rounded-lg border cursor-pointer ${
-                  active
-                    ? "bg-indigo/15 text-indigo-glow border-indigo/40 shadow-sm"
-                    : "text-muted-foreground border-transparent hover:bg-white/5"
-                }`}
+                onClick={() => setSearchTerm("")}
+                className="hover:text-red-400 transition-colors cursor-pointer"
+                title="Limpar busca"
               >
-                {c.id === "Todos" ? t("sections.projects-all") : c.label}
+                <X className="h-3 w-3" />
               </button>
-            );
-          })}
+            </div>
+          )}
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -60,7 +115,7 @@ function ProjectCard({ project }: { project: Project }) {
   const { t } = useTranslation();
 
   const content = (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-indigo/20 bg-surface-elevated/70 shadow-glow backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-indigo/50 hover:shadow-glow font-mono text-xs">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-indigo/20 bg-surface-elevated/70 shadow-sm dark:shadow-none hover:shadow-md dark:hover:shadow-[0_0_15px_rgba(99,102,241,0.12)] transition-all duration-300 hover:-translate-y-1 hover:border-indigo/50 font-mono text-xs">
       
       {/* Terminal Window Header (Fiori Style) */}
       <div className="bg-surface-elevated/70 px-4 py-2 flex items-center justify-between border-b border-border/30 text-[10px]">
@@ -112,10 +167,10 @@ function ProjectCard({ project }: { project: Project }) {
           ))}
         </div>
 
-        {/* Action Link & SAP Status bar */}
+        {/* Action Link & compile status bar */}
         <div className="border-t border-border/20 pt-3 flex items-center justify-between text-[10px] text-muted-foreground/80">
           <div>
-            <span>T-Code: /n{project.id}</span>
+            <span>SYSTEM: S4H</span>
           </div>
           {project.link ? (
             <div className="inline-flex items-center gap-0.5 text-indigo-glow font-bold">
@@ -125,7 +180,7 @@ function ProjectCard({ project }: { project: Project }) {
           ) : (
             <div className="flex items-center gap-1 text-emerald-500 font-bold">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_#10b981]"></span>
-              <span>BUILD: OK</span>
+              <span>COMPILED: OK</span>
             </div>
           )}
         </div>

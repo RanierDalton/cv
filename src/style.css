@@ -98,8 +98,8 @@
       transparent 70%
     );
   --gradient-primary: linear-gradient(135deg, var(--indigo) 0%, var(--indigo-glow) 100%);
-  --shadow-glow: 0 20px 60px -20px color-mix(in oklab, var(--indigo) 55%, transparent);
-  --shadow-card: 0 8px 30px -12px oklch(0 0 0 / 40%);
+  --shadow-glow: 0 15px 45px -15px color-mix(in oklab, var(--indigo) 20%, transparent);
+  --shadow-card: 0 8px 24px -10px oklch(0 0 0 / 45%);
 }
 
 .light {
@@ -133,7 +133,8 @@
   --indigo: oklch(0.45 0.22 275);
   --indigo-glow: oklch(0.6 0.2 285);
 
-  --shadow-card: 0 8px 30px -12px oklch(0.4 0.1 275 / 20%);
+  --shadow-card: 0 12px 36px -10px oklch(0.15 0.02 260 / 14%), 0 2px 8px -3px oklch(0.15 0.02 260 / 8%);
+  --shadow-glow: 0 12px 30px -10px oklch(0.15 0.02 260 / 10%);
 }
 
 @layer base {

@@ -3,6 +3,7 @@ import { profile } from "@/lib/portfolio-data";
 import { Github, Linkedin, Mail, ArrowUpRight, Sparkles, FileDown, Terminal, Music, Settings } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import sapLogo from "@/assets/sap_logo.jpeg";
+import oracleLogo from "@/assets/oracle_logo.jpeg";
 
 const createImgLogo = (src: string, alt: string, extraClass = "") => (
   <img src={src} alt={alt} className={`h-full w-full object-contain ${extraClass}`} loading="lazy" />
@@ -16,13 +17,6 @@ type TechItem = {
   name: string;
   logo: React.ReactNode;
 };
-
-// Oracle custom SVG Stadium logo filled with Oracle Red (#F80000)
-const oracleSvgIcon = (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="text-[#F80000] h-5 w-10 object-contain shrink-0">
-    <path d="M12 4C5.37 4 0 7.58 0 12s5.37 8 12 8 12-3.58 12-8-5.37-8-12-8zm0 12c-4.42 0-8-1.79-8-4s3.58-4 8-4 8 1.79 8 4-3.58 4-8 4z"/>
-  </svg>
-);
 
 const row1: TechItem[] = [
   { name: "SAP BTP", logo: createImgLogo(sapLogo, "SAP BTP") },
@@ -71,7 +65,7 @@ const row2: TechItem[] = [
     ),
   },
   { name: "JavaScript", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", "JavaScript") },
-  { name: "OCI", logo: createSvgLogo(oracleSvgIcon) },
+  { name: "OCI", logo: createImgLogo(oracleLogo, "OCI") },
   { name: "SAP RAP", logo: createImgLogo(sapLogo, "SAP RAP") },
   { name: "Flask", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg", "Flask", "dark:invert") },
   { name: "GitHub", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", "GitHub", "dark:invert") },
@@ -275,10 +269,6 @@ export function Hero() {
                     <div className="text-indigo-glow font-bold">
                       {t("terminal.about.executing")}
                     </div>
-                    <div className="text-muted-foreground font-semibold text-[11px]">
-                      {t("terminal.about.status")}
-                    </div>
-                    <div className="border-t border-border/20 pt-2"></div>
                     <p className="text-foreground/90 whitespace-pre-wrap leading-relaxed">
                       {typedText}
                       {isTyping && <span className="inline-block h-3.5 w-2 bg-indigo-glow ml-1 animate-cursor-blink">▋</span>}

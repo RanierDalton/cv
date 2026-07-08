@@ -47,7 +47,7 @@ export const experience: TimelineItem[] = [
     id: "freelance-rpa",
     title: "Desenvolvedor Freelancer · RPA",
     org: "Freelance",
-    period: "Mar 2024 — Jun 2024",
+    period: "Mar 2021 — Jun 2021",
     location: "São Paulo",
     description:
       "Desenvolvimento de automações robóticas (RPA) em Python voltadas para otimização de fluxos fiscais. Criação de scripts para lançamento automatizado de notas de serviço em portais municipais, reduzindo o esforço operacional em aproximadamente 89% e a taxa de falhas de digitação para 1%.",
@@ -142,7 +142,7 @@ export const projects: Project[] = [
       "Robô de emissão e conferência automática de NF-e integrando portal fiscal, ERP e repositório documental, reduzindo o esforço operacional em aproximadamente 89%.",
     objectives: "Reduzir taxa de erros de emissão para ~1% e liberar tempo do time fiscal.",
     stack: ["Python", "RPA", "NF-e", "Selenium"],
-    period: "2024",
+    period: "2021",
     category: "Backend",
   },
   {
