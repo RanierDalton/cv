@@ -1,5 +1,6 @@
+import { useState, useEffect } from "react";
 import { certifications } from "@/lib/portfolio-data";
-import { ArrowUpRight, Calendar, Award } from "lucide-react";
+import { ArrowUpRight, Calendar, Award, X } from "lucide-react";
 import { SectionHeader } from "./Timeline";
 import { useTranslation } from "react-i18next";
 
@@ -10,6 +11,26 @@ import efsetLogo from "@/assets/efset_logo.jpeg";
 
 export function Certifications() {
   const { t } = useTranslation();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const handleSearchCerts = (e: Event) => {
+      const query = (e as CustomEvent).detail;
+      setSearchTerm(query || "");
+    };
+    window.addEventListener("search-certs", handleSearchCerts);
+    return () => window.removeEventListener("search-certs", handleSearchCerts);
+  }, []);
+
+  const filtered = certifications.filter((cert) => {
+    if (!searchTerm) return true;
+    const term = searchTerm.toLowerCase();
+    return (
+      cert.name.toLowerCase().includes(term) ||
+      cert.issuer.toLowerCase().includes(term) ||
+      cert.skills.some((s) => s.toLowerCase().includes(term))
+    );
+  });
 
   return (
     <section id="certificacoes" className="relative py-24 sm:py-32">
@@ -20,8 +41,24 @@ export function Certifications() {
           subtitle={t("sections.certifications-description")}
         />
 
+        {/* Active Search Badge */}
+        {searchTerm && (
+          <div className="mt-6 flex justify-start font-mono text-xs">
+            <div className="flex items-center gap-2 bg-indigo/10 border border-indigo/30 rounded-lg px-3 py-1.5 text-indigo-glow text-[11px] font-bold">
+              <span>Busca ativa: "{searchTerm}"</span>
+              <button
+                onClick={() => setSearchTerm("")}
+                className="hover:text-red-400 transition-colors cursor-pointer"
+                title="Limpar busca"
+              >
+                <X className="h-3 w-3" />
+              </button>
+            </div>
+          </div>
+        )}
+
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-2">
-          {certifications.map((cert) => (
+          {filtered.map((cert) => (
             <a
               key={cert.id}
               href={cert.link}

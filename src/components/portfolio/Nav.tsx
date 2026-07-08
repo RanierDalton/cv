@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { ThemeToggle } from "./ThemeToggle";
 import { useTranslation } from "react-i18next";
-import { projects } from "@/lib/portfolio-data";
+import { projects, experience, education, certifications } from "@/lib/portfolio-data";
 
 const nav = [
   { href: "#sobre", labelKey: "nav.about" },
@@ -92,20 +92,55 @@ export function Nav() {
                     type: "S",
                   });
                 } else {
-                  // Check projects for search matching
-                  const matched = projects.filter((p) =>
+                  // 1. Check projects for search matching
+                  const matchedProjects = projects.filter((p) =>
                     p.title.toLowerCase().includes(val) ||
                     p.description.toLowerCase().includes(val) ||
                     p.stack.some((s) => s.toLowerCase().includes(val))
                   );
 
-                  if (matched.length > 0) {
+                  // 2. Check timeline (experience & education)
+                  const matchedTimeline = [...experience, ...education].filter((item) =>
+                    item.title.toLowerCase().includes(val) ||
+                    item.org.toLowerCase().includes(val) ||
+                    item.description.toLowerCase().includes(val) ||
+                    item.skills.some((s) => s.toLowerCase().includes(val))
+                  );
+
+                  // 3. Check certifications
+                  const matchedCerts = certifications.filter((c) =>
+                    c.name.toLowerCase().includes(val) ||
+                    c.issuer.toLowerCase().includes(val) ||
+                    c.skills.some((s) => s.toLowerCase().includes(val))
+                  );
+
+                  if (matchedProjects.length > 0) {
                     window.location.hash = "#projetos";
                     window.dispatchEvent(new CustomEvent("search-tcode", { detail: val }));
                     setStatusMsg({
                       text: currentLang === "pt"
-                        ? `S: Busca bem-sucedida. Encontrado(s) ${matched.length} projeto(s).`
-                        : `S: Search successful. Found ${matched.length} project(s).`,
+                        ? `S: Busca bem-sucedida. Encontrado(s) ${matchedProjects.length} projeto(s).`
+                        : `S: Search successful. Found ${matchedProjects.length} project(s).`,
+                      type: "S",
+                    });
+                  } else if (matchedTimeline.length > 0) {
+                    window.location.hash = "#trajetoria";
+                    const firstMatch = matchedTimeline[0];
+                    // Dispatch custom event to focus the matched item inside TimelineTrack
+                    window.dispatchEvent(new CustomEvent("search-timeline", { detail: firstMatch.id }));
+                    setStatusMsg({
+                      text: currentLang === "pt"
+                        ? `S: Trajetória: '${firstMatch.title}' em '${firstMatch.org}'.`
+                        : `S: Timeline: '${firstMatch.title}' at '${firstMatch.org}'.`,
+                      type: "S",
+                    });
+                  } else if (matchedCerts.length > 0) {
+                    window.location.hash = "#certificacoes";
+                    window.dispatchEvent(new CustomEvent("search-certs", { detail: val }));
+                    setStatusMsg({
+                      text: currentLang === "pt"
+                        ? `S: Encontrada(s) ${matchedCerts.length} certificação(ões) para '${val}'.`
+                        : `S: Found ${matchedCerts.length} certification(s) for '${val}'.`,
                       type: "S",
                     });
                   } else {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { experience, education, type TimelineItem } from "@/lib/portfolio-data";
 import { Briefcase, GraduationCap, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -52,6 +52,18 @@ function TimelineTrack({
   const current = items[index];
   const canPrev = index > 0;
   const canNext = index < items.length - 1;
+
+  useEffect(() => {
+    const handleSearchTimeline = (e: Event) => {
+      const targetId = (e as CustomEvent).detail;
+      const foundIndex = items.findIndex((item) => item.id === targetId);
+      if (foundIndex !== -1) {
+        setIndex(foundIndex);
+      }
+    };
+    window.addEventListener("search-timeline", handleSearchTimeline);
+    return () => window.removeEventListener("search-timeline", handleSearchTimeline);
+  }, [items]);
 
   return (
     <div className="relative">
