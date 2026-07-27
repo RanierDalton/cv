@@ -145,7 +145,7 @@ function TimelineTrack({
         {/* Console-style Card */}
         <article
           key={current.id}
-          className="rounded-2xl border border-indigo/20 bg-surface-elevated/70 shadow-glow backdrop-blur-md animate-in fade-in slide-in-from-bottom-2 duration-500 flex flex-col overflow-hidden font-mono"
+          className="rounded-2xl border border-indigo/20 bg-surface-elevated shadow-glow animate-in fade-in slide-in-from-bottom-2 duration-500 flex flex-col overflow-hidden font-mono"
         >
           {/* Terminal Window Header */}
           <div className="bg-surface-elevated px-4 py-2 flex items-center justify-between border-b border-border/30 text-xs">

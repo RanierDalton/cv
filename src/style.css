@@ -2,11 +2,6 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
-@import "@fontsource/syne/400.css";
-@import "@fontsource/syne/500.css";
-@import "@fontsource/syne/600.css";
-@import "@fontsource/syne/700.css";
-@import "@fontsource/syne/800.css";
 @import "@fontsource/plus-jakarta-sans/400.css";
 @import "@fontsource/plus-jakarta-sans/500.css";
 @import "@fontsource/plus-jakarta-sans/600.css";
@@ -15,7 +10,7 @@
 @custom-variant dark (&:is(.dark, .dark *));
 
 @theme inline {
-  --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
@@ -50,55 +45,46 @@
   --color-surface-elevated: var(--surface-elevated);
 }
 
-/* Dark = default (Midnight Indigo). Light mode inverts. */
+/* Dark = default (Terminal Amber). Light mode inverts. */
 :root {
-  --radius: 0.75rem;
+  --radius: 0.3rem;
 
-  --background: oklch(0.09 0.03 275);
-  --foreground: oklch(0.97 0.01 260);
+  --background: oklch(0.06 0.003 75);
+  --foreground: oklch(0.93 0.004 90);
 
-  --surface: oklch(0.13 0.04 275);
-  --surface-elevated: oklch(0.18 0.06 275);
+  --surface: oklch(0.1 0.003 75);
+  --surface-elevated: oklch(0.145 0.004 75);
 
-  --card: oklch(0.13 0.04 275);
-  --card-foreground: oklch(0.97 0.01 260);
-  --popover: oklch(0.13 0.04 275);
-  --popover-foreground: oklch(0.97 0.01 260);
+  --card: oklch(0.1 0.003 75);
+  --card-foreground: oklch(0.93 0.004 90);
+  --popover: oklch(0.1 0.003 75);
+  --popover-foreground: oklch(0.93 0.004 90);
 
-  --primary: oklch(0.62 0.22 275);
-  --primary-foreground: oklch(0.99 0.005 260);
+  --primary: oklch(0.78 0.16 70);
+  --primary-foreground: oklch(0.15 0.02 70);
 
-  --secondary: oklch(0.22 0.06 275);
-  --secondary-foreground: oklch(0.97 0.01 260);
+  --secondary: oklch(0.16 0.006 75);
+  --secondary-foreground: oklch(0.93 0.004 90);
 
-  --muted: oklch(0.18 0.04 275);
-  --muted-foreground: oklch(0.68 0.03 265);
+  --muted: oklch(0.13 0.004 75);
+  --muted-foreground: oklch(0.6 0.012 85);
 
-  --accent: oklch(0.28 0.09 275);
-  --accent-foreground: oklch(0.97 0.01 260);
+  --accent: oklch(0.2 0.01 75);
+  --accent-foreground: oklch(0.93 0.004 90);
 
   --destructive: oklch(0.62 0.24 27);
   --destructive-foreground: oklch(0.98 0 0);
 
-  --border: oklch(0.28 0.06 275 / 60%);
-  --input: oklch(0.28 0.06 275 / 80%);
-  --ring: oklch(0.62 0.22 275);
+  --border: oklch(0.24 0.006 75 / 60%);
+  --input: oklch(0.24 0.006 75 / 80%);
+  --ring: oklch(0.78 0.16 70);
 
-  --indigo: oklch(0.62 0.22 275);
-  --indigo-glow: oklch(0.75 0.19 285);
+  --indigo: oklch(0.78 0.16 70);
+  --indigo-glow: oklch(0.85 0.14 78);
 
-  --gradient-hero: radial-gradient(
-      ellipse 80% 60% at 50% 0%,
-      color-mix(in oklab, var(--indigo) 35%, transparent) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 60% 50% at 80% 100%,
-      color-mix(in oklab, var(--indigo-glow) 25%, transparent) 0%,
-      transparent 70%
-    );
-  --gradient-primary: linear-gradient(135deg, var(--indigo) 0%, var(--indigo-glow) 100%);
-  --shadow-glow: 0 15px 45px -15px color-mix(in oklab, var(--indigo) 20%, transparent);
+  --gradient-hero: none;
+  --gradient-primary: linear-gradient(135deg, var(--indigo) 0%, var(--indigo) 100%);
+  --shadow-glow: 0 0 0 1px var(--indigo), 0 4px 12px -4px color-mix(in oklab, var(--indigo) 35%, transparent);
   --shadow-card: 0 8px 24px -10px oklch(0 0 0 / 45%);
 }
 
@@ -116,6 +102,11 @@
 
   --primary: oklch(0.48 0.20 275);
   --primary-foreground: oklch(0.99 0.005 260);
+  --gradient-hero: radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      color-mix(in oklab, var(--indigo) 20%, transparent) 0%,
+      transparent 70%
+    );
 
   --secondary: oklch(0.93 0.015 265);
   --secondary-foreground: oklch(0.12 0.03 275);
@@ -176,9 +167,7 @@
   box-shadow: var(--shadow-card);
 }
 @utility glass {
-  background-color: color-mix(in oklab, var(--surface) 60%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background-color: var(--color-surface-elevated);
 }
 
 @utility tag-pill {

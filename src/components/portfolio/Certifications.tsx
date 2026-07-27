@@ -89,7 +89,7 @@ export function Certifications() {
               href={cert.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-indigo/20 bg-surface-elevated/70 p-5 shadow-glow backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo/50 hover:shadow-glow font-mono text-xs"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-indigo/20 bg-surface-elevated p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo hover:shadow-glow font-mono text-xs"
             >
               <div className="flex items-start gap-4">
                 <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-xl overflow-hidden shadow-sm bg-white/5 border border-white/10">
@@ -189,7 +189,7 @@ function IssuerLogo({ issuer }: { issuer: string }) {
   }
 
   return (
-    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-950 to-slate-900 text-white">
+    <div className="w-full h-full flex items-center justify-center bg-surface-elevated text-foreground">
       <Award className="h-6 w-6 text-indigo-glow" />
     </div>
   );

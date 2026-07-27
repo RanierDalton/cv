@@ -154,7 +154,7 @@ function ProjectCard({ project }: { project: Project }) {
   const { t } = useTranslation();
 
   const content = (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-indigo/20 bg-surface-elevated/70 shadow-sm dark:shadow-none hover:shadow-md dark:hover:shadow-[0_0_15px_rgba(99,102,241,0.12)] transition-all duration-300 hover:-translate-y-1 hover:border-indigo/50 font-mono text-xs">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-indigo/20 bg-surface-elevated shadow-sm dark:shadow-none transition-all duration-300 hover:-translate-y-1 hover:border-indigo hover:shadow-glow font-mono text-xs">
       
       {/* Terminal Window Header (Fiori Style) */}
       <div className="bg-surface-elevated/70 px-4 py-2 flex items-center justify-between border-b border-border/30 text-[10px]">

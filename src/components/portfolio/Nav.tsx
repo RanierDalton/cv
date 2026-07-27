@@ -51,7 +51,7 @@ export function Nav() {
         </Link>
 
         {/* SAP GUI Command Field (T-Code Navigator & Search Center) */}
-        <div className="hidden md:flex items-center gap-1.5 bg-surface-elevated/70 border border-indigo/40 hover:border-indigo/70 rounded-lg px-3 py-1.5 font-mono text-xs max-w-[340px] ml-4 shadow-[0_0_12px_rgba(99,102,241,0.08)] transition-all duration-200">
+        <div className="hidden md:flex items-center gap-1.5 bg-surface-elevated/70 border border-indigo/40 hover:border-indigo/70 rounded-lg px-3 py-1.5 font-mono text-xs max-w-[340px] ml-4 transition-all duration-200">
           <span className="text-indigo-glow font-bold">/n</span>
           <input
             type="text"

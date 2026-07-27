@@ -222,7 +222,7 @@ export function Hero() {
 
         {/* Bottom: Monospace Interactive Terminal Simulator (Widescreen Full Width) */}
         <div className="w-full">
-          <div className="w-full rounded-2xl border border-indigo/25 bg-surface/85 shadow-glow backdrop-blur-md overflow-hidden font-mono text-sm text-foreground/90 flex flex-col min-h-[360px]">
+          <div className="w-full rounded-2xl border border-border bg-surface-elevated overflow-hidden font-mono text-sm text-foreground/90 flex flex-col min-h-[360px]">
             
             {/* Terminal Window Header */}
             <div className="bg-surface-elevated/70 px-4 py-3 flex items-center justify-between border-b border-border/30">
@@ -297,7 +297,7 @@ export function Hero() {
                         return (
                           <div
                             key={i}
-                            className="w-1.5 bg-gradient-to-t from-indigo-500 via-indigo-glow to-cyan-400 rounded-full animate-soundwave origin-bottom"
+                            className="w-1.5 bg-indigo-glow rounded-full animate-soundwave origin-bottom"
                             style={{
                               height: `${height}%`,
                               animationDelay: `${delay}s`,

@@ -29,7 +29,7 @@ export function BackToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-6 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface/85 text-muted-foreground shadow-glow backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-indigo hover:text-indigo-glow hover:scale-110 active:scale-95 animate-in fade-in slide-in-from-bottom-4"
+      className="fixed bottom-6 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface-elevated text-muted-foreground transition-all duration-300 hover:-translate-y-1 hover:border-indigo hover:text-indigo-glow hover:shadow-glow hover:scale-110 active:scale-95 animate-in fade-in slide-in-from-bottom-4"
       aria-label="Voltar ao topo"
     >
       <ArrowUp className="h-5 w-5" />
