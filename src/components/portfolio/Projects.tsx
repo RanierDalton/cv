@@ -73,7 +73,7 @@ export function Projects() {
   const displayed = isMobile ? filtered.slice(0, visibleCount) : filtered;
 
   return (
-    <section id="projetos" className="relative py-24 sm:py-32">
+    <section id="projetos" className="relative py-[4.5rem] sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeader
           kicker={t("sections.projects-subtitle")}

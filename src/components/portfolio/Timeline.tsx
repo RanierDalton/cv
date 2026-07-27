@@ -9,7 +9,7 @@ export function Timeline() {
   const { t } = useTranslation();
 
   return (
-    <section id="trajetoria" className="relative py-24 sm:py-32">
+    <section id="trajetoria" className="relative py-[4.5rem] sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeader
           kicker={t("sections.timeline-subtitle")}

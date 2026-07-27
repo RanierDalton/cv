@@ -106,10 +106,10 @@ export function Hero() {
     return () => clearInterval(timer);
   }, [activeTab, fullText]);
 
-  // Effect to simulate title typing loop ($: Ranier Dalton do Couto)
+  // Effect to simulate title typing loop ($: <profile.name>)
   useEffect(() => {
     let isMounted = true;
-    const fullTitle = "$: Ranier Dalton do Couto";
+    const fullTitle = `$: ${profile.name}`;
     let index = 0;
     let isDeleting = false;
 
@@ -175,7 +175,7 @@ export function Hero() {
           </div>
 
           {/* Loop-Typing Monospace Header */}
-          <h1 className="mt-6 text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl min-h-[70px] font-mono text-indigo-glow">
+          <h1 className="mt-6 text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl min-h-[4.5rem] sm:min-h-[5.25rem] md:min-h-[7rem] lg:min-h-[8.5rem] transition-[min-height] duration-300 ease-out font-mono text-indigo-glow">
             {nameText}
             <span className="inline-block h-6 sm:h-8 w-[2px] bg-gradient-primary ml-1.5 animate-cursor-blink" />
           </h1>
