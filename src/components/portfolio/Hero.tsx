@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { profile } from "@/lib/portfolio-data";
-import { Github, Linkedin, Mail, ArrowUpRight, Sparkles, FileDown, Terminal, Music, Settings } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowUpRight, Sparkles, FileDown, Terminal, Music, Settings, Link2, Workflow } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import sapLogo from "@/assets/sap_logo.jpeg";
 import oracleLogo from "@/assets/oracle_logo.jpeg";
@@ -47,6 +47,7 @@ const row1: TechItem[] = [
   { name: "Express", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", "Express", "dark:invert") },
   { name: "Redis", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg", "Redis") },
   { name: "Linux", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg", "Linux") },
+  { name: "Neo4j", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/neo4j/neo4j-original.svg", "Neo4j") },
 ];
 
 const row2: TechItem[] = [
@@ -73,6 +74,8 @@ const row2: TechItem[] = [
   { name: "shell/bash", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg", "shell/bash", "dark:invert") },
   { name: "SAP HANA", logo: createImgLogo(sapLogo, "SAP HANA") },
   { name: "Arduino", logo: createImgLogo("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg", "Arduino") },
+  { name: "LangChain", logo: createSvgLogo(<Link2 className="h-1/2 w-1/2 text-emerald-500" strokeWidth={2.25} />) },
+  { name: "LangGraph", logo: createSvgLogo(<Workflow className="h-1/2 w-1/2 text-emerald-500" strokeWidth={2.25} />) },
 ];
 
 export function Hero() {
