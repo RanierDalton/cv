@@ -59,11 +59,23 @@
     "bio": "Currently working as a Trainee in SAP ABAP and BTP development at Exed Consulting, focusing on SAP Fiori, OData services, and R&D initiatives in React, Node.js, and Artificial Intelligence — including Agentic AI. I am a Computer Science student and digital game programming technician, interested in solutions that connect technology, business, and innovation."
   },
   "experience": {
-    "exed-consultant": {
-      "title": "BTP & AI Consultant",
+    "exed-training-instructor": {
+      "title": "Training Instructor",
+      "period": "Jul 2026 — Present",
+      "location": "São Paulo · Remote",
+      "description": "Training staff on SAP technologies, with a focus on SAP ABAP."
+    },
+    "exed-ai-engineer": {
+      "title": "AI Engineer",
       "period": "Apr 2026 — Present",
       "location": "São Paulo · Hybrid",
-      "description": "Development of extensions and integrations for SAP S/4HANA environments (side-by-side and in-app extension architectures) using SAP BTP. Testing and integration of SAP LBN (Logistics Business Network) with carrier systems. Strong focus on logistics and sales modules (SD, EWM, and TM). Building AI applications and agents (LLMs) with Python, LangGraph, and FastAPI. Direct client engagement using the SAP Activate methodology."
+      "description": "Support for AI and R&D initiatives. Development of Full Stack applications, AI agents (LLMs), and Backoffice products using Python, FastAPI, and LangGraph. Code refactoring and architecture design, applying design and maintainability best practices. Working with AWS services and configurations to support development and deployment of solutions."
+    },
+    "exed-abap-btp": {
+      "title": "ABAP & BTP Consultant",
+      "period": "Apr 2026 — Present",
+      "location": "São Paulo · Hybrid",
+      "description": "Development of extensions and integrations for SAP S/4HANA environments (side-by-side and in-app extension architectures) using SAP BTP. Testing and integration of SAP systems with non-SAP platforms, with emphasis on SAP LBN integration with carrier systems. Strong technical involvement with logistics and sales modules (SD, EWM, and TM). Direct client engagement using the SAP Activate methodology."
     },
     "exed-abap": {
       "title": "ABAP & BTP Consultant",

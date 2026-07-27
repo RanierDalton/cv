@@ -24,14 +24,33 @@ export type TimelineItem = {
 
 export const experience: TimelineItem[] = [
   {
-    id: "exed-consultant",
-    title: "Consultor BTP & IA",
+    id: "exed-training-instructor",
+    title: "Instrutor de treinamento",
+    org: "Exed Academy · Meio período",
+    period: "Jul 2026 — Presente",
+    location: "São Paulo · Remoto",
+    description: "Treinamento de pessoal em tecnologias SAP, com foco em SAP ABAP.",
+    skills: ["Treinamento de Pessoal", "SAP ABAP"],
+  },
+  {
+    id: "exed-ai-engineer",
+    title: "AI Engineer",
+    org: "Exed Consulting · Meio período",
+    period: "Abr 2026 — Presente",
+    location: "São Paulo · Híbrido",
+    description:
+      "Apoio nas iniciativas de IA e R&D. Desenvolvimento de aplicações Full Stack, agentes de IA (LLMs) e produtos Backoffice utilizando Python, FastAPI e LangGraph. Refatoração de código e estruturação de arquitetura, aplicando boas práticas de design e manutenibilidade. Contato com serviços e configurações da AWS para suporte ao desenvolvimento e implantação de soluções.",
+    skills: ["Python", "FastAPI", "LangGraph", "MCP", "AWS", "Full Stack"],
+  },
+  {
+    id: "exed-abap-btp",
+    title: "Consultor ABAP & BTP",
     org: "Exed Consulting",
     period: "Abr 2026 — Presente",
     location: "São Paulo · Híbrido",
     description:
-      "Desenvolvimento de extensões e integrações para ambientes SAP S/4HANA (arquiteturas side-by-side e in-app extensions) utilizando SAP BTP. Execução de testes e integração do SAP LBN (Logistics Business Network) com sistemas de transportadoras. Forte atuação com os módulos logísticos e de vendas (SD, EWM e TM). Construção de aplicações e agentes de IA (LLMs) com Python, LangGraph e FastAPI. Engajamento direto com clientes usando metodologia SAP Activate.",
-    skills: ["SAP BTP", "SAP S/4HANA", "SAP LBN", "LangGraph", "FastAPI", "SAP Activate", "Agentic AI"],
+      "Desenvolvimento de extensões e integrações para ambientes SAP S/4HANA (arquiteturas side-by-side e in-app extensions) utilizando SAP BTP. Execução de testes e integração de sistemas SAP com plataformas não-SAP, com destaque para a integração do SAP LBN com sistemas de transportadoras. Forte atuação técnica com os módulos logísticos e de vendas (SD, EWM e TM). Atuação direta com clientes utilizando a metodologia SAP Activate.",
+    skills: ["SAP BTP", "SAP S/4HANA", "SAP LBN", "SD", "EWM", "TM", "SAP Activate"],
   },
   {
     id: "exed-abap",
@@ -218,6 +237,15 @@ export type Certification = {
 };
 
 export const certifications: Certification[] = [
+  {
+    id: "oracle-agentic-ai",
+    name: "Oracle Cloud Agentic AI",
+    issuer: "Oracle",
+    issued: "Jul 2026",
+    expires: "Jul 2028",
+    skills: ["Agentic AI", "LangChain", "MCP", "OCI Enterprise AI Agents"],
+    link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=53A83A38EBEB4228E311E6FE52D5B675E5CC6E1CEDBDA8E0B0AE870F07555F8D",
+  },
   {
     id: "sap-solution-architect",
     name: "SAP Certified - Solution Architect - SAP BTP",
