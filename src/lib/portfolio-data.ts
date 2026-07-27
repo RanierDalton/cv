@@ -95,6 +95,8 @@ export const education: TimelineItem[] = [
   },
 ];
 
+export type ProjectCategory = "SAP" | "IA" | "Backend" | "FullStack" | "Integração" | "Games";
+
 export type Project = {
   id: string;
   title: string;
@@ -103,7 +105,7 @@ export type Project = {
   stack: string[];
   period: string;
   link?: string;
-  category: "SAP" | "IA" | "Backend" | "Games";
+  categories: ProjectCategory[];
 };
 
 export const projects: Project[] = [
@@ -116,7 +118,7 @@ export const projects: Project[] = [
       "Reduzir latência de rastreio e eliminar reconciliação manual entre SAP e parceiros logísticos.",
     stack: ["SAP BTP", "CAP", "CPI", "S/4HANA", "OData", "Event-Driven", "SAP LBN"],
     period: "2026",
-    category: "SAP",
+    categories: ["SAP", "Integração"],
   },
   {
     id: "solarway",
@@ -128,7 +130,7 @@ export const projects: Project[] = [
     stack: ["JavaScript", "Node.js", "React", "Extensão"],
     period: "Jul 2025 — Mai 2026",
     link: "https://github.com/Projeto-de-extensao-Grupo-06",
-    category: "Backend",
+    categories: ["FullStack"],
   },
   {
     id: "cs2-stats-bot",
@@ -140,7 +142,7 @@ export const projects: Project[] = [
     stack: ["Python", "Discord API", "MySQL", "OCR", "IA"],
     period: "Férias 2025 — 2026",
     link: "https://github.com/RanierDalton/cs2-stats-bot",
-    category: "IA",
+    categories: ["IA"],
   },
   {
     id: "infrawatch",
@@ -152,7 +154,7 @@ export const projects: Project[] = [
     stack: ["Python", "IoT", "Monitoramento", "Backend"],
     period: "Dez 2024 — Mai 2025",
     link: "https://github.com/InfraWatch-inc",
-    category: "Backend",
+    categories: ["FullStack"],
   },
   {
     id: "nfe-rpa",
@@ -162,7 +164,7 @@ export const projects: Project[] = [
     objectives: "Reduzir taxa de erros de emissão para ~1% e liberar tempo do time fiscal.",
     stack: ["Python", "RPA", "NF-e", "Selenium"],
     period: "2021",
-    category: "Backend",
+    categories: ["Backend"],
   },
   {
     id: "sinal-verde",
@@ -174,7 +176,7 @@ export const projects: Project[] = [
     stack: ["JavaScript", "IoT", "Sensores", "Dashboard"],
     period: "1º Semestre 2024",
     link: "https://github.com/Carvalho003/sinal_verde",
-    category: "Backend",
+    categories: ["Backend"],
   },
   {
     id: "feat-up",
@@ -186,7 +188,7 @@ export const projects: Project[] = [
     stack: ["Database Modeling", "SQL", "Social Media", "Music Collaboration"],
     period: "1º Semestre 2024",
     link: "https://github.com/RanierDalton/feat-up",
-    category: "Backend",
+    categories: ["FullStack", "IA"],
   },
   {
     id: "monocromo",
@@ -198,7 +200,7 @@ export const projects: Project[] = [
     stack: ["Unity", "C#", "Game Design", "TCC"],
     period: "2023",
     link: "https://github.com/RanierDC/Monocromo",
-    category: "Games",
+    categories: ["Games"],
   },
   {
     id: "reddead2-wiki",
@@ -210,7 +212,7 @@ export const projects: Project[] = [
     stack: ["Java", "Android", "Mobile App", "Android Studio"],
     period: "2022",
     link: "https://github.com/RanierDC/RedDead2-Wiki",
-    category: "Games",
+    categories: ["Games"],
   },
   {
     id: "broken-control",
@@ -222,7 +224,7 @@ export const projects: Project[] = [
     stack: ["HTML", "CSS", "JavaScript", "Games Hub"],
     period: "2021",
     link: "https://github.com/RanierDC/BrokenControl",
-    category: "Games",
+    categories: ["Games"],
   },
 ];
 

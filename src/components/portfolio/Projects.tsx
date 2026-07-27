@@ -1,23 +1,27 @@
 import { useState, useEffect } from "react";
-import { projects, type Project } from "@/lib/portfolio-data";
+import { projects, type Project, type ProjectCategory } from "@/lib/portfolio-data";
 import { ArrowUpRight, Target, X } from "lucide-react";
 import { SectionHeader } from "./Timeline";
 import { useTranslation } from "react-i18next";
+import { useReveal } from "@/hooks/use-reveal";
 
-const categories: Array<{ id: Project["category"] | "Todos"; label: string }> = [
+const categories: Array<{ id: ProjectCategory | "Todos"; label: string }> = [
   { id: "Todos", label: "Todos" },
   { id: "SAP", label: "SAP" },
   { id: "IA", label: "IA" },
   { id: "Backend", label: "Backend" },
+  { id: "FullStack", label: "FullStack" },
+  { id: "Integração", label: "Integração" },
   { id: "Games", label: "Games" },
 ];
 
 export function Projects() {
   const { t } = useTranslation();
-  const [filter, setFilter] = useState<Project["category"] | "Todos">("Todos");
+  const [filter, setFilter] = useState<ProjectCategory | "Todos">("Todos");
   const [searchTerm, setSearchTerm] = useState("");
   const [isMobile, setIsMobile] = useState(false);
   const [visibleCount, setVisibleCount] = useState(3);
+  const { ref, isVisible } = useReveal<HTMLElement>();
 
   // Check if viewport is mobile (md screen threshold 768px)
   useEffect(() => {
@@ -61,7 +65,7 @@ export function Projects() {
   }, []);
 
   const filtered = projects.filter((p) => {
-    const matchesCategory = filter === "Todos" || p.category === filter;
+    const matchesCategory = filter === "Todos" || p.categories.includes(filter);
     const matchesSearch =
       !searchTerm ||
       p.title.toLowerCase().includes(searchTerm) ||
@@ -73,7 +77,11 @@ export function Projects() {
   const displayed = isMobile ? filtered.slice(0, visibleCount) : filtered;
 
   return (
-    <section id="projetos" className="relative py-[4.5rem] sm:py-24">
+    <section
+      id="projetos"
+      ref={ref}
+      className={`relative py-[4.5rem] sm:py-24 transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+    >
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeader
           kicker={t("sections.projects-subtitle")}
@@ -164,9 +172,16 @@ function ProjectCard({ project }: { project: Project }) {
       <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
         <div>
           <div className="flex items-center justify-between">
-            <span className="rounded border border-indigo/20 bg-indigo/5 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-indigo-glow">
-              {project.category}
-            </span>
+            <div className="flex flex-wrap gap-1">
+              {project.categories.map((c) => (
+                <span
+                  key={c}
+                  className="rounded border border-indigo/20 bg-indigo/5 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-indigo-glow"
+                >
+                  {c}
+                </span>
+              ))}
+            </div>
             <span className="text-[10px] text-muted-foreground/80">
               {t(`projects.${project.id}.period`, { defaultValue: project.period })}
             </span>

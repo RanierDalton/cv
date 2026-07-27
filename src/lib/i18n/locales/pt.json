@@ -47,7 +47,8 @@
     "certifications-description": "Minhas certificações técnicas e proficiências emitidas por instituições parceiras. Clique para validar a credencial.",
     "certifications-validate": "Validar credencial",
     "certifications-expires": "Expira em",
-    "certifications-no-expiry": "Sem expiração"
+    "certifications-no-expiry": "Sem expiração",
+    "certifications-load-more": "Carregar Mais"
   },
   "footer": {
     "title": "Vamos conversar?",

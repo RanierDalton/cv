@@ -3,6 +3,7 @@ import { certifications } from "@/lib/portfolio-data";
 import { ArrowUpRight, Calendar, Award, X } from "lucide-react";
 import { SectionHeader } from "./Timeline";
 import { useTranslation } from "react-i18next";
+import { useReveal } from "@/hooks/use-reveal";
 
 import sapLogo from "@/assets/sap_logo.jpeg";
 import oracleLogo from "@/assets/oracle_logo.jpeg";
@@ -12,6 +13,24 @@ import efsetLogo from "@/assets/efset_logo.jpeg";
 export function Certifications() {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(4);
+  const { ref, isVisible } = useReveal<HTMLElement>();
+
+  // Check if viewport is mobile (md screen threshold 768px)
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Reset pagination limit when search changes
+  useEffect(() => {
+    setVisibleCount(4);
+  }, [searchTerm]);
 
   useEffect(() => {
     const handleSearchCerts = (e: Event) => {
@@ -32,8 +51,14 @@ export function Certifications() {
     );
   });
 
+  const displayed = isMobile ? filtered.slice(0, visibleCount) : filtered;
+
   return (
-    <section id="certificacoes" className="relative py-[4.5rem] sm:py-24">
+    <section
+      id="certificacoes"
+      ref={ref}
+      className={`relative py-[4.5rem] sm:py-24 transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+    >
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeader
           kicker={t("sections.certifications-subtitle")}
@@ -58,7 +83,7 @@ export function Certifications() {
         )}
 
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-2">
-          {filtered.map((cert) => (
+          {displayed.map((cert) => (
             <a
               key={cert.id}
               href={cert.link}
@@ -118,6 +143,18 @@ export function Certifications() {
             </a>
           ))}
         </div>
+
+        {/* Mobile load more button */}
+        {isMobile && filtered.length > visibleCount && (
+          <div className="mt-10 flex justify-center font-mono text-xs">
+            <button
+              onClick={() => setVisibleCount((prev) => prev + 4)}
+              className="glass relative inline-flex h-11 px-6 items-center justify-center rounded-full border border-indigo/30 text-indigo-glow font-bold hover:border-indigo hover:text-indigo-glow hover:shadow-glow cursor-pointer transition-all duration-200"
+            >
+              {t("sections.certifications-load-more")}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -2,14 +2,20 @@ import { useState, useEffect } from "react";
 import { experience, education, type TimelineItem } from "@/lib/portfolio-data";
 import { Briefcase, GraduationCap, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useReveal } from "@/hooks/use-reveal";
 
 type Track = "experience" | "education";
 
 export function Timeline() {
   const { t } = useTranslation();
+  const { ref, isVisible } = useReveal<HTMLElement>();
 
   return (
-    <section id="trajetoria" className="relative py-[4.5rem] sm:py-24">
+    <section
+      id="trajetoria"
+      ref={ref}
+      className={`relative py-[4.5rem] sm:py-24 transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+    >
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeader
           kicker={t("sections.timeline-subtitle")}

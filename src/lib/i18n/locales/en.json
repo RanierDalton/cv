@@ -47,7 +47,8 @@
     "certifications-description": "My technical certifications and proficiencies issued by partner institutions. Click to validate the credential.",
     "certifications-validate": "Validate credential",
     "certifications-expires": "Expires on",
-    "certifications-no-expiry": "No expiry"
+    "certifications-no-expiry": "No expiry",
+    "certifications-load-more": "Load More"
   },
   "footer": {
     "title": "Let's talk?",
