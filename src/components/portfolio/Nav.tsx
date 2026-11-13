@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useActiveSection } from "@/hooks/useActiveSection";
@@ -19,6 +19,19 @@ export function Nav() {
   const active = useActiveSection(nav.map((n) => n.id));
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const links = useRef<Record<string, HTMLAnchorElement | null>>({});
+  const [bar, setBar] = useState({ x: 0, w: 0 });
+
+  // Indicador que desliza até o link da seção ativa.
+  useLayoutEffect(() => {
+    const measure = () => {
+      const el = active ? links.current[active] : null;
+      setBar(el ? { x: el.offsetLeft, w: el.offsetWidth } : { x: 0, w: 0 });
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [active, lang]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -36,7 +49,9 @@ export function Nav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-200 ${
-        scrolled || open ? "border-b border-border bg-background/90 backdrop-blur-md" : "border-b border-transparent"
+        scrolled || open
+          ? "border-b border-border bg-background/90 backdrop-blur-md"
+          : "border-b border-transparent"
       }`}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
@@ -45,10 +60,18 @@ export function Nav() {
           <span className="text-primary">.</span>
         </a>
 
-        <nav aria-label="Principal" className="hidden items-center gap-7 md:flex">
+        <nav aria-label="Principal" className="relative hidden items-center gap-7 md:flex">
+          <span
+            aria-hidden
+            className="absolute -bottom-1.5 left-0 h-px bg-primary transition-[transform,width,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
+            style={{ transform: `translateX(${bar.x}px)`, width: bar.w, opacity: bar.w ? 1 : 0 }}
+          />
           {nav.map((item) => (
             <a
               key={item.id}
+              ref={(el) => {
+                links.current[item.id] = el;
+              }}
               href={`#${item.id}`}
               aria-current={active === item.id ? "true" : undefined}
               className={`font-mono text-[13px] transition-colors hover:text-foreground ${
@@ -81,6 +104,8 @@ export function Nav() {
           </button>
         </div>
       </div>
+
+      <div aria-hidden className="read-progress absolute inset-x-0 bottom-0 h-0.5 bg-primary" />
 
       {open && (
         <nav aria-label="Principal" className="border-t border-border px-4 pb-4 md:hidden">

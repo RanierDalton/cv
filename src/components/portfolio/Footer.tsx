@@ -1,79 +1,48 @@
-import { profile } from "@/lib/portfolio-data";
-import { Github, Linkedin, Mail, Link2 } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { profile } from "@/lib/portfolio-data";
+import { Reveal, stagger } from "./Reveal";
 
 export function Footer() {
   const { t } = useTranslation();
+  const links = [
+    { href: `mailto:${profile.contacts.email}`, label: profile.contacts.email, icon: Mail },
+    { href: profile.contacts.linkedin, label: "LinkedIn", icon: Linkedin },
+    { href: profile.contacts.githubAcademic, label: "GitHub · RanierDalton", icon: Github },
+    { href: profile.contacts.githubPersonal, label: "GitHub · RanierDC", icon: Github },
+  ];
 
   return (
-    <footer id="contato" className="border-t border-border/60 bg-surface/30 py-16">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="grid gap-10 md:grid-cols-2 md:items-center">
-          <div>
-            <div className="font-display text-2xl font-bold tracking-tight">
-              <span className="text-gradient">{t("footer.title").split(" ")[0]}</span>
-              <span className="text-foreground"> {t("footer.title").split(" ").slice(1).join(" ")}</span>
-            </div>
-            <p className="mt-2 text-sm text-muted-foreground max-w-md">
-              {t("footer.description")}
-            </p>
-            <p className="mt-8 text-xs text-muted-foreground/60">
-              © {new Date().getFullYear()} · Ranier Dalton Couto.
-            </p>
-          </div>
-
-          <div className="flex flex-col items-start gap-4 md:items-end">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-glow">
-              {t("footer.social")}
-            </span>
-            <div className="flex flex-wrap gap-3">
+    <footer id="contato" className="border-t border-border">
+      <Reveal className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+        <h2 className="reveal-item text-[clamp(2.4rem,6vw,4.5rem)] leading-none text-foreground">
+          {t("footer.title")}
+        </h2>
+        <p className="reveal-item mt-4 max-w-xl text-lg text-muted-foreground" style={stagger(1)}>
+          {t("footer.description")}
+        </p>
+        <ul className="mt-10 grid gap-x-8 sm:grid-cols-2">
+          {links.map(({ href, label, icon: Icon }, i) => (
+            <li key={href} className="reveal-item" style={stagger(i + 2)}>
               <a
-                href={`mailto:${profile.contacts.email}`}
-                aria-label="Email"
-                className="group relative inline-flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface/50 text-muted-foreground transition-all duration-300 hover:-translate-y-1 hover:border-red-500/60 hover:text-red-400 hover:shadow-[0_0_20px_rgba(239,68,68,0.4)]"
-              >
-                <Mail className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-              </a>
-              <a
-                href={profile.contacts.linkedin}
-                aria-label="LinkedIn"
-                target="_blank"
+                href={href}
+                target={href.startsWith("mailto:") ? undefined : "_blank"}
                 rel="noopener noreferrer"
-                className="group relative inline-flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface/50 text-muted-foreground transition-all duration-300 hover:-translate-y-1 hover:border-blue-500/60 hover:text-blue-400 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]"
+                className="group flex items-center justify-between border-b border-border py-4 text-foreground transition-colors hover:text-primary"
               >
-                <Linkedin className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+                <span className="flex items-center gap-3">
+                  <Icon className="h-4 w-4 text-muted-foreground group-hover:text-primary" />
+                  {label}
+                </span>
+                <ArrowUpRight className="h-4 w-4 text-faint transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
               </a>
-              <a
-                href="https://linktr.ee/ranierdalton"
-                aria-label="Linktree"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative inline-flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface/50 text-muted-foreground transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/60 hover:text-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.4)]"
-              >
-                <Link2 className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-              </a>
-              <a
-                href={profile.contacts.githubPersonal}
-                aria-label="GitHub Pessoal"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative inline-flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface/50 text-muted-foreground transition-all duration-300 hover:-translate-y-1 hover:border-indigo hover:text-indigo-glow hover:shadow-glow"
-              >
-                <Github className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-              </a>
-              <a
-                href={profile.contacts.githubAcademic}
-                aria-label="GitHub Acadêmico"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative inline-flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface/50 text-muted-foreground transition-all duration-300 hover:-translate-y-1 hover:border-indigo hover:text-indigo-glow hover:shadow-glow"
-              >
-                <Github className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-12 font-mono text-[11px] text-faint">
+          © {new Date().getFullYear()} · {t("footer.rights")}
+        </p>
+      </Reveal>
     </footer>
   );
 }

@@ -145,7 +145,10 @@ export const education: Education[] = [
     ),
   },
   {
-    title: l("Técnico em Programação de Jogos Digitais", "Technical Degree in Digital Game Programming"),
+    title: l(
+      "Técnico em Programação de Jogos Digitais",
+      "Technical Degree in Digital Game Programming",
+    ),
     org: "ETEC Prof. Basilides de Godoy",
     period: l("01/2021 – 12/2023", "01/2021 – 12/2023"),
     description: l(
@@ -164,7 +167,10 @@ export const cases: Case[] = [
   {
     id: "ap-agent",
     title: l("Agente de IA de Contas a Pagar", "Accounts Payable AI agent"),
-    segment: l("Multinacional norte-americana de alimentos e bebidas", "U.S. food and beverage multinational"),
+    segment: l(
+      "Multinacional norte-americana de alimentos e bebidas",
+      "U.S. food and beverage multinational",
+    ),
     problem: l(
       "Reunir num agente de IA os dados de contas a pagar do S/4HANA e do SAP Ariba.",
       "Bring accounts payable data from S/4HANA and SAP Ariba into one AI agent.",
@@ -205,7 +211,10 @@ export const cases: Case[] = [
   },
   {
     id: "tax-reform",
-    title: l("Reforma Tributária na integração fiscal", "Brazil's Tax Reform in the tax integration"),
+    title: l(
+      "Reforma Tributária na integração fiscal",
+      "Brazil's Tax Reform in the tax integration",
+    ),
     segment: l("Distribuidora de combustíveis e lubrificantes", "Fuel and lubricants distributor"),
     problem: l(
       "A integração com o motor fiscal Avalara gerava valores errados de IBS/CBS.",
@@ -235,10 +244,7 @@ export const cases: Case[] = [
     id: "hr-portal",
     title: l("Portal de RH", "HR portal"),
     segment: l("Produto interno do R&D", "Internal R&D product"),
-    problem: l(
-      "Um portal de RH integrado ao SAP HCM.",
-      "An HR portal integrated with SAP HCM.",
-    ),
+    problem: l("Um portal de RH integrado ao SAP HCM.", "An HR portal integrated with SAP HCM."),
     did: l(
       "Participei do protótipo Fiori e o apresentei a CEO, CTO e líderes técnicos. Virou produto, e desenvolvi grande parte dele em React com micro front-ends e Node.js, integrado ao S/4HANA via OData.",
       "Helped build the Fiori prototype and presented it to the CEO, CTO and technical leads. It became a product, and I built most of it in React with micro-frontends and Node.js, integrated with S/4HANA via OData.",
@@ -247,7 +253,10 @@ export const cases: Case[] = [
   },
   {
     id: "pnld",
-    title: l("Apps para um contrato com o governo federal", "Apps for a federal government contract"),
+    title: l(
+      "Apps para um contrato com o governo federal",
+      "Apps for a federal government contract",
+    ),
     segment: l("Grupo educacional de grande porte", "Large Brazilian education group"),
     problem: l(
       "Aplicar as regras do PNLD, um contrato com o governo federal, de contratos e ordens de venda até o armazém.",
@@ -391,6 +400,7 @@ export const credentials: Credential[] = [
     issuer: "SAP",
     issued: "10/2026",
     expires: "10/2027",
+    link: "https://www.credly.com/badges/920fb0f6-6252-4dc3-bcc4-11eca51e9c9f",
     skills: ["Solution Architecture", "SAP BTP", "SAP Business AI"],
   },
   {
@@ -490,11 +500,23 @@ export const award = {
 };
 
 export const courses: { name: L; org: string; date: string }[] = [
-  { name: l("SAP ABAP para Programadores (92 horas)", "SAP ABAP for Programmers (92 hours)"), org: "Exed Academy", date: "09/2025" },
+  {
+    name: l("SAP ABAP para Programadores (92 horas)", "SAP ABAP for Programmers (92 hours)"),
+    org: "Exed Academy",
+    date: "09/2025",
+  },
   { name: l("Datadog Foundation", "Datadog Foundation"), org: "Datadog", date: "04/2025" },
   { name: l("Inglês Avançado 2", "Advanced English 2"), org: "Senac São Paulo", date: "12/2024" },
-  { name: l("Comunicação para Líderes", "Communication for Leaders"), org: "Impacta Tecnologia", date: "12/2023" },
-  { name: l("CC50 – Ciência da Computação de Harvard", "CC50 – Harvard's Computer Science course"), org: "Fundação Estudar", date: "07/2023" },
+  {
+    name: l("Comunicação para Líderes", "Communication for Leaders"),
+    org: "Impacta Tecnologia",
+    date: "12/2023",
+  },
+  {
+    name: l("CC50 – Ciência da Computação de Harvard", "CC50 – Harvard's Computer Science course"),
+    org: "Fundação Estudar",
+    date: "07/2023",
+  },
 ];
 
 export const languages: { name: L; level: L }[] = [
@@ -508,14 +530,42 @@ export const languages: { name: L; level: L }[] = [
 export const stack: { area: L; items: string[] }[] = [
   {
     area: l("ABAP & S/4HANA", "ABAP & S/4HANA"),
-    items: ["ABAP Cloud", "RAP", "CDS Views", "BOPF", "BAdIs", "Enhancements", "ALV", "Adobe Forms", "OData/SAP Gateway", "SAP Fiori/SAPUI5"],
+    items: [
+      "ABAP Cloud",
+      "RAP",
+      "CDS Views",
+      "BOPF",
+      "BAdIs",
+      "Enhancements",
+      "ALV",
+      "Adobe Forms",
+      "OData/SAP Gateway",
+      "SAP Fiori/SAPUI5",
+    ],
   },
   {
     area: l("SAP BTP & Integração", "SAP BTP & Integration"),
-    items: ["SAP CAP", "Cloud Foundry", "SAP Build Process Automation", "SAP Joule Studio", "SAP AI Core", "SAP Integration Suite (CPI)", "SAP LBN"],
+    items: [
+      "SAP CAP",
+      "Cloud Foundry",
+      "SAP Build Process Automation",
+      "SAP Joule Studio",
+      "SAP AI Core",
+      "SAP Integration Suite (CPI)",
+      "SAP LBN",
+    ],
   },
   { area: l("Módulos", "Modules"), items: ["TM", "SD", "MM", "EWM", "HCM", "SAP Activate"] },
-  { area: l("IA", "AI"), items: ["Agentes de IA", "LLMs", "RAG", "LangGraph", "MCP", "AWS Bedrock"] },
-  { area: l("Desenvolvimento", "Development"), items: ["Python", "FastAPI", "Node.js", "TypeScript", "Java", "React", "SQL/SAP HANA"] },
-  { area: l("Cloud & DevOps", "Cloud & DevOps"), items: ["AWS", "SAP BTP", "Git", "GitHub Actions"] },
+  {
+    area: l("IA", "AI"),
+    items: ["Agentes de IA", "LLMs", "RAG", "LangGraph", "MCP", "AWS Bedrock"],
+  },
+  {
+    area: l("Desenvolvimento", "Development"),
+    items: ["Python", "FastAPI", "Node.js", "TypeScript", "Java", "React", "SQL/SAP HANA"],
+  },
+  {
+    area: l("Cloud & DevOps", "Cloud & DevOps"),
+    items: ["AWS", "SAP BTP", "Git", "GitHub Actions"],
+  },
 ];

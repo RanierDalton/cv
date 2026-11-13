@@ -1,36 +1,27 @@
 import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export function BackToTop() {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.scrollY > 400) {
-        setVisible(true);
-      } else {
-        setVisible(false);
-      }
-    };
-
-    window.addEventListener("scroll", toggleVisibility, { passive: true });
-    return () => window.removeEventListener("scroll", toggleVisibility);
+    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.9);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  if (!visible) return null;
 
   return (
     <button
-      onClick={scrollToTop}
-      className="fixed bottom-6 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface-elevated text-muted-foreground transition-all duration-300 hover:-translate-y-1 hover:border-indigo hover:text-indigo-glow hover:shadow-glow hover:scale-110 active:scale-95 animate-in fade-in slide-in-from-bottom-4"
-      aria-label="Voltar ao topo"
+      type="button"
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      aria-label={t("backToTop")}
+      tabIndex={visible ? 0 : -1}
+      className={`fixed bottom-6 right-6 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background/90 text-muted-foreground backdrop-blur transition-[opacity,transform,color,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-foreground hover:text-foreground ${
+        visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"
+      }`}
     >
       <ArrowUp className="h-5 w-5" />
     </button>

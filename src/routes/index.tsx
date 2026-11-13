@@ -11,9 +11,17 @@ export const Route = createFileRoute("/")({
         content:
           "Portfólio de Ranier Dalton Couto — Consultor SAP BTP & IA na Exed Consulting. SAP ABAP, RAP, CAP, S/4HANA, Fiori, Agentic AI, Python e integrações corporativas.",
       },
-      { name: "keywords", content: "SAP ABAP, SAP BTP, SAP CAP, SAP RAP, Fiori, S/4HANA, IA, Agentic AI, Ranier Dalton, Consultor SAP" },
+      {
+        name: "keywords",
+        content:
+          "SAP ABAP, SAP BTP, SAP CAP, SAP RAP, Fiori, S/4HANA, IA, Agentic AI, Ranier Dalton, Consultor SAP",
+      },
       { property: "og:title", content: "Ranier Dalton Couto — Consultor SAP BTP & IA" },
-      { property: "og:description", content: "Portfólio profissional: SAP, IA agêntica, integrações corporativas e engenharia de software." },
+      {
+        property: "og:description",
+        content:
+          "Portfólio profissional: SAP, IA agêntica, integrações corporativas e engenharia de software.",
+      },
       { property: "og:type", content: "profile" },
       { property: "og:url", content: "/" },
       { name: "twitter:card", content: "summary_large_image" },

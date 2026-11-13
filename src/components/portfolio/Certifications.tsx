@@ -1,196 +1,144 @@
-import { useState, useEffect } from "react";
-import { certifications } from "@/lib/portfolio-data";
-import { ArrowUpRight, Calendar, Award, X } from "lucide-react";
-import { SectionHeader } from "./Timeline";
+import { ArrowUpRight, Award } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useReveal } from "@/hooks/use-reveal";
+import { award, courses, credentials, languages, type Credential } from "@/lib/portfolio-data";
+import { useL } from "@/lib/use-l";
+import { Reveal, stagger } from "./Reveal";
+import { SectionHeader } from "./Timeline";
 
 import sapLogo from "@/assets/sap_logo.jpeg";
 import oracleLogo from "@/assets/oracle_logo.jpeg";
 import ibmLogo from "@/assets/ibm_logo.jpeg";
 import efsetLogo from "@/assets/efset_logo.jpeg";
 
-export function Certifications() {
+const LOGO: Record<Credential["issuer"], string> = {
+  SAP: sapLogo,
+  Oracle: oracleLogo,
+  IBM: ibmLogo,
+  "EF SET": efsetLogo,
+};
+const ISSUERS: Credential["issuer"][] = ["SAP", "Oracle", "IBM", "EF SET"];
+
+function CredentialCard({ c, i }: { c: Credential; i: number }) {
   const { t } = useTranslation();
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isMobile, setIsMobile] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(4);
-  const { ref, isVisible } = useReveal<HTMLElement>();
-
-  // Check if viewport is mobile (md screen threshold 768px)
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  // Reset pagination limit when search changes
-  useEffect(() => {
-    setVisibleCount(4);
-  }, [searchTerm]);
-
-  useEffect(() => {
-    const handleSearchCerts = (e: Event) => {
-      const query = (e as CustomEvent).detail;
-      setSearchTerm(query || "");
-    };
-    window.addEventListener("search-certs", handleSearchCerts);
-    return () => window.removeEventListener("search-certs", handleSearchCerts);
-  }, []);
-
-  const filtered = certifications.filter((cert) => {
-    if (!searchTerm) return true;
-    const term = searchTerm.toLowerCase();
-    return (
-      cert.name.toLowerCase().includes(term) ||
-      cert.issuer.toLowerCase().includes(term) ||
-      cert.skills.some((s) => s.toLowerCase().includes(term))
-    );
-  });
-
-  const displayed = isMobile ? filtered.slice(0, visibleCount) : filtered;
-
-  return (
-    <section
-      id="certificacoes"
-      ref={ref}
-      className={`relative py-[4.5rem] sm:py-24 transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-    >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <SectionHeader
-          kicker={t("sections.certifications-subtitle")}
-          title={t("sections.certifications-title")}
-          subtitle={t("sections.certifications-description")}
+  const body = (
+    <>
+      <div className="flex items-start gap-3">
+        <img
+          src={LOGO[c.issuer]}
+          alt={`Logo ${c.issuer}`}
+          width={36}
+          height={36}
+          loading="lazy"
+          className="h-9 w-9 shrink-0 rounded object-contain"
         />
-
-        {/* Active Search Badge */}
-        {searchTerm && (
-          <div className="mt-6 flex justify-start font-mono text-xs">
-            <div className="flex items-center gap-2 bg-indigo/10 border border-indigo/30 rounded-lg px-3 py-1.5 text-indigo-glow text-[11px] font-bold">
-              <span>Busca ativa: "{searchTerm}"</span>
-              <button
-                onClick={() => setSearchTerm("")}
-                className="hover:text-red-400 transition-colors cursor-pointer"
-                title="Limpar busca"
-              >
-                <X className="h-3 w-3" />
-              </button>
-            </div>
-          </div>
-        )}
-
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-2">
-          {displayed.map((cert) => (
-            <a
-              key={cert.id}
-              href={cert.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-indigo/20 bg-surface-elevated p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo hover:shadow-glow font-mono text-xs"
-            >
-              <div className="flex items-start gap-4">
-                <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-xl overflow-hidden shadow-sm bg-white/5 border border-white/10">
-                  <IssuerLogo issuer={cert.issuer} />
-                </div>
-
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-glow">
-                      {cert.issuer}
-                    </span>
-                    <ArrowUpRight className="h-3 w-3 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-                  </div>
-                  <h3 className="mt-1 font-display text-sm font-bold leading-snug text-foreground group-hover:text-indigo-glow transition-colors">
-                    {cert.name}
-                  </h3>
-                  <div className="mt-2 flex items-center gap-3 text-[11px] text-muted-foreground">
-                    <span className="inline-flex items-center gap-1">
-                      <Calendar className="h-3 w-3" />
-                      {cert.issued}
-                    </span>
-                    {cert.expires ? (
-                      <span>· {t("sections.certifications-expires")} {cert.expires}</span>
-                    ) : (
-                      <span>· {t("sections.certifications-no-expiry")}</span>
-                    )}
-                  </div>
-                  <div className="mt-3 flex flex-wrap gap-1">
-                    {cert.skills.map((s) => (
-                      <span
-                        key={s}
-                        className="rounded border border-border/40 bg-surface px-2 py-0.5 text-[10px] text-foreground/80"
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* CLI Verification footer bar */}
-              <div className="border-t border-border/20 pt-3 mt-4 flex items-center justify-between text-[10px] text-muted-foreground/80">
-                <div className="truncate max-w-[190px] sm:max-w-xs">
-                  <span>$ verify_badge --id {cert.id.substring(0, 12)}...</span>
-                </div>
-                <div className="flex items-center gap-1 text-emerald-500 font-bold">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_#10b981]"></span>
-                  <span>VERIFIED ✔</span>
-                </div>
-              </div>
-            </a>
-          ))}
-        </div>
-
-        {/* Mobile load more button */}
-        {isMobile && filtered.length > visibleCount && (
-          <div className="mt-10 flex justify-center font-mono text-xs">
-            <button
-              onClick={() => setVisibleCount((prev) => prev + 4)}
-              className="glass relative inline-flex h-11 px-6 items-center justify-center rounded-full border border-indigo/30 text-indigo-glow font-bold hover:border-indigo hover:text-indigo-glow hover:shadow-glow cursor-pointer transition-all duration-200"
-            >
-              {t("sections.certifications-load-more")}
-            </button>
-          </div>
-        )}
+        <h4 className="font-sans text-[15px] font-semibold leading-snug text-foreground">
+          {c.name}
+        </h4>
       </div>
-    </section>
+      <p className="mt-3 font-mono text-[11px] text-faint">
+        {t("credentials.issued")} {c.issued}
+        {c.expires && ` · ${t("credentials.expires")} ${c.expires}`}
+      </p>
+      {c.link && (
+        <span className="mt-3 inline-flex items-center gap-1 font-mono text-xs text-primary">
+          {t("credentials.validate")}
+          <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        </span>
+      )}
+    </>
+  );
+  const cls =
+    "reveal-item group flex h-full flex-col rounded-lg border border-border bg-card p-5 transition-[transform,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]";
+  return c.link ? (
+    <a
+      href={c.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`${cls} hover:-translate-y-0.5 hover:border-primary/60`}
+      style={stagger(i)}
+    >
+      {body}
+    </a>
+  ) : (
+    <div className={cls} style={stagger(i)}>
+      {body}
+    </div>
   );
 }
 
-function IssuerLogo({ issuer }: { issuer: string }) {
-  const normalized = issuer.toUpperCase();
-
-  const logoUrls: Record<string, string> = {
-    SAP: sapLogo,
-    ORACLE: oracleLogo,
-    IBM: ibmLogo,
-    EF: efsetLogo,
-  };
-
-  const matchedKey = Object.keys(logoUrls).find((key) => normalized.includes(key));
-
-  if (matchedKey) {
-    return (
-      <div className="w-full h-full bg-white flex items-center justify-center p-1">
-        <img
-          src={logoUrls[matchedKey]}
-          alt={issuer}
-          className="h-full w-full object-contain rounded-lg"
-          loading="lazy"
-          onError={(e) => {
-            e.currentTarget.style.display = "none";
-          }}
-        />
-      </div>
-    );
-  }
+export function Certifications() {
+  const { t } = useTranslation();
+  const { tr } = useL();
 
   return (
-    <div className="w-full h-full flex items-center justify-center bg-surface-elevated text-foreground">
-      <Award className="h-6 w-6 text-indigo-glow" />
-    </div>
+    <section id="credenciais" className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+      <SectionHeader
+        index="03"
+        title={t("credentials.title")}
+        description={t("credentials.description")}
+      />
+
+      <div className="space-y-10 md:pl-32">
+        <Reveal>
+          <div className="reveal-item flex items-center gap-4 rounded-lg border border-primary/40 bg-primary/5 p-5">
+            <Award className="h-8 w-8 shrink-0 text-primary" />
+            <div>
+              <p className="font-mono text-xs text-primary">
+                {t("credentials.award")} · {award.date}
+              </p>
+              <p className="font-display text-2xl text-foreground">{tr(award.name)}</p>
+              <p className="text-sm text-muted-foreground">{award.org}</p>
+            </div>
+          </div>
+        </Reveal>
+
+        {ISSUERS.map((issuer) => {
+          const list = credentials.filter((c) => c.issuer === issuer);
+          return (
+            <Reveal key={issuer}>
+              <h3 className="reveal-item mb-4 font-mono text-xs uppercase tracking-widest text-faint">
+                {issuer} <span className="text-primary">· {list.length}</span>
+              </h3>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {list.map((c, i) => (
+                  <CredentialCard key={c.id} c={c} i={i + 1} />
+                ))}
+              </div>
+            </Reveal>
+          );
+        })}
+
+        <Reveal className="grid gap-8 sm:grid-cols-2">
+          <div className="reveal-item">
+            <h3 className="mb-4 font-mono text-xs uppercase tracking-widest text-faint">
+              {t("credentials.courses")}
+            </h3>
+            <ul className="divide-y divide-border border-y border-border">
+              {courses.map((c) => (
+                <li key={c.name.en} className="flex items-baseline justify-between gap-4 py-3">
+                  <span className="text-sm text-foreground">
+                    {tr(c.name)} <span className="text-muted-foreground">· {c.org}</span>
+                  </span>
+                  <span className="shrink-0 font-mono text-[11px] text-faint">{c.date}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="reveal-item" style={stagger(1)}>
+            <h3 className="mb-4 font-mono text-xs uppercase tracking-widest text-faint">
+              {t("credentials.languages")}
+            </h3>
+            <ul className="divide-y divide-border border-y border-border">
+              {languages.map((l) => (
+                <li key={l.name.en} className="flex items-baseline justify-between py-3">
+                  <span className="text-sm text-foreground">{tr(l.name)}</span>
+                  <span className="font-mono text-xs text-primary">{tr(l.level)}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
+      </div>
+    </section>
   );
 }

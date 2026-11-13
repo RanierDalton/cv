@@ -107,7 +107,7 @@ Públicos com link: CS2 Stats Bot, SolarWay, InfraWatch, FeatUp (descrição de 
 ### 7.5 Credenciais
 | Credencial | Emissor | Data | Link |
 |---|---|---|---|
-| SAP Certified – Solution Architect – SAP Business AI Platform | SAP | 10/2026 | Credly (pegar no LinkedIn/Credly) |
+| SAP Certified – Solution Architect – SAP Business AI Platform | SAP | 10/2026 | https://www.credly.com/badges/920fb0f6-6252-4dc3-bcc4-11eca51e9c9f |
 | SAP Certified – SAP Fiori Application Developer | SAP | 11/2026 (expira 11/2027) | https://www.credly.com/badges/ce6ee021-7a26-41e7-ad4c-167e23b707d5 |
 | SAP Certified – Back-End Developer – ABAP Cloud | SAP | 05/2026 | já no site |
 | SAP Certified – Back-End Developer – SAP CAP | SAP | 05/2026 | já no site |

@@ -1,25 +1,24 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export function useActiveSection(sectionIds: string[], offset = 120) {
-  const [active, setActive] = useState<string>(sectionIds[0] ?? "");
+/** Seção visível no momento ("" quando ainda está no topo, antes da primeira). */
+export function useActiveSection(sectionIds: string[], offset = 140) {
+  const [active, setActive] = useState("");
+  const key = sectionIds.join("|");
 
   useEffect(() => {
+    const ids = key.split("|");
     const handleScroll = () => {
-      const scrollY = window.scrollY + offset;
-      for (let i = sectionIds.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sectionIds[i]);
-        if (el && el.offsetTop <= scrollY) {
-          setActive(sectionIds[i]);
-          return;
-        }
+      const y = window.scrollY + offset;
+      for (let i = ids.length - 1; i >= 0; i--) {
+        const el = document.getElementById(ids[i]);
+        if (el && el.offsetTop <= y) return setActive(ids[i]);
       }
-      setActive(sectionIds[0] ?? "");
+      setActive("");
     };
-
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [sectionIds, offset]);
+  }, [key, offset]);
 
   return active;
 }

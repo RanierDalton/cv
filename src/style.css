@@ -233,3 +233,104 @@
 @utility animate-soundwave {
   animation: soundwave 1.2s ease-in-out infinite;
 }
+/* ---------- Movimento (respeita prefers-reduced-motion via regra global em @layer base) ---------- */
+:root {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+html {
+  scroll-padding-top: 5rem;
+}
+
+/* Entrada do hero: cascata via --i */
+@keyframes enter-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+.enter {
+  animation: enter-up 640ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 90ms + 80ms);
+}
+
+/* Reveal no scroll: o pai recebe data-visible; filhos com .reveal-item em cascata */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 560ms var(--ease-out), transform 560ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 70ms);
+  [data-visible="true"] & {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Barra de progresso de leitura (scroll-driven; some onde não há suporte) */
+@keyframes grow-x {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.read-progress {
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  .read-progress {
+    display: block;
+    transform-origin: 0 50%;
+    animation: grow-x linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+
+/* Troca de tema: círculo saindo do botão (View Transitions) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-new(root) {
+  animation: theme-reveal 560ms var(--ease-in-out);
+}
+@keyframes theme-reveal {
+  from { clip-path: circle(0 at var(--vt-x, 50%) var(--vt-y, 0)); }
+  to { clip-path: circle(var(--vt-r, 150vmax) at var(--vt-x, 50%) var(--vt-y, 0)); }
+}
+
+/* Prompt digitado (só no tema escuro) */
+@keyframes typing {
+  from { width: 0; }
+}
+@keyframes caret {
+  50% { border-color: transparent; }
+}
+.typed {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+  border-right: 0.55em solid currentColor;
+  width: calc(var(--chars) * 1ch + 0.55em);
+  animation: typing 900ms steps(var(--chars)) 250ms both, caret 900ms step-end 1150ms 4 forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enter, .reveal-item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
+/* "Mais projetos": abre com altura animada onde o navegador suporta (::details-content) */
+:root {
+  interpolate-size: allow-keywords;
+}
+details::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition: block-size 420ms var(--ease-out), content-visibility 420ms allow-discrete;
+}
+details[open]::details-content {
+  block-size: auto;
+}

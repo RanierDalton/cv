@@ -2,6 +2,37 @@ import { ArrowUpRight, Download, Github, Linkedin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { profile } from "@/lib/portfolio-data";
 import { useL } from "@/lib/use-l";
+import { useReveal } from "@/hooks/use-reveal";
+import { useCountUp } from "@/hooks/use-count-up";
+import { stagger } from "./Reveal";
+
+const PROMPT = "ranier@s4h:~$ whoami";
+
+function Stat({
+  value,
+  label,
+  start,
+  i,
+}: {
+  value: string;
+  label: string;
+  start: boolean;
+  i: number;
+}) {
+  const shown = useCountUp(value, start);
+  return (
+    <div className="enter" style={stagger(i)}>
+      <dt className="sr-only">{label}</dt>
+      <dd
+        className="font-display text-4xl leading-none tabular-nums text-foreground"
+        aria-label={value}
+      >
+        {shown}
+      </dd>
+      <dd className="mt-2 font-mono text-xs text-faint">{label}</dd>
+    </div>
+  );
+}
 
 export function Hero() {
   const { t } = useTranslation();
@@ -11,35 +42,62 @@ export function Hero() {
   const accent = tr(profile.headlineAccent);
   const [before, after] = headline.split(accent);
   const cvFile = t("hero.cvFile");
+  const stats = useReveal<HTMLDListElement>();
 
   return (
-    <section id="top" className="relative mx-auto max-w-6xl px-4 pb-20 pt-32 sm:px-6 sm:pt-40 lg:pb-28">
-      <p className="font-mono text-[13px] text-faint">
-        <span className="hidden text-primary dark:inline">ranier@s4h:~$ whoami&nbsp;&nbsp;</span>
+    <section
+      id="top"
+      className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-center px-4 pb-10 pt-24 sm:px-6"
+    >
+      <p className="enter font-mono text-[13px] text-faint" style={stagger(0)}>
+        <span className="hidden text-primary dark:inline">
+          <span
+            className="typed"
+            style={{ "--chars": PROMPT.length } as React.CSSProperties}
+            aria-label={PROMPT}
+          >
+            {PROMPT}
+          </span>
+          &nbsp;&nbsp;
+        </span>
         <span className="text-primary dark:hidden">—&nbsp;</span>
         {tr(profile.title)} · {tr(profile.location)}
       </p>
 
-      <h1 className="mt-6 max-w-4xl text-[clamp(2.6rem,7vw,5.4rem)] leading-[1.02] text-foreground">
-        <span className="block text-muted-foreground">{profile.shortName}.</span>
-        {before}
-        <em className="text-primary">{accent}</em>
-        {after}
+      <h1 className="mt-5 max-w-4xl text-[clamp(2.3rem,5.6vw,4.6rem)] leading-[1.04] text-foreground">
+        <span className="enter block text-muted-foreground" style={stagger(1)}>
+          {profile.shortName}.
+        </span>
+        <span className="enter block" style={stagger(2)}>
+          {before}
+          <em className="text-primary">{accent}</em>
+          {after}
+        </span>
       </h1>
 
-      <p className="mt-7 max-w-2xl text-lg leading-relaxed text-muted-foreground">{tr(profile.bio)}</p>
+      <p
+        className="enter mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground"
+        style={stagger(3)}
+      >
+        {tr(profile.bio)}
+      </p>
 
-      <dl className="mt-12 grid max-w-3xl grid-cols-2 gap-y-6 border-t border-border pt-6 sm:grid-cols-4">
-        {profile.stats.map((s) => (
-          <div key={s.value + s.label.en}>
-            <dt className="sr-only">{tr(s.label)}</dt>
-            <dd className="font-display text-4xl leading-none text-foreground">{s.value}</dd>
-            <dd className="mt-2 font-mono text-xs text-faint">{tr(s.label)}</dd>
-          </div>
+      <dl
+        ref={stats.ref}
+        className="mt-9 grid max-w-3xl grid-cols-2 gap-y-5 border-t border-border pt-5 sm:grid-cols-4"
+      >
+        {profile.stats.map((s, i) => (
+          <Stat
+            key={s.value + s.label.en}
+            value={s.value}
+            label={tr(s.label)}
+            start={stats.isVisible}
+            i={4 + i}
+          />
         ))}
       </dl>
 
-      <div className="mt-10 flex flex-wrap items-center gap-3">
+      <div className="enter mt-8 flex flex-wrap items-center gap-3" style={stagger(8)}>
         <a
           href={`./${cvFile}`}
           download={cvFile}
