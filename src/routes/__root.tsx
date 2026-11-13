@@ -91,8 +91,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "Ranier Dalton do Couto" },
       { name: "theme-color", content: "#f5f2ec" },
       { property: "og:site_name", content: "Ranier Dalton do Couto" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

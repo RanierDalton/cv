@@ -26,14 +26,17 @@ const oracle = credentials.filter((c) => c.issuer === "Oracle");
 if (oracle.length !== 3) fail(`Oracle = ${oracle.length}, esperado 3`);
 if (credentials.some((c) => /SAP BTP/.test(c.name) && /Solution Architect/.test(c.name)))
   fail("SAP BTP Solution Architect não deve aparecer");
-if (credentials.some((c) => /Java Foundations/i.test(c.name))) fail("Oracle Java Foundations não deve aparecer");
+if (credentials.some((c) => /Java Foundations/i.test(c.name)))
+  fail("Oracle Java Foundations não deve aparecer");
 if (experience[0]?.roles.length !== 2) fail("Exed precisa de 2 cargos");
 if (cases.length !== 7) fail(`cases = ${cases.length}, esperado 7`);
 
 const all = JSON.stringify(data);
 if (all.includes("P&D")) fail("usar R&D, não P&D");
-if (/Desenvolvedor|Developer/.test(profile.title.pt + profile.title.en)) fail("título não pode ser Desenvolvedor/Developer");
-if (/Arquitet|Architect/.test(profile.title.pt + profile.title.en)) fail("título não pode ser Arquiteto");
+if (/Desenvolvedor|Developer/.test(profile.title.pt + profile.title.en))
+  fail("título não pode ser Desenvolvedor/Developer");
+if (/Arquitet|Architect/.test(profile.title.pt + profile.title.en))
+  fail("título não pode ser Arquiteto");
 if (/intermedi|B1/.test(JSON.stringify(data.languages))) fail("espanhol é básico");
 
 if (errors.length) {
