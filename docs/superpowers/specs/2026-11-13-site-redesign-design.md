@@ -169,3 +169,13 @@ União das competências do mestre (seção 6): ABAP & S/4HANA · SAP BTP & Inte
 - Varredura de sigilo: grep por nomes de clientes/produtos internos da tabela de sigilo e da lista interna (fazer a partir do mestre) no `src/` e no CV gerado.
 - Conferir que cada fato do site existe no mestre.
 - Deploy **só com aprovação do usuário**.
+
+## 12. Adendo (13/11/2026): o "molho" — hero A + C e Roadmap
+
+Brainstorm com referências (Cyera, A24/Ravi Klaassens, ZRK). Decidido pelo Ranier:
+
+- **Hero A + C:** na metade direita do hero (só ≥ 1024 px), objetos de sistema em traço de tinta (cubo, nó hexagonal, card de app, cristal de IA) flutuando, ligados por fios tracejados animados; por baixo, campo de pontos (meio-tom) em `<canvas>` com máscara elíptica, que acende em volta do cursor. Grão leve (≈ 6–7% de opacidade) **só no hero**. O resto do site fica sem textura.
+- **Roadmap:** um fio tracejado percorre a calha dos índices (coluna de 8rem à esquerda) por todo o site, desenhando-se com o scroll; em cada seção há um marco (cubo = Trajetória, card = Cases, cristal = Credenciais, nó = Sobre, seta = Contato) que acende ao ser alcançado. Só ≥ 768 px.
+- **Regra dura: nada se sobrepõe.** Objetos do hero ficam em coluna própria (nunca atrás do texto); o fio e os marcos ficam dentro da calha de 8rem, sem invadir o conteúdo; abaixo dos breakpoints os elementos somem em vez de se espremer.
+- Dois temas: tinta + azul no papel; verde fósforo no escuro (cores vêm dos tokens).
+- `prefers-reduced-motion`: fio já desenhado, objetos parados, pontos estáticos. O canvas pausa fora da tela.

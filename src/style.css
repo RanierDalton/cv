@@ -334,3 +334,78 @@ details::details-content {
 details[open]::details-content {
   block-size: auto;
 }
+
+/* ---------- "Molho": formas de tinta, fios, pontos e grão do hero ---------- */
+:root {
+  --ink-line: #171512;
+  --ink-paper: #fbf9f5;
+  --ink-shade: #d9d2c5;
+}
+.dark {
+  --ink-line: #7ee2a8;
+  --ink-paper: #111613;
+  --ink-shade: #1b241f;
+}
+.ink-wire {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 2;
+  stroke-dasharray: 4 7;
+  animation: wire-run 2.6s linear infinite;
+}
+@keyframes wire-run {
+  to { stroke-dashoffset: -44; }
+}
+.ink-float {
+  animation: ink-float 7s var(--ease-in-out) infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes ink-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(3deg); }
+}
+.dot-mask {
+  -webkit-mask-image: radial-gradient(ellipse 62% 58% at 55% 50%, #000 30%, transparent 78%);
+  mask-image: radial-gradient(ellipse 62% 58% at 55% 50%, #000 30%, transparent 78%);
+}
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.dark .hero-grain {
+  mix-blend-mode: screen;
+  opacity: 0.05;
+  filter: invert(1);
+}
+
+/* Roadmap */
+.road-base {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 2;
+  stroke-dasharray: 4 7;
+}
+.road-draw {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 2;
+}
+.road-mark {
+  opacity: 0.35;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
+}
+.road-mark[data-on="true"] {
+  opacity: 1;
+  transform: scale(1.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ink-wire, .ink-float { animation: none; }
+}

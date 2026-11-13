@@ -74,6 +74,7 @@ export function Certifications() {
     <section id="credenciais" className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <SectionHeader
         index="03"
+        mark="crystal"
         title={t("credentials.title")}
         description={t("credentials.description")}
       />

@@ -10,7 +10,12 @@ export function Cases() {
 
   return (
     <section id="cases" className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-      <SectionHeader index="02" title={t("cases.title")} description={t("cases.description")} />
+      <SectionHeader
+        index="02"
+        mark="card"
+        title={t("cases.title")}
+        description={t("cases.description")}
+      />
 
       <Reveal className="grid gap-4 md:pl-32 lg:grid-cols-2">
         {cases.map((c, i) => (

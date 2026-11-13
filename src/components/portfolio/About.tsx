@@ -11,7 +11,7 @@ export function About() {
 
   return (
     <section id="sobre" className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-      <SectionHeader index="04" title={t("about.title")} />
+      <SectionHeader index="04" mark="node" title={t("about.title")} />
 
       <div className="space-y-10 md:pl-32">
         <Reveal className="max-w-3xl space-y-5">

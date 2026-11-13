@@ -2,19 +2,24 @@ import { useTranslation } from "react-i18next";
 import { education, experience } from "@/lib/portfolio-data";
 import { useL } from "@/lib/use-l";
 import { Reveal, stagger } from "./Reveal";
+import type { MarkKind } from "./ink-shapes";
 
 export function SectionHeader({
   index,
   title,
   description,
+  mark,
 }: {
   index: string;
   title: string;
   description?: string;
+  mark?: MarkKind;
 }) {
   return (
     <Reveal className="mb-8 grid gap-3 border-t border-border pt-5 md:grid-cols-[8rem_1fr]">
-      <span className="reveal-item font-mono text-[13px] text-primary">{index}</span>
+      <span className="reveal-item font-mono text-[13px] text-primary" data-road={mark}>
+        {index}
+      </span>
       <div>
         <h2
           className="reveal-item text-3xl leading-tight text-foreground sm:text-4xl"
@@ -40,6 +45,7 @@ export function Timeline() {
     <section id="trajetoria" className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <SectionHeader
         index="01"
+        mark="cube"
         title={t("timeline.title")}
         description={t("timeline.description")}
       />

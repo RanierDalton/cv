@@ -269,3 +269,15 @@ assert len(g["exp"]) == 2                        # Exed + freelance
 **Files:** `CUR/referencias/linkedin-textos-finais.md` (seção 2 e título com textos aplicados), `CUR/README.md` (marcar LinkedIn e site como feitos; pendências restantes), `CUR/curriculo-mestre.md` seção 12.
 - [ ] **Step 1:** Atualizar os três arquivos.
 - [ ] **Step 2:** Listar pendências ao Ranier: títulos "Desenvolvedor" nos CVs de recorte (revisar para "Consultor"?), nomes oficiais no Credly, números 89%/1% do RPA, Open to Work só para recrutadores.
+
+---
+
+## FASE 3b — "Molho" (adendo do spec, seção 12)
+
+### Task 16: Formas de tinta + hero A + C
+**Files:** Create `src/components/portfolio/ink-shapes.tsx` (`Cube`, `Hex`, `AppCard`, `Crystal`, `Node`, `Arrow`: SVG `<g>` centrados em (0,0), cores por tokens), `src/components/portfolio/HeroArt.tsx` (SVG + `DotField`), `src/components/portfolio/DotField.tsx`; Modify `Hero.tsx` (grid texto | arte, arte `hidden lg:block`), `style.css` (grão do hero, flutuação, fio animado).
+- [ ] Verificar: em 1280 e 1440 px, nenhum retângulo dos objetos intersecta o bloco de texto (`getBoundingClientRect`); em < 1024 px a arte não renderiza; reduce-motion sem animação.
+
+### Task 17: Roadmap
+**Files:** Create `src/components/portfolio/Roadmap.tsx`; Modify `Timeline.tsx` (`SectionHeader` recebe `mark` e expõe `data-road`), `Footer.tsx` (calha de 8rem com marco "→"), `cv.tsx` (wrapper `relative` + `<Roadmap />`).
+- [ ] Verificar: em ≥ 768 px o caminho e os marcos ficam com `x` dentro da calha (≤ 8rem a partir da borda do container) e não intersectam texto; fio acompanha o scroll; marcos acendem; build, check-data e sigilo ok.
