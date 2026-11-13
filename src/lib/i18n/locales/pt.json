@@ -1,167 +1,53 @@
 {
   "nav": {
-    "about": "Sobre",
     "timeline": "Trajetória",
-    "projects": "Projetos",
-    "certifications": "Certificações",
-    "contact": "Contato"
+    "cases": "Cases",
+    "credentials": "Credenciais",
+    "about": "Sobre",
+    "menu": "Menu",
+    "switchLang": "Switch to English",
+    "themeLight": "Ativar tema claro",
+    "themeDark": "Ativar tema escuro"
   },
   "hero": {
-    "status": "Disponível para novos projetos SAP & IA",
-    "academic-github": "GitHub · Acadêmico",
-    "personal-github": "GitHub · Pessoal",
-    "download-cv": "Baixar CV"
+    "downloadCv": "Baixar CV",
+    "contact": "Falar comigo",
+    "cvFile": "Ranier-Dalton-do-Couto-Curriculo.pdf"
   },
-  "terminal": {
-    "tabs": {
-      "about": "sobre_mim.txt",
-      "music": "hobby.mp3"
-    },
-    "about": {
-      "executing": "ranier@s4h:~$ cat sobre_mim.txt",
-      "status": "[sistema] Conexão: S/4HANA Cloud (BTP) & IA Agêntica · ATIVA"
-    },
-    "music": {
-      "executing": "ranier@s4h:~$ play_audio hobby.mp3",
-      "playing": "Reproduzindo: hobby.mp3 (320 kbps)",
-      "desc": "Sou o Ranier, sou apaixonado por música e estou em uma jornada emocionante de produção musical. Os gêneros que mais me fascinam são o trap, o rap e a música eletrônica. Apenas com um computador e fones de ouvido, estou transformando minhas inspirações em realidade, explorando os segredos da produção e criando os beats que ecoam na minha mente. Minha parte favorita é, com certeza, a criação de Beats e Mixagem, utilizando exclusivamente o FL Studio.",
-      "focus": "Foco: Produção de Beats, Mixagem e Sound Design no FL Studio"
-    }
+  "timeline": {
+    "title": "Trajetória",
+    "description": "Onde trabalhei e o que estudei.",
+    "education": "Formação"
   },
-  "sections": {
-    "timeline-subtitle": "02 · Trajetória",
-    "timeline-title": "Vida acadêmica e profissional",
-    "timeline-description": "Duas linhas do tempo em paralelo. Use as setas para navegar por cada momento.",
-    "timeline-exp": "Experiência",
-    "timeline-edu": "Escolaridade",
-    "projects-subtitle": "03 · Portfólio",
-    "projects-title": "Projetos em destaque",
-    "projects-description": "Uma seleção de entregas reais e experimentos. Cada card traz objetivo, stack e período de desenvolvimento.",
-    "projects-all": "Todos",
-    "projects-repo": "Ver repositório",
-    "projects-details": "Ver detalhes",
-    "projects-load-more": "Carregar Mais",
-    "tech-title": "Principais Stacks & Tecnologias",
-    "certifications-subtitle": "04 · Credenciais",
-    "certifications-title": "Certificações & Especializações",
-    "certifications-description": "Minhas certificações técnicas e proficiências emitidas por instituições parceiras. Clique para validar a credencial.",
-    "certifications-validate": "Validar credencial",
-    "certifications-expires": "Expira em",
-    "certifications-no-expiry": "Sem expiração",
-    "certifications-load-more": "Carregar Mais"
+  "cases": {
+    "title": "Cases",
+    "description": "Trabalhos reais, sem citar clientes: o desafio, o que eu fiz e a stack.",
+    "problem": "Desafio",
+    "did": "O que fiz",
+    "more": "Mais projetos",
+    "moreHint": "faculdade, pessoais e jogos",
+    "groups": { "pessoal": "Pessoais", "uni": "Faculdade", "jogos": "Jogos e curso técnico" },
+    "repo": "Repositório"
+  },
+  "credentials": {
+    "title": "Credenciais",
+    "description": "Certificações oficiais, com link para validar cada uma.",
+    "award": "Prêmio",
+    "validate": "Validar",
+    "issued": "Emitida em",
+    "expires": "válida até",
+    "courses": "Cursos",
+    "languages": "Idiomas"
+  },
+  "about": {
+    "title": "Sobre",
+    "stack": "Stack por área",
+    "offline": "Fora do código"
   },
   "footer": {
     "title": "Vamos conversar?",
-    "description": "Sinta-se à vontade para entrar em contato para novas oportunidades, projetos ou apenas para trocar ideias sobre desenvolvimento SAP, Cloud e Inteligência Artificial.",
-    "social": "Contato & Redes"
+    "description": "Para oportunidades, projetos ou freelas, escreva para mim.",
+    "rights": "Feito por Ranier Dalton do Couto"
   },
-  "profile": {
-    "role": "Consultor BTP & IA · SAP ABAP Developer",
-    "bio": "Atualmente trabalho como Trainee em desenvolvimento SAP ABAP e BTP na Exed Consulting, com foco em SAP Fiori, serviços OData e iniciativas de R&D em React, Node.js e inteligência artificial — incluindo Agentic AI. Sou estudante de Ciência da Computação e técnico em Programação de Jogos Digitais, com interesse em soluções que conectem tecnologia, negócio e inovação."
-  },
-  "experience": {
-    "exed-training-instructor": {
-      "title": "Instrutor de treinamento",
-      "period": "Jul 2026 — Presente",
-      "location": "São Paulo · Remoto",
-      "description": "Treinamento de pessoal em tecnologias SAP, com foco em SAP ABAP."
-    },
-    "exed-ai-engineer": {
-      "title": "AI Engineer",
-      "period": "Abr 2026 — Presente",
-      "location": "São Paulo · Híbrido",
-      "description": "Apoio nas iniciativas de IA e R&D. Desenvolvimento de aplicações Full Stack, agentes de IA (LLMs) e produtos Backoffice utilizando Python, FastAPI e LangGraph. Refatoração de código e estruturação de arquitetura, aplicando boas práticas de design e manutenibilidade. Contato com serviços e configurações da AWS para suporte ao desenvolvimento e implantação de soluções."
-    },
-    "exed-abap-btp": {
-      "title": "Consultor ABAP & BTP",
-      "period": "Abr 2026 — Presente",
-      "location": "São Paulo · Híbrido",
-      "description": "Desenvolvimento de extensões e integrações para ambientes SAP S/4HANA (arquiteturas side-by-side e in-app extensions) utilizando SAP BTP. Execução de testes e integração de sistemas SAP com plataformas não-SAP, com destaque para a integração do SAP LBN com sistemas de transportadoras. Forte atuação técnica com os módulos logísticos e de vendas (SD, EWM e TM). Atuação direta com clientes utilizando a metodologia SAP Activate."
-    },
-    "exed-abap": {
-      "title": "Consultor ABAP & BTP",
-      "period": "Ago 2025 — Mar 2026",
-      "location": "São Paulo · Híbrido",
-      "description": "Atendimento a demandas reais de clientes, desenvolvendo soluções sistêmicas customizadas com foco profundo nos módulos HCM e SD. Lógicas de negócio e modelagem de dados em ABAP e CDS Views. Implementações complexas com Enhancements, BADIs, BAPIs, Adobe Forms e BOPF. Interfaces em SAP Fiori (Freestyle e Fiori Elements) e serviços OData via SAP Gateway."
-    },
-    "freelance-rpa": {
-      "title": "Desenvolvedor Freelancer · RPA",
-      "period": "Mar 2021 — Jun 2021",
-      "location": "São Paulo",
-      "description": "Desenvolvimento de automações robóticas (RPA) em Python voltadas para otimização de fluxos fiscais. Criação de scripts para lançamento automatizado de notas de serviço em portais municipais, reduzindo o esforço operacional em aproximadamente 89% e a taxa de falhas de digitação para 1%."
-    }
-  },
-  "education": {
-    "sptech": {
-      "title": "Bacharelado em Ciência da Computação",
-      "org": "São Paulo Tech School — SPTech",
-      "period": "2024 — Presente",
-      "location": "São Paulo",
-      "description": "Formação em backend com Java e Spring Boot, arquitetura de microserviços, mensageria com RabbitMQ, pipelines de dados (OLTP, OLAP, Data Lake, DW), Cloud e DevOps com AWS e Terraform."
-    },
-    "etec": {
-      "title": "Técnico em Programação de Jogos Digitais",
-      "org": "ETEC Professor Basilides de Godoy",
-      "period": "2022 — 2023",
-      "location": "São Paulo",
-      "description": "Desenvolvimento de jogos com Unity e C#, programação orientada a objetos, MySQL, desenvolvimento mobile com Android Studio (Java) e design visual e sonoro para jogos."
-    }
-  },
-  "projects": {
-    "infrawatch": {
-      "title": "InfraWatch",
-      "period": "Dez 2024 — Mai 2025",
-      "description": "Solução acadêmica inovadora desenvolvida como projeto do 2º (segundo) semestre da faculdade para monitoramento inteligente de Render Farms, garantindo eficiência, previsibilidade e segurança no uso de infraestrutura de servidores de renderização.",
-      "objectives": "Oferecer visibilidade em tempo real do consumo de recursos dos servidores de renderização, antecipando gargalos e falhas."
-    },
-    "solarway": {
-      "title": "SolarWay",
-      "period": "3º e 4º Semestre 2025",
-      "description": "Projeto de extensão acadêmico desenvolvido ao longo do 3º (terceiro) e 4º (quarto) semestres da faculdade, facilitando o acesso a projetos de instalação de placas solares e gerando impacto social positivo.",
-      "objectives": "Criar uma solução que contribua para a melhoria da qualidade de vida ao redor da SolarWay, empresa autônoma de energia solar."
-    },
-    "cs2-stats-bot": {
-      "title": "CS2 Stats Bot",
-      "period": "Férias 2025 — 2026",
-      "description": "Bot de Discord em Python para rastrear e analisar estatísticas de jogadores e partidas de Counter-Strike, com persistência em MySQL e OCR assistido por IA.",
-      "objectives": "Automatizar a coleta de estatísticas de CS2 e fornecer análises rápidas para comunidades de jogadores no Discord."
-    },
-    "monocromo": {
-      "title": "Monocromo",
-      "period": "2023",
-      "description": "Jogo de ação e aventura ambientado em um mundo futurista distópico, desenvolvido como Trabalho de Conclusão de Curso do técnico em Programação de Jogos Digitais.",
-      "objectives": "Entregar uma experiência narrativa envolvente com quebra-cabeças, exploração e combate, consolidando os aprendizados do curso técnico."
-    },
-    "sap-lbn-integration": {
-      "title": "Integração SAP LBN × Transportadoras",
-      "period": "Abr 2026 — Presente",
-      "description": "Solução orientada a eventos para integração entre o SAP Logistics Business Network (LBN) e sistemas de transportadoras externas, conectando planos de integração através do SAP Integration Suite (CPI) e do SAP S/4HANA para unificar o rastreamento em tempo real.",
-      "objectives": "Reduzir latência de rastreio e eliminar reconciliação manual entre SAP e parceiros logísticos."
-    },
-    "nfe-rpa": {
-      "title": "RPA · Notas Fiscais Eletrônicas",
-      "description": "Robô de emissão e conferência automática de NF-e integrando portal fiscal, ERP e repositório documental, reduzindo o esforço operacional em aproximadamente 89%.",
-      "objectives": "Reduzir taxa de erros de emissão para ~1% e liberar tempo do time fiscal."
-    },
-    "sinal-verde": {
-      "title": "Sinal Verde",
-      "description": "Projeto acadêmico Web de monitoramento inteligente de trânsito utilizando sensores IoT em postes da cidade de São Paulo, desenvolvido no primeiro semestre da faculdade.",
-      "objectives": "Utilizar sensores de distância para monitorar o fluxo de veículos em tempo real e fornecer uma dashboard intuitiva para otimização de tráfego, redução de congestionamentos e melhoria da mobilidade urbana."
-    },
-    "feat-up": {
-      "title": "FeatUp",
-      "description": "Plataforma desenvolvida no primeiro semestre da faculdade para conectar produtores musicais, facilitando colaborações (feats), interações sociais e gerenciamento de preferências de gênero musical.",
-      "objectives": "Projetar uma modelagem de dados completa e robusta capaz de capturar preferências, feats e integrações de redes sociais entre artistas."
-    },
-    "reddead2-wiki": {
-      "title": "RedDead 2 Wiki",
-      "description": "Aplicativo mobile desenvolvido em formato de Fan Wiki sobre o aclamado jogo eletrônico de ação e aventura Red Dead Redemption 2 da Rockstar Games.",
-      "objectives": "Criar um guia portátil de consulta com informações de lore, missões e itens do jogo utilizando Java e Android Studio."
-    },
-    "broken-control": {
-      "title": "Broken Control",
-      "description": "Trabalho de Conclusão de Módulo (TCM) do 1º ano técnico. Um portal completo de jogos com notícias da indústria e 6 clássicos de plataforma jogáveis no navegador (Jogo da Velha, Cobrinha, Jogo da Mágica, Space Invaders, Breakout e Geometric Jump).",
-      "objectives": "Desenvolver um hub de jogos clássicos estilo plataforma integrados a um painel de notícias recente sobre a indústria de games."
-    }
-  }
+  "backToTop": "Voltar ao topo"
 }

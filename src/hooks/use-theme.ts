@@ -1,32 +1,20 @@
 import { useEffect, useState } from "react";
 
-type Theme = "dark" | "light";
+export type Theme = "dark" | "light";
 
+// Primeira visita sempre no tema claro (sóbrio para recrutadores); a escolha persiste.
 function getInitialTheme(): Theme {
-  if (typeof window === "undefined") return "dark";
-  const stored = window.localStorage.getItem("theme");
-  if (stored === "light" || stored === "dark") return stored;
-  return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  if (typeof window === "undefined") return "light";
+  return window.localStorage.getItem("theme") === "dark" ? "dark" : "light";
 }
 
 export function useTheme() {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>("light");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const initial = getInitialTheme();
-    setTheme(initial);
+    setTheme(getInitialTheme());
     setMounted(true);
-
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: light)");
-    const handleChange = (e: MediaQueryListEvent) => {
-      if (!window.localStorage.getItem("theme")) {
-        setTheme(e.matches ? "light" : "dark");
-      }
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
   useEffect(() => {
@@ -35,6 +23,7 @@ export function useTheme() {
     root.classList.remove("light", "dark");
     root.classList.add(theme);
     window.localStorage.setItem("theme", theme);
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#0b0d0c" : "#f5f2ec");
   }, [theme, mounted]);
 
   const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"));

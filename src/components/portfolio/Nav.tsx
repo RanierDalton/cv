@@ -1,227 +1,100 @@
-import { useState, useEffect } from "react";
-import { Link } from "@tanstack/react-router";
-import { useActiveSection } from "@/hooks/useActiveSection";
-import { ThemeToggle } from "./ThemeToggle";
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { projects, experience, education, certifications } from "@/lib/portfolio-data";
+import { useActiveSection } from "@/hooks/useActiveSection";
+import { profile } from "@/lib/portfolio-data";
+import { useL } from "@/lib/use-l";
+import { ThemeToggle } from "./ThemeToggle";
 
 const nav = [
-  { href: "#sobre", labelKey: "nav.about" },
-  { href: "#trajetoria", labelKey: "nav.timeline" },
-  { href: "#projetos", labelKey: "nav.projects" },
-  { href: "#certificacoes", labelKey: "nav.certifications" },
+  { id: "trajetoria", key: "nav.timeline" },
+  { id: "cases", key: "nav.cases" },
+  { id: "credenciais", key: "nav.credentials" },
+  { id: "sobre", key: "nav.about" },
 ];
-
-type StatusMessage = {
-  text: string;
-  type: "S" | "E" | "W"; // Success, Error, Warning
-} | null;
 
 export function Nav() {
   const { t, i18n } = useTranslation();
-  const active = useActiveSection(nav.map((n) => n.href.replace("#", "")));
-  const [statusMsg, setStatusMsg] = useState<StatusMessage>(null);
+  const { lang } = useL();
+  const active = useActiveSection(nav.map((n) => n.id));
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const currentLang = i18n.language?.startsWith("en") ? "en" : "pt";
-
-  const toggleLanguage = () => {
-    const nextLang = currentLang === "pt" ? "en" : "pt";
-    i18n.changeLanguage(nextLang);
-  };
-
-  // Automatically clear status message after 4s
   useEffect(() => {
-    if (statusMsg) {
-      const timer = setTimeout(() => setStatusMsg(null), 4000);
-      return () => clearTimeout(timer);
-    }
-  }, [statusMsg]);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = lang === "en" ? "en" : "pt-BR";
+  }, [lang]);
+
+  const toggleLanguage = () => i18n.changeLanguage(lang === "pt" ? "en" : "pt");
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/40 bg-surface/85 backdrop-blur-xl transition-colors duration-200 shadow-sm dark:shadow-none">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-200 ${
+        scrolled || open ? "border-b border-border bg-background/90 backdrop-blur-md" : "border-b border-transparent"
+      }`}
+    >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link
-          to="/"
-          className="group font-display text-lg font-bold tracking-tight shrink-0"
-        >
-          <span className="text-gradient transition-all duration-300 group-hover:[filter:brightness(1.15)]">
-            RC
-          </span>
-          <span className="text-foreground">.dev</span>
-        </Link>
+        <a href="#top" className="font-display text-xl tracking-tight text-foreground">
+          {profile.shortName}
+          <span className="text-primary">.</span>
+        </a>
 
-        {/* SAP GUI Command Field (T-Code Navigator & Search Center) */}
-        <div className="hidden md:flex items-center gap-1.5 bg-surface-elevated/70 border border-indigo/40 hover:border-indigo/70 rounded-lg px-3 py-1.5 font-mono text-xs max-w-[340px] ml-4 transition-all duration-200">
-          <span className="text-indigo-glow font-bold">/n</span>
-          <input
-            type="text"
-            placeholder={currentLang === "pt" ? "T-Code ou busca (ex: abap)" : "T-Code or search (ex: abap)"}
-            className="bg-transparent border-none outline-none text-foreground w-[185px] placeholder:text-muted-foreground"
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                const raw = e.currentTarget.value.trim().toLowerCase();
-                if (!raw) return;
-
-                const val = raw.startsWith("/n") ? raw.slice(2).trim() : raw;
-                
-                // Multi-language T-Code mapping
-                const sectionMap: Record<string, string> = {
-                  // Portuguese T-Codes
-                  sobre: "#sobre",
-                  trajetoria: "#trajetoria",
-                  projetos: "#projetos",
-                  cert: "#certificacoes",
-                  certificacoes: "#certificacoes",
-                  contato: "#contato",
-                  // English T-Codes
-                  about: "#sobre",
-                  timeline: "#trajetoria",
-                  projects: "#projetos",
-                  certs: "#certificacoes",
-                  certifications: "#certificacoes",
-                  contact: "#contato",
-                };
-                
-                const target = sectionMap[val];
-                if (target) {
-                  window.location.hash = target;
-                  setStatusMsg({
-                    text: currentLang === "pt"
-                      ? `S: Transação '/n${val}' executada com sucesso.`
-                      : `S: Transaction '/n${val}' executed successfully.`,
-                    type: "S",
-                  });
-                } else {
-                  // 1. Check projects for search matching
-                  const matchedProjects = projects.filter((p) =>
-                    p.title.toLowerCase().includes(val) ||
-                    p.description.toLowerCase().includes(val) ||
-                    p.stack.some((s) => s.toLowerCase().includes(val))
-                  );
-
-                  // 2. Check timeline (experience & education)
-                  const matchedTimeline = [...experience, ...education].filter((item) =>
-                    item.title.toLowerCase().includes(val) ||
-                    item.org.toLowerCase().includes(val) ||
-                    item.description.toLowerCase().includes(val) ||
-                    item.skills.some((s) => s.toLowerCase().includes(val))
-                  );
-
-                  // 3. Check certifications
-                  const matchedCerts = certifications.filter((c) =>
-                    c.name.toLowerCase().includes(val) ||
-                    c.issuer.toLowerCase().includes(val) ||
-                    c.skills.some((s) => s.toLowerCase().includes(val))
-                  );
-
-                  if (matchedProjects.length > 0) {
-                    window.location.hash = "#projetos";
-                    window.dispatchEvent(new CustomEvent("search-tcode", { detail: val }));
-                    setStatusMsg({
-                      text: currentLang === "pt"
-                        ? `S: Busca bem-sucedida. Encontrado(s) ${matchedProjects.length} projeto(s).`
-                        : `S: Search successful. Found ${matchedProjects.length} project(s).`,
-                      type: "S",
-                    });
-                  } else if (matchedTimeline.length > 0) {
-                    window.location.hash = "#trajetoria";
-                    const firstMatch = matchedTimeline[0];
-                    // Dispatch custom event to focus the matched item inside TimelineTrack
-                    window.dispatchEvent(new CustomEvent("search-timeline", { detail: firstMatch.id }));
-                    setStatusMsg({
-                      text: currentLang === "pt"
-                        ? `S: Trajetória: '${firstMatch.title}' em '${firstMatch.org}'.`
-                        : `S: Timeline: '${firstMatch.title}' at '${firstMatch.org}'.`,
-                      type: "S",
-                    });
-                  } else if (matchedCerts.length > 0) {
-                    window.location.hash = "#certificacoes";
-                    window.dispatchEvent(new CustomEvent("search-certs", { detail: val }));
-                    setStatusMsg({
-                      text: currentLang === "pt"
-                        ? `S: Encontrada(s) ${matchedCerts.length} certificação(ões) para '${val}'.`
-                        : `S: Found ${matchedCerts.length} certification(s) for '${val}'.`,
-                      type: "S",
-                    });
-                  } else {
-                    setStatusMsg({
-                      text: currentLang === "pt"
-                        ? `E: Transação ou conteúdo '${val}' não encontrado.`
-                        : `E: Transaction or content '${val}' not found.`,
-                      type: "E",
-                    });
-                  }
-                }
-                e.currentTarget.value = "";
-              }
-            }}
-          />
-        </div>
-
-        <nav className="hidden items-center gap-1 md:flex">
-          {nav.map((item) => {
-            const isActive = active === item.href.replace("#", "");
-            return (
-              <a
-                key={item.href}
-                href={item.href}
-                className="nav-link group relative px-3 py-2 text-sm font-medium"
-              >
-                <span
-                  className={`transition-colors duration-200 ${
-                    isActive ? "text-foreground" : "text-muted-foreground"
-                  } group-hover:text-foreground`}
-                >
-                  {t(item.labelKey)}
-                </span>
-                <span
-                  className={`absolute bottom-1 left-3 right-3 h-0.5 rounded-full bg-gradient-primary transition-all duration-300 ${
-                    isActive ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"
-                  } group-hover:scale-x-100 group-hover:opacity-100`}
-                />
-              </a>
-            );
-          })}
+        <nav aria-label="Principal" className="hidden items-center gap-7 md:flex">
+          {nav.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              aria-current={active === item.id ? "true" : undefined}
+              className={`font-mono text-[13px] transition-colors hover:text-foreground ${
+                active === item.id ? "text-foreground" : "text-muted-foreground"
+              }`}
+            >
+              {t(item.key)}
+            </a>
+          ))}
         </nav>
 
         <div className="flex items-center gap-2">
           <button
+            type="button"
             onClick={toggleLanguage}
-            aria-label={currentLang === "pt" ? "Switch to English" : "Mudar para Português"}
-            className="glass relative inline-flex h-10 px-3 items-center justify-center rounded-full border border-border text-xs font-semibold uppercase tracking-wider text-muted-foreground transition-all hover:border-indigo hover:text-indigo-glow hover:shadow-glow cursor-pointer"
+            aria-label={t("nav.switchLang")}
+            className="inline-flex h-9 items-center rounded-full border border-border px-3 font-mono text-xs text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
           >
-            {currentLang === "pt" ? "EN" : "PT"}
+            {lang === "pt" ? "EN" : "PT"}
           </button>
-          
           <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setOpen((o) => !o)}
+            aria-label={t("nav.menu")}
+            aria-expanded={open}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground md:hidden"
+          >
+            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          </button>
         </div>
       </div>
 
-      {/* Floating SAP GUI Style Status Bar */}
-      {statusMsg && (
-        <div 
-          className="fixed bottom-4 left-4 z-50 rounded-lg border px-4 py-2.5 font-mono text-[11px] sm:text-xs flex items-center gap-2.5 shadow-lg bg-surface border-indigo/20 animate-in slide-in-from-bottom duration-300 select-none max-w-sm sm:max-w-md"
-        >
-          {statusMsg.type === "S" && (
-            <>
-              <span className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981] shrink-0" />
-              <span className="text-emerald-500 font-bold">S:</span>
-            </>
-          )}
-          {statusMsg.type === "E" && (
-            <>
-              <span className="h-2 w-2 rounded-full bg-red-500 shadow-[0_0_8px_#ef4444] shrink-0" />
-              <span className="text-red-500 font-bold">E:</span>
-            </>
-          )}
-          {statusMsg.type === "W" && (
-            <>
-              <span className="h-2 w-2 rounded-full bg-amber-500 shadow-[0_0_8px_#f59e0b] shrink-0" />
-              <span className="text-amber-500 font-bold">W:</span>
-            </>
-          )}
-          <span className="text-foreground/90 font-semibold">{statusMsg.text.slice(3)}</span>
-        </div>
+      {open && (
+        <nav aria-label="Principal" className="border-t border-border px-4 pb-4 md:hidden">
+          {nav.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              onClick={() => setOpen(false)}
+              className="block border-b border-border py-3 font-mono text-sm text-foreground last:border-0"
+            >
+              {t(item.key)}
+            </a>
+          ))}
+        </nav>
       )}
     </header>
   );

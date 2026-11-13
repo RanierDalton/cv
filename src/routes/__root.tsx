@@ -77,8 +77,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 const themeInitScript = `(() => {
   try {
     const stored = localStorage.getItem('theme');
-    const preferLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-    const theme = stored === 'light' || stored === 'dark' ? stored : (preferLight ? 'light' : 'dark');
+    const theme = stored === 'dark' ? 'dark' : 'light';
     document.documentElement.classList.remove('light','dark');
     document.documentElement.classList.add(theme);
   } catch (e) {}
@@ -89,9 +88,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { name: "author", content: "Ranier Dalton Couto" },
-      { name: "theme-color", content: "#0a0a1a" },
-      { property: "og:site_name", content: "Ranier Dalton Couto" },
+      { name: "author", content: "Ranier Dalton do Couto" },
+      { name: "theme-color", content: "#f5f2ec" },
+      { property: "og:site_name", content: "Ranier Dalton do Couto" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -109,7 +108,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-BR" className="dark" suppressHydrationWarning>
+    <html lang="pt-BR" className="light" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>

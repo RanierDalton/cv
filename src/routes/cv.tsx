@@ -1,11 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/portfolio/Nav";
 import { Hero } from "@/components/portfolio/Hero";
-import { Timeline } from "@/components/portfolio/Timeline";
-import { Projects } from "@/components/portfolio/Projects";
-import { Certifications } from "@/components/portfolio/Certifications";
-import { Footer } from "@/components/portfolio/Footer";
-import { BackToTop } from "@/components/portfolio/BackToTop";
 import { profile } from "@/lib/portfolio-data";
 
 export const Route = createFileRoute("/cv")({
@@ -32,7 +27,7 @@ export const Route = createFileRoute("/cv")({
           "@context": "https://schema.org",
           "@type": "Person",
           name: profile.name,
-          jobTitle: profile.role,
+          jobTitle: profile.title.pt,
           email: `mailto:${profile.contacts.email}`,
           address: { "@type": "PostalAddress", addressLocality: "São Paulo", addressCountry: "BR" },
           sameAs: [
@@ -64,12 +59,7 @@ export function Index() {
       <Nav />
       <main>
         <Hero />
-        <Timeline />
-        <Projects />
-        <Certifications />
       </main>
-      <Footer />
-      <BackToTop />
     </div>
   );
 }
