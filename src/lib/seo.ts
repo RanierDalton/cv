@@ -2,9 +2,9 @@ import { profile } from "./portfolio-data";
 
 export const SITE_URL = "https://ranier.is-a.dev/";
 const OG_IMAGE = `${SITE_URL}og-image.png`;
-const TITLE = "Ranier Dalton do Couto — Consultor técnico SAP · ABAP, BTP e IA agêntica";
+const TITLE = "Ranier Dalton — Consultor técnico SAP e IA agêntica";
 const DESCRIPTION =
-  "Consultor técnico SAP na Exed Consulting: sistemas, integrações e agentes de IA que resolvem processos reais. ABAP, RAP, CAP, SAP BTP, Integration Suite, SAP Joule e LangGraph. 6 certificações SAP e 3 OCI.";
+  "Consultor técnico SAP: sistemas, integrações e agentes de IA com ABAP, RAP, CAP, SAP BTP e Integration Suite. 6 certificações SAP e 3 OCI.";
 
 /** Head compartilhado pelas rotas "/" e "/cv" (ambas apontam o canonical para a home). */
 export function pageHead() {

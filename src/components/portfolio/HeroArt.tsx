@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { AppCard, Crystal, Cube, Hex } from "./ink-shapes";
 import { DotField } from "./DotField";
 
@@ -18,6 +19,17 @@ const WIRES = [
 ];
 
 export function HeroArt() {
+  // Só monta em telas largas (>= 1024px): no celular não há arte nem canvas rodando.
+  const [wide, setWide] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const on = () => setWide(mq.matches);
+    on();
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
+  }, []);
+  if (!wide) return <div aria-hidden className="hidden lg:block lg:h-[480px]" />;
+
   return (
     <div aria-hidden className="hero-art relative hidden h-[480px] w-full lg:block">
       <DotField className="dot-mask absolute inset-0 h-full w-full" />

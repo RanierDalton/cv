@@ -26,9 +26,9 @@ export function Projects() {
         <div className="space-y-8 border-t border-border p-5">
           {GROUPS.map((g) => (
             <div key={g}>
-              <h3 className="font-mono text-xs uppercase tracking-widest text-faint">
+              <p className="font-mono text-xs uppercase tracking-widest text-faint">
                 {t(`cases.groups.${g}`)}
-              </h3>
+              </p>
               <ul className="mt-3 divide-y divide-border">
                 {projects
                   .filter((p) => p.group === g)

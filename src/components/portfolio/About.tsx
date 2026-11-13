@@ -27,9 +27,9 @@ export function About() {
         </Reveal>
 
         <Reveal>
-          <h3 className="reveal-item mb-4 font-mono text-xs uppercase tracking-widest text-faint">
+          <p className="reveal-item mb-4 font-mono text-xs uppercase tracking-widest text-faint">
             {t("about.stack")}
-          </h3>
+          </p>
           <dl className="grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
             {stack.map((s, i) => (
               <div

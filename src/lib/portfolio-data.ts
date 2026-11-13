@@ -29,8 +29,8 @@ export const profile = {
       "I work with classic ABAP (Enhancements, BAdIs, ALV, Adobe Forms, BOPF) and ABAP Cloud (RAP, CDS, Fiori) on S/4HANA Private and Public Edition, in the TM, SD, MM and EWM modules, and with side-by-side SAP BTP extensions: SAP CAP, SAP Build Process Automation, SAP Integration Suite (CPI), and integrations with SAP LBN, SAP Ariba and external systems.",
     ),
     l(
-      "Em R&D, desenvolvo agentes de IA com SAP Joule Studio e SAP AI Core, e aplicações com LLMs em Python, FastAPI e LangGraph, integradas via MCP. Também ministro treinamentos de SAP ABAP na Exed Academy.",
-      "In R&D, I build AI agents with SAP Joule Studio and SAP AI Core, and LLM applications with Python, FastAPI and LangGraph, integrated via MCP. I also teach SAP ABAP training at Exed Academy.",
+      "Em R&D, trabalho com IA agêntica: desenvolvo agentes de IA com SAP Joule Studio e SAP AI Core, e aplicações com LLMs em Python, FastAPI e LangGraph, integradas via MCP. Também ministro treinamentos de SAP ABAP na Exed Academy.",
+      "In R&D, I work on agentic AI: I build AI agents with SAP Joule Studio and SAP AI Core, and LLM applications with Python, FastAPI and LangGraph, integrated via MCP. I also teach SAP ABAP training at Exed Academy.",
     ),
   ],
   hobby: l(
@@ -359,7 +359,7 @@ export const projects: Project[] = [
     id: "reddead2-wiki",
     title: "RedDead 2 Wiki",
     description: l(
-      "App Android de fan wiki sobre Red Dead Redemption 2, com lore, guias de missões e consulta de itens.",
+      "App Android de wiki de fãs sobre Red Dead Redemption 2, com lore, guias de missões e consulta de itens.",
       "Android fan wiki app for Red Dead Redemption 2, with lore, mission guides and item lookup.",
     ),
     stack: ["Java", "Android Studio"],

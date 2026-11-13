@@ -68,10 +68,13 @@ export function Hero() {
             {tr(profile.title)} · {tr(profile.location)}
           </p>
 
-          <h1 className="mt-5 max-w-4xl text-[clamp(2.3rem,4.4vw,3.9rem)] leading-[1.04] text-foreground">
-            <span className="enter block text-muted-foreground" style={stagger(1)}>
-              {profile.shortName}.
-            </span>
+          <p
+            className="enter mt-5 font-display text-[clamp(2.3rem,4.4vw,3.9rem)] leading-[1.04] text-muted-foreground"
+            style={stagger(1)}
+          >
+            {profile.shortName}.
+          </p>
+          <h1 className="max-w-4xl text-[clamp(2.3rem,4.4vw,3.9rem)] leading-[1.04] text-foreground">
             <span className="enter block" style={stagger(2)}>
               {before}
               <em className="text-primary">{accent}</em>

@@ -31,9 +31,7 @@ function CredentialCard({ c, i }: { c: Credential; i: number }) {
           loading="lazy"
           className="h-9 w-9 shrink-0 rounded object-contain"
         />
-        <h4 className="font-sans text-[15px] font-semibold leading-snug text-foreground">
-          {c.name}
-        </h4>
+        <p className="font-sans text-[15px] font-semibold leading-snug text-foreground">{c.name}</p>
       </div>
       <p className="mt-3 font-mono text-[11px] text-faint">
         {t("credentials.issued")} {c.issued}
@@ -97,9 +95,9 @@ export function Certifications() {
           const list = credentials.filter((c) => c.issuer === issuer);
           return (
             <Reveal key={issuer}>
-              <h3 className="reveal-item mb-4 font-mono text-xs uppercase tracking-widest text-faint">
+              <p className="reveal-item mb-4 font-mono text-xs uppercase tracking-widest text-faint">
                 {issuer} <span className="text-primary">· {list.length}</span>
-              </h3>
+              </p>
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {list.map((c, i) => (
                   <CredentialCard key={c.id} c={c} i={i + 1} />
@@ -111,9 +109,9 @@ export function Certifications() {
 
         <Reveal className="grid gap-8 sm:grid-cols-2">
           <div className="reveal-item">
-            <h3 className="mb-4 font-mono text-xs uppercase tracking-widest text-faint">
+            <p className="mb-4 font-mono text-xs uppercase tracking-widest text-faint">
               {t("credentials.courses")}
-            </h3>
+            </p>
             <ul className="divide-y divide-border border-y border-border">
               {courses.map((c) => (
                 <li key={c.name.en} className="flex items-baseline justify-between gap-4 py-3">
@@ -126,9 +124,9 @@ export function Certifications() {
             </ul>
           </div>
           <div className="reveal-item" style={stagger(1)}>
-            <h3 className="mb-4 font-mono text-xs uppercase tracking-widest text-faint">
+            <p className="mb-4 font-mono text-xs uppercase tracking-widest text-faint">
               {t("credentials.languages")}
-            </h3>
+            </p>
             <ul className="divide-y divide-border border-y border-border">
               {languages.map((l) => (
                 <li key={l.name.en} className="flex items-baseline justify-between py-3">

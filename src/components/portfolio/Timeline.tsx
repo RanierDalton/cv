@@ -95,9 +95,9 @@ export function Timeline() {
         ))}
 
         <Reveal as="div">
-          <h3 className="reveal-item font-mono text-[13px] uppercase tracking-widest text-faint">
+          <p className="reveal-item font-mono text-[13px] uppercase tracking-widest text-faint">
             {t("timeline.education")}
-          </h3>
+          </p>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             {education.map((e, i) => (
               <article
@@ -106,9 +106,9 @@ export function Timeline() {
                 style={stagger(i + 1)}
               >
                 <p className="font-mono text-xs text-primary">{tr(e.period)}</p>
-                <h4 className="mt-2 font-sans text-base font-semibold text-foreground">
+                <p className="mt-2 font-sans text-base font-semibold text-foreground">
                   {tr(e.title)}
-                </h4>
+                </p>
                 <p className="text-sm text-muted-foreground">{e.org}</p>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                   {tr(e.description)}
