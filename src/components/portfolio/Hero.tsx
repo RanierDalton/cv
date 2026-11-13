@@ -48,7 +48,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-center overflow-hidden px-4 pb-10 pt-24 sm:px-6"
+      className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-center px-4 pb-10 pt-24 sm:px-6"
     >
       <div className="hero-grain" aria-hidden />
       <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.12fr)_minmax(0,0.88fr)]">

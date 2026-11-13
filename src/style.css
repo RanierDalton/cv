@@ -121,6 +121,10 @@
   html {
     scroll-behavior: smooth;
   }
+  html,
+  body {
+    overflow-x: clip;
+  }
   body {
     background-color: var(--color-background);
     background-image: var(--page-grid);
@@ -371,7 +375,11 @@ details[open]::details-content {
 }
 .hero-grain {
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
   pointer-events: none;
   opacity: 0.07;
   mix-blend-mode: multiply;
