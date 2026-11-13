@@ -42,7 +42,7 @@ export function About() {
                   {s.items.map((it) => (
                     <span
                       key={it}
-                      className="rounded border border-border px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
+                      className="rounded border border-border px-2 py-0.5 font-mono text-xs text-muted-foreground"
                     >
                       {it}
                     </span>

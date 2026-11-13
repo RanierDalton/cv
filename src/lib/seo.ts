@@ -4,7 +4,7 @@ export const SITE_URL = "https://ranier.is-a.dev/";
 const OG_IMAGE = `${SITE_URL}og-image.png`;
 const TITLE = "Ranier Dalton — Consultor técnico SAP e IA agêntica";
 const DESCRIPTION =
-  "Consultor técnico SAP: sistemas, integrações e agentes de IA com ABAP, RAP, CAP, SAP BTP e Integration Suite. 6 certificações SAP e 3 OCI.";
+  "Consultor técnico SAP: sistemas, integrações e agentes de IA com ABAP, RAP, CAP, SAP BTP e Integration Suite. 6× SAP e 3× OCI.";
 
 /** Head compartilhado pelas rotas "/" e "/cv" (ambas apontam o canonical para a home). */
 export function pageHead() {
@@ -32,7 +32,11 @@ export function pageHead() {
       { name: "twitter:description", content: DESCRIPTION },
       { name: "twitter:image", content: OG_IMAGE },
     ],
-    links: [{ rel: "canonical", href: SITE_URL }],
+    links: [
+      { rel: "canonical", href: SITE_URL },
+      { rel: "alternate", hrefLang: "pt-BR", href: SITE_URL },
+      { rel: "alternate", hrefLang: "x-default", href: SITE_URL },
+    ],
     scripts: [
       {
         type: "application/ld+json",

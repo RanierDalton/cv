@@ -33,7 +33,7 @@ function CredentialCard({ c, i }: { c: Credential; i: number }) {
         />
         <p className="font-sans text-[15px] font-semibold leading-snug text-foreground">{c.name}</p>
       </div>
-      <p className="mt-3 font-mono text-[11px] text-faint">
+      <p className="mt-3 font-mono text-xs text-faint">
         {t("credentials.issued")} {c.issued}
         {c.expires && ` · ${t("credentials.expires")} ${c.expires}`}
       </p>
@@ -118,7 +118,7 @@ export function Certifications() {
                   <span className="text-sm text-foreground">
                     {tr(c.name)} <span className="text-muted-foreground">· {c.org}</span>
                   </span>
-                  <span className="shrink-0 font-mono text-[11px] text-faint">{c.date}</span>
+                  <span className="shrink-0 font-mono text-xs text-faint">{c.date}</span>
                 </li>
               ))}
             </ul>

@@ -43,7 +43,7 @@ export function Footer() {
               </li>
             ))}
           </ul>
-          <p className="mt-12 font-mono text-[11px] text-faint">
+          <p className="mt-12 font-mono text-xs text-faint">
             © {new Date().getFullYear()} · {t("footer.rights")}
           </p>
         </div>

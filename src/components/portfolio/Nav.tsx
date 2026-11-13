@@ -88,7 +88,7 @@ export function Nav() {
             type="button"
             onClick={toggleLanguage}
             aria-label={t("nav.switchLang")}
-            className="inline-flex h-9 items-center rounded-full border border-border px-3 font-mono text-xs text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
+            className="inline-flex h-11 items-center rounded-full border border-border px-4 font-mono text-xs text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
           >
             {lang === "pt" ? "EN" : "PT"}
           </button>
@@ -98,7 +98,7 @@ export function Nav() {
             onClick={() => setOpen((o) => !o)}
             aria-label={t("nav.menu")}
             aria-expanded={open}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground md:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground md:hidden"
           >
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>

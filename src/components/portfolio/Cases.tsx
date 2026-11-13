@@ -24,9 +24,7 @@ export function Cases() {
             className="reveal-item group flex flex-col rounded-lg border border-border bg-card p-6 transition-[transform,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-primary/60"
             style={stagger(i % 2)}
           >
-            <p className="font-mono text-[11px] uppercase tracking-wider text-faint">
-              {tr(c.segment)}
-            </p>
+            <p className="font-mono text-xs uppercase tracking-wider text-faint">{tr(c.segment)}</p>
             <h3 className="mt-3 text-2xl leading-snug text-foreground">{tr(c.title)}</h3>
 
             <dl className="mt-4 space-y-3 text-[15px] leading-relaxed">
@@ -44,7 +42,7 @@ export function Cases() {
               {c.stack.map((s) => (
                 <li
                   key={s}
-                  className="rounded border border-border px-2 py-0.5 font-mono text-[11px] text-muted-foreground transition-colors group-hover:border-primary/40 group-hover:text-foreground"
+                  className="rounded border border-border px-2 py-0.5 font-mono text-xs text-muted-foreground transition-colors group-hover:border-primary/40 group-hover:text-foreground"
                 >
                   {s}
                 </li>

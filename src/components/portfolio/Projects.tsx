@@ -45,7 +45,7 @@ export function Projects() {
                         </span>
                         <span className="text-sm leading-relaxed text-muted-foreground">
                           {tr(p.description)}
-                          <span className="mt-1 block font-mono text-[11px] text-faint">
+                          <span className="mt-1 block font-mono text-xs text-faint">
                             {tr(p.period)} · {p.stack.join(" · ")}
                           </span>
                         </span>
